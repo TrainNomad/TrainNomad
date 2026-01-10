@@ -1,6 +1,9 @@
 // server.js
 // --- Prérequis : npm install express ---
 
+const cors = require('cors');
+app.use(cors()); // Autorise les requêtes provenant d'autres domaines
+
 const express = require('express');
 const app = express();
 const PORT = 3000;

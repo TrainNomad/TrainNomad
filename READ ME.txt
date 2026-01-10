@@ -1,0 +1,61 @@
+TGV_Max/
+├── assets/
+│   ├── A_Propos/               # Photos de destinations
+│   │   ├── Angers.jpg
+│   │   ├── goulven_robin.jpg
+│   │   ├── Lille.jpg
+│   │   ├── mont_saint_michel.jpg
+│   │   └── Paris.jpg
+│   ├── Compagnie/              # Logos des transporteurs
+│   │   ├── inoui.svg
+│   │   ├── intercite.png
+│   │   ├── Intercite.svg
+│   │   └── ouigo.svg
+│   ├── Icons_Logo/             # Éléments d'interface
+│   │   ├── Explorer.svg
+│   │   ├── Explorer_blanc.svg
+│   │   ├── Icon_Logo.png
+│   │   ├── Train.svg
+│   │   ├── train_blanc.svg
+│   │   ├── Train_Marker.svg
+│   │   └── Voyager.svg
+│   ├── results/                # Interface de recherche
+│   │   ├── fleche_card.png
+│   │   └── Trier_croissant.svg
+│   └── background-index.jpeg    # Image de fond principale
+├── css/
+│   ├── sections/
+│   │   ├── A_propos/           # Styles spécifiques
+│   │   │   ├── footer.css
+│   │   │   ├── header.css
+│   │   │   └── main.css
+│   │   ├── results/            # Styles spécifiques
+│   │   │   ├── footer.css
+│   │   │   ├── header.css
+│   │   │   └── main.css
+│   │   ├── Train/
+│   │   │   ├── footer.css
+│   │   │   ├── header.css
+│   │   │   └── main.css
+│   │   ├── footer.css          # Styles globaux partagés
+│   │   ├── header.css
+│   │   └── main.css
+│   ├── A_propos.css
+│   ├── global.css
+│   ├── results.css
+│   ├── style.css
+│   └── Train.css
+├── script/
+│   ├── api_service.js
+│   ├── filters.js
+│   ├── image_fetcher.js
+│   ├── map.js
+│   ├── results_display_unified.js
+│   ├── script.js
+│   ├── search.js
+│   ├── server.js
+│   └── Train.js
+├── A_propos.html
+├── index.html
+├── results.html
+└── Train.html

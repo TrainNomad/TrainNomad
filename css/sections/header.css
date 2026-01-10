@@ -1,0 +1,287 @@
+/* -------------------------------------- */
+/* --- HEADER.CSS - Flux normal et Centrage --- */
+/* -------------------------------------- */
+
+.header{
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column; 
+    
+    justify-content: flex-start;
+    align-items: center;
+    
+    position: relative;
+    top:0;
+    left: 0;
+    
+    background-color: transparent; 
+    z-index: 10;
+}
+
+.header__nav{
+    width: 100%;
+    max-width: 1450px;
+    height: 76px; 
+    
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 0 auto; 
+    
+    z-index: 10;
+}
+
+.nav__logo{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav__logo-title{
+    font-size: var(--subheadline-font-size); 
+    color: rgb(var(--secondary-color));
+    padding: 30px;
+}
+
+.nav__right{
+    display: flex;
+    gap:30px;
+    padding: 30px
+}
+.nav__icon{
+    width: 18px;
+    height: 18px;
+}
+.nav__right-about_me{
+    font-size:var(--body-font-size);
+    cursor: pointer;
+    color: rgb(var(--secondary-color));
+}
+a {
+    text-decoration: none;
+    
+}
+.right__link{
+    display: flex;
+    gap: 10px;
+}
+/* ------------------------------------ */
+/* --- MAIN.CSS - Hero et Contenu --- */
+/* ------------------------------------ */
+
+.main__hero {
+    width: 100%; 
+    position: relative; 
+    background-color: transparent; 
+    z-index: 1;
+    top: -76px;
+}
+
+.main__hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 400px;
+    
+    background-color: rgba(78, 77, 77, 0.3); 
+    z-index: 2;
+}
+
+.hero__background{
+  width:100%;
+  height: 400px;
+  background-color: rgba(78, 77, 77, 0.5);
+}
+
+.hero__background-img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  object-position: center; 
+  position: relative; 
+  z-index:1;
+}
+
+.hero__sections{
+  position: absolute;
+  z-index: 10;
+
+  top: 50%;
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+
+  width: 100%;
+  text-align: center;
+
+  color: rgb(var(--secondary-color));
+}
+
+.hero__sections h3{
+  font-size:45px;
+  color: rgb(var(--secondary-color));
+  margin-bottom: 25px;
+}
+
+.hero__sections p{
+  font-size:var(--subheadline-font-size);
+  color: rgb(var(--secondary-color));
+}
+
+/* ------------------------------------ */
+/* --- SEARCH.CSS - Barre de Recherche  --- */
+/* ------------------------------------ */
+
+.search__main{
+  background-color:  rgb(var(--secondary-color));
+  
+  height: 50px;
+  margin: 0 auto;
+  
+  
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+
+  border-radius: 10px 10px 0 0;
+
+  padding: 8px 16px;
+  max-width: 800px; 
+  
+  margin-top: -30px; 
+
+  position: relative;
+  z-index: 20; 
+  
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+}
+
+.search__inputs {
+    height: 100%;
+    display: flex;
+    flex-grow: 1;
+    gap: 5px;
+    position: relative; /* IMPORTANT : crée un contexte de positionnement pour les suggestions */
+}
+
+/* Wrapper pour chaque input + ses suggestions */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    /* flex: 1; */
+    height: 100%;
+    flex-grow: 1;
+    
+}
+
+/* Style de base pour tous les inputs */
+.search__inputs input{
+  height: 100%;
+  width: 100%;
+  padding: 0 10px;
+  
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  background-color: rgba(241,242,246,1); 
+}
+
+.search__depart-input{
+    border-radius: 5px 0 0 5px;
+}
+.search__inputs input:focus {
+    outline: none;
+}
+
+/* Styles pour les placeholders */
+.search__inputs input::placeholder {
+    color: black;
+}
+
+.search__bouton-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.search__bouton{
+  height: 100%;
+  padding: 0 15px;
+  background-color: rgb(236,134,66);
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 0 8px 8px 0; 
+  white-space: nowrap;
+  border-radius: 0 5px 5px 0;
+  margin-left: 5px;
+}
+
+/* ================================================= */
+/* --- SUGGESTIONS D'AUTOCOMPLÉTION --- */
+/* ================================================= */
+
+/* Conteneur global des suggestions */
+.suggestions-container{
+    position: absolute;
+    top: 100%; /* Positionné juste en dessous de l'input */
+    left: 0;
+    right: 0;
+    
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 5px 5px;
+    
+    max-height: 200px;
+    overflow-y: auto;
+    
+    z-index: 1000;
+    
+    /* Légère marge pour séparer de l'input */
+    margin-top: 2px;
+}
+
+/* Style de chaque élément de suggestion */
+.suggestion-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    color: #333;
+    transition: background-color 0.2s ease;
+}
+
+/* Surlignage au survol */
+.suggestion-item:hover {
+    background-color: #fce6e6;
+    color: #a00;
+}
+
+/* Supprime la bordure du dernier élément */
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+/* Classe pour masquer le conteneur */
+.hidden {
+    display: none !important;
+}
+
+/* Style spécial pour l'option "N'importe où" */
+.everywhere-option {
+    background-color: #f1f8e9 !important;
+    cursor: pointer;
+    padding: 10px 15px;
+}
+
+.everywhere-option:hover {
+    background-color: #c8e6c9 !important;
+}

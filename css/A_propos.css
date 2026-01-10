@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Baskervville:ital,wght@0,400..700;1,400..700&family=GFS+Didot&display=swap");
+@import url('global.css');
+
+@import url('sections/A_propos/header.css');
+@import url('sections/A_propos/main.css');
+@import url('sections/A_propos/footer.css');
+
+:root{
+
+    --roboto: "Roboto", sans-serif; 
+    --baskervville: "Baskervville", serif;
+    --gfs-didot: "GFS Didot", serif;
+
+    --primary-color : 0,0,0;
+    --secondary-color: 255,255,255;
+
+    --orange-color: 236, 134,66;
+    --blue-color: 25,96,128;
+    --grey-color: 217,217,217;
+
+    --headline-font-size :42px;
+    --headline-font-weight: 700;
+
+    --subheadline-font-size: 22px;
+    --subheadline-font-weight: 400;
+
+    --body-font-size: 18px;
+}
+

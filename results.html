@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrainNomad</title>
+    <link rel="icon" type="image/x-icon" href="assets/Icons_Logo/Train_Marker.svg">
+    <link rel="stylesheet" href="css/results.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+</head>
+<body>
+    <header class="header">
+        <nav class="header__nav">
+            <div class="nav__logo">
+                <a href="index.html"><h3 class="nav__logo-title">TrainNomad</h3></a>
+            </div>
+            <div class="nav__right">
+                <a class="right__link" href="results.html">
+                    <p class="nav__right-about_me">Explorer</p>
+                </a>
+                <a href="Train.html">
+                    <p class="nav__right-about_me">Train</p>
+                </a>
+                <a href="A_propos.html">
+                    <p class="nav__right-about_me">À propos</p>
+                </a>
+            </div>
+        </nav>
+        
+        <div class="search__main">
+            <div class="search__inputs">
+                <!-- Wrapper pour Départ + suggestions -->
+                <div class="input-wrapper">
+                    <input type="text" placeholder="Départ" class="search__depart-input" id="results-departure-city" autocomplete="off">
+                    <div id="results-departure-suggestions" class="suggestions-container hidden"></div>
+                </div>
+                
+                <!-- Wrapper pour Arrivée + suggestions -->
+                <div class="input-wrapper">
+                    <input type="text" placeholder="Arrivée" class="search__arrive-input" id="results-destination-city" autocomplete="off">
+                    <div id="results-destination-suggestions" class="suggestions-container hidden"></div>
+                </div>
+                
+                <div class="input-wrapper">
+                    <input type="date" class="search__date-input" id="results-departure-date"> 
+                </div>
+            </div>
+            
+            <div class="search__bouton-container">
+                <button type="submit" class="search__bouton" id="results-search-btn">
+                    RECHERCHER
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="results__main">
+        
+        <div class="results__list-container">
+            <!-- ✅ SECTION FILTRES COMPLÈTE -->
+            <div class="filters-section" id="filters-section">
+                <div class="filters-row">
+                    
+                    <!-- Filtre Heure de départ -->
+                    <div class="filter-item">
+                        <button class="filter-button" id="time-filter-btn">
+                            <img src="assets/results/Trier_croissant.svg" class="filter-icon" alt="Ordre_croissant">
+                            <span class="filter-label" id="selected-hour-label">À partir de : 00h</span>
+                            <span class="filter-chevron">▼</span>
+                        </button>
+                        <div class="filter-dropdown hidden" id="time-filter-dropdown">
+                            <div class="time-grid">
+                                <select id="start-hour-select" size="10" style="width: 100%; border: none;">
+                                    <option value="all">Toute la journée</option>
+                                    <option value="0">00:00</option>
+                                    <option value="6">06:00</option>
+                                    <option value="8">08:00</option>
+                                    <option value="10">10:00</option>
+                                    <option value="12">12:00</option>
+                                    <option value="14">14:00</option>
+                                    <option value="16">16:00</option>
+                                    <option value="18">18:00</option>
+                                    <option value="20">20:00</option>
+                                    <option value="22">22:00</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filtre Correspondances -->
+                    <div class="filter-item">
+                        <button class="filter-button" id="stops-filter-btn">
+                            <span class="filter-label">Correspondances</span>
+                            <span class="filter-chevron">▼</span>
+                        </button>
+                        <div class="filter-dropdown hidden" id="stops-filter-dropdown">
+                            <div class="filter-options">
+                                <label class="filter-option">
+                                    <input type="checkbox" name="stops-filter" value="direct" checked> Direct
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="stops-filter" value="1" checked> Jusqu'à 1
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="stops-filter" value="2"> Jusqu'à 2
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filtre Durée -->
+                    <div class="filter-item">
+                        <button class="filter-button" id="duration-filter-btn">
+                            <span class="filter-label" id="selected-duration-label">Toutes durées</span>
+                            <span class="filter-chevron">▼</span>
+                        </button>
+                        <div class="filter-dropdown hidden" id="duration-filter-dropdown">
+                            <div class="time-grid">
+                                <select id="duration-select" size="8" style="width: 100%; border: none;">
+                                    <option value="all">Toutes durées</option>
+                                    <option value="2">Max 2h</option>
+                                    <option value="3">Max 3h</option>
+                                    <option value="4">Max 4h</option>
+                                    <option value="5">Max 5h</option>
+                                    <option value="6">Max 6h</option>
+                                    <option value="8">Max 8h</option>
+                                    <option value="10">Max 10h</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <!-- Les cartes de résultats seront insérées ici -->
+        </div>
+
+        <div id="map" class="results__map"></div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer_nav"> 
+            <div class="footer_left">
+                <p>@TrainNomad - 2026</p>
+                <p>Mentions légales</p>
+            </div>
+            <div class="footer_right">
+                <h3>TrainNomad</h3>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts dans l'ordre correct -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script/api_service.js"></script>
+    <script src="script/filters.js"></script>
+    <script src="script/script.js"></script>
+    <script src="script/image_fetcher.js"></script>
+    <script src="script/results_display_unified.js"></script>
+    <script src="script/search.js"></script>
+</body>
+</html>

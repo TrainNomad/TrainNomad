@@ -1,0 +1,153 @@
+/* -------------------------------------- */
+/* --- MAIN.CSS - Styles de la Page --- */
+/* -------------------------------------- */
+
+.main {
+    width: 100%;
+    gap: 30px; 
+
+}
+.story-section{
+    gap: auto; 
+    display: flex; 
+}
+.story-content{
+    padding: 60px 76px 60px 76px;
+
+}
+.story-content h1 {
+    padding-bottom: 10px; 
+    gap: 10px;
+    font-family: var(--gfs-didot);
+    font-size: 48px; 
+}
+.story-content p{
+    padding-bottom: 20px; 
+    text-justify: none; 
+    font-family: var(--baskervville);
+    font-size: 16px; 
+}
+.subtitle{
+    padding-bottom: 30px; 
+
+}
+.subtitle p{
+    font-family: var(--gfs-didot);
+    font-size: 32px; 
+}
+.Story-image{
+    padding: 20px 76px 20px 76px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.Story-image img{
+    height: 360px; 
+    border-radius: 16px;
+}
+
+.Quote-Section{
+    gap: 20px; 
+    padding: 50px 0 50px 0; 
+    background-color: rgba(25, 96, 128, 1);
+}
+.blockquote{
+    padding: 20px 162px 20px 162px;
+    gap: 10px; 
+}
+.blockquote p{
+    font-family: var(--baskervville);
+    font-size: 20px; 
+    font-style: italic;
+    color: rgb(var(--secondary-color));
+    text-align: center;
+}
+.quote-author{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-content: center;
+    
+}
+.quote-author p{
+    font-family: var(--baskervville);
+    font-size: 16px; 
+    color: rgb(var(--secondary-color));
+    
+}
+.Mission-Section{
+    padding: 60px 76px 20px 76px; 
+    gap: 20px; 
+}
+.Mission-Section p{
+    padding-bottom: 20px; 
+    gap: 10px; 
+    
+    font-family: var(--baskervville);
+    font-size: 16px; 
+    text-justify: none; 
+}
+.Value-Section{
+    display: flex;
+    gap: 76px; 
+    padding:  50px 76px 50px 76px; 
+
+}
+.Value-Item{
+    gap: 10px; 
+}
+.Value-Item h3{
+    font-family: var(--gfs-didot);
+    font-size: 24px; 
+}
+.Value-Item p{
+    font-family: var(--baskervville);
+    font-size: 16px; 
+    text-justify: none;
+    display: flex;
+}
+.Vision-Section{
+     
+    padding:  50px 76px 50px 76px; 
+}
+.Vision-Item p{
+    font-family: var(--baskervville);
+    font-size: 16px; 
+    text-justify: none;
+    display: flex;    
+    padding-bottom: 40px; 
+}
+.Destination-Grid{
+    place-items: center;
+    display: flex;
+    width: 100%; 
+    /* gap: 20px; */
+    justify-content: space-between;
+}
+.Destination-Card{
+    position: relative; 
+    border-radius: 10px;
+    min-width: 150px; 
+    max-width: 224px;
+    overflow: hidden;
+}
+.Destination-Card img{
+ 
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease; 
+    
+}
+.Destination-Label{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: white;
+    padding: 20px 10px 10px;
+    font-weight: 600;
+    text-align: center;
+    font-family: var(--baskervville);
+}

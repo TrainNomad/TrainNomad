@@ -1,0 +1,332 @@
+/* -------------------------------------- */
+/* --- RESULTS.CSS - Section Principale (Main) --- */
+/* -------------------------------------- */
+
+/* Style pour l'ensemble de la page (fond gris foncé) */
+body {
+    background-color: rgba(241,242,246,1); /* Un gris claire pour le fond, comme sur l'image */
+    margin: 0;
+    padding: 0;
+}
+
+/* Conteneur principal qui structure la liste et la carte */
+.results__main {
+    max-width: 1450px; /* Aligné avec les max-width du header et footer */
+    margin: 0 auto; /* Centrage horizontal */
+    padding: 30px 20px; /* Espacement intérieur */
+    
+    display: flex;
+    gap: 30px; /* Espace entre la liste et la carte */
+    
+    /* Assure que le main est en haut du footer */
+    min-height: calc(100vh - 76px - 150px - 50px); /* Hauteur de l'écran moins header, footer, et search bar (estimation) */
+}
+
+/* Conteneur pour la liste des résultats (colonne gauche) */
+.results__list-container {
+    flex: 1; /* Prend l'espace restant après que la carte ait pris sa taille fixe/maximale */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Placeholders pour les cartes de résultats */
+.result__card-placeholder {
+    display: flex; 
+
+    background-color: white;
+    min-height: 120px; /* Une hauteur pour les cartes */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    /* === NOUVEAU: Préparation pour la transformation === */
+    transition: transform 0.2s ease-in-out; /* Ajoute une transition douce à la transformation */
+    cursor: pointer; /* Indique que la carte est interactive */
+}
+
+/* === NOUVEAU: Effet de survol (Hover) === */
+.result__card-placeholder:hover {
+    /* Application de la transformation demandée */
+    transform: translateX(3px) scale(1.013); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Optionnel: accentue l'ombre pour l'effet "décollé" */
+}
+
+.result__card-destination{
+    flex:1; 
+    justify-content: flex-start;
+    
+    /* grid-template-columns: repeat(3, minmax(0, 1fr)); <- Rendu obsolete par le flex:1 ci-dessus */
+    
+    display: flex; 
+    gap: 15px;
+    font-size: var(--subheadline-font-size);
+    padding: 8px;
+    align-items: center;
+}
+
+.result__card-image-container {
+    width: 80px; /* Taille fixe pour l'image */
+    height: 80px;
+    overflow: hidden; /* Assure que l'image ne dépasse pas son cadre */
+    border-radius: 4px; /* Un peu d'arrondi */
+    margin-right: 15px; /* Espace entre l'image et le texte */
+    flex-shrink: 0; /* Empêche la réduction de la taille de l'image */
+    background-color: #f0f0f0; /* Fond gris en attendant le chargement */
+}
+
+.result__card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recadre l'image pour qu'elle remplisse le conteneur sans déformation */
+}
+
+.result__car-hour{
+    display: grid;
+    gap: 8px;
+    margin-top: 8px;
+     
+}
+.result__min-duration{
+    font-size: var(--body-font-size);
+}
+.result__car-hour-buton{
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    border-radius: 999px;
+    padding: 8px 12px;
+    margin: 5px;
+    font-weight: 600;
+    cursor: default;
+}
+
+.result__car-hour-buton p{
+    font-size: var(--body-font-size);
+    
+}
+/* Conteneur pour la carte Leaflet (colonne droite) */
+.results__map {
+    width: 60%; /* La carte prend environ 60% de la largeur du main */
+    height: 500px;
+    max-height: 500px; 
+    
+    /* === MODIFICATIONS POUR L'EFFET STICKY === */
+    position: sticky; /* Permet à l'élément de suivre le défilement */
+    top: 30px; /* Distance du haut de la fenêtre (Header + padding top) */
+    /* ======================================== */
+    
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.result__card-header {
+    cursor: pointer;
+    display: flex;
+
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+     
+    vertical-align: middle;
+    /* justify-content: center; */
+    align-items: center;
+    padding: 10px;
+    /* Assurez-vous d'avoir une bordure ou une ombre pour délimiter la carte */
+}
+
+/* Style de l'image de la flèche */
+.expand-arrow {
+    width: 20px; /* Ajustez la taille selon vos besoins */
+    height: 20px;
+    transition: transform 0.3s ease;
+    display: block; /* S'assure qu'elle prend sa propre ligne si nécessaire */
+}
+
+/* Fait pivoter la flèche vers le haut quand la carte est développée */
+.result__card-placeholder.expanded .expand-arrow {
+    transform: rotate(180deg); /* Tourne de 180 degrés pour pointer vers le haut */
+}
+
+/* Cache le conteneur des horaires par défaut */
+.result__card-details.hidden {
+    display: none;
+    /* Ajoutez une petite animation pour une transition fluide si possible */
+}
+
+/* ========== SECTION FILTRES ========== */
+.filters-section {
+    /* background: white; */
+    /* padding: 20px; */
+    /* margin: 20px auto; */
+    max-width: 1200px;
+    border-radius: 12px;
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+}
+.filter-icon{
+    width: 15px; 
+    height: 15px;
+}
+.filters-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin: 0 auto; 
+    max-width: 1024px; 
+}
+
+/* ========== BOUTON DE FILTRE ========== */
+.filter-item {
+    position: relative;
+}
+
+.filter-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 50vh;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    transition: all 0.2s ease;
+}
+
+.filter-button:hover {
+    background: #e8e8e8;
+    border-color: #d0d0d0;
+}
+
+.filter-button:active {
+    transform: scale(0.98);
+}
+
+.filter-icon {
+    font-size: 18px;
+}
+
+.filter-label {
+    white-space: nowrap;
+}
+
+.filter-chevron {
+    font-size: 10px;
+    transition: transform 0.2s ease;
+}
+
+/* Rotation du chevron quand ouvert */
+.filter-button.active .filter-chevron {
+    transform: rotate(180deg);
+}
+
+/* ========== DROPDOWN ========== */
+.filter-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 8px;
+    min-width: 140px;
+    z-index: 1000;
+}
+
+/* Animation d'ouverture */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.filter-dropdown:not(.hidden) {
+    animation: slideDown 0.2s ease;
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* ========== OPTIONS DE FILTRE ========== */
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    user-select: none;
+}
+
+.filter-option:hover {
+    background: #f5f5f5;
+}
+
+.filter-option input[type="checkbox"] {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    accent-color: #2196F3;
+}
+
+.filter-option span {
+    font-size: 14px;
+    color: #333;
+    flex: 1;
+}
+
+
+/* -------------------------------------- */
+/* --- Adaptation pour l'effet de Déploiement/Réduction --- */
+/* -------------------------------------- */
+
+/* Style du conteneur des détails (les horaires) */
+.result__card-details {
+    /* Ajoute un padding interne au contenu des horaires pour un meilleur look */
+    padding: 0 10px 10px 10px; /* Haut/Droite/Bas/Gauche */
+    /* Gère la transition de hauteur si vous voulez un effet smooth (plus avancé) */
+    /* max-height: 500px; Une grande hauteur par défaut pour l'état déplié */
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out; 
+}
+
+/* ⬅️ MODIFICATION CLÉ 1 : Cibler la classe '.collapsed' */
+/* Masque le conteneur quand il est réduit (état initial par défaut) */
+.result__card-details.collapsed {
+    max-height: 0; /* Réduit la hauteur à zéro pour cacher le contenu */
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* ⬅️ MODIFICATION CLÉ 2 : Positionner le contenu pour que le header prenne toute la largeur */
+/* Le header et le détails doivent être des éléments de la carte */
+.result__card-placeholder {
+    /* ... votre CSS existant ... */
+    
+    /* Assure que les éléments internes sont bien empilés verticalement */
+    flex-direction: column; 
+    justify-content: center;
+}
+
+/* ⬅️ Modification sur le header pour ne pas le casser avec 'flex-direction: column' */
+.result__card-header {
+    cursor: pointer;
+    display: flex;
+    /* Garder la largeur à 100% de la carte */
+    width: 100%; /* Éliminer le calc(100% - 20px) car la carte gère déjà le padding/margin */
+    height: auto; /* Laisser la hauteur dépendre du contenu */
+    vertical-align: middle;
+    align-items: center;
+    padding: 10px; /* Le padding doit être ici */
+    box-sizing: border-box; /* S'assure que le padding est inclus dans la width/height */
+    /* Assurez-vous d'avoir une bordure ou une ombre pour délimiter la carte */
+}

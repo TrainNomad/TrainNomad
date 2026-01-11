@@ -137,21 +137,21 @@ async function fetchWithCache(url) {
 async function fetchStationByIata(iataCode) {
     if (!iataCode) return null;
     
-    // Utiliser l'API_BASE_URL globale si elle existe
-    const baseUrl = typeof API_BASE_URL !== 'undefined' 
-        ? API_BASE_URL 
-        : 'https://tgvmax.fr/api'; // Fallback
+    // Vérifier que stations_service.js est chargé
+    if (typeof STATIONS_SERVICE === 'undefined') {
+        console.error('❌ STATIONS_SERVICE non disponible');
+        return null;
+    }
     
     try {
-        const url = `${baseUrl}/station/${iataCode}`;
-        const response = await fetch(url);
+        const station = await STATIONS_SERVICE.getStationByIata(iataCode);
         
-        if (!response.ok) {
+        if (!station) {
             console.warn(`⚠️ Gare non trouvée: ${iataCode}`);
             return null;
         }
         
-        return await response.json();
+        return station;
     } catch (error) {
         console.error(`❌ Erreur fetch gare ${iataCode}:`, error);
         return null;

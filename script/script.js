@@ -1,8 +1,6 @@
 // script.js
-// Gère l'autocomplétion des gares et la communication avec l'API /suggestions.
-
-// === CONFIGURATION ===
-const API_BASE_URL = "http://localhost:3000/api";
+// Gère l'autocomplétion des gares - VERSION SANS SERVEUR
+// Utilise directement STATIONS_SERVICE pour accéder aux données
 
 // === UTILS ===
 function showAlert(message) {
@@ -10,16 +8,20 @@ function showAlert(message) {
     alert(message); 
 }
 
-// === API SUGGESTIONS (INTERNE) ===
+// === API SUGGESTIONS (CLIENT-SIDE) ===
 async function getSuggestions(input) {
     if (!input || input.length < 2) return [];
     
+    // Vérifier que stations_service.js est chargé
+    if (typeof STATIONS_SERVICE === 'undefined') {
+        console.error('❌ STATIONS_SERVICE non disponible. Assurez-vous que stations_service.js est chargé AVANT script.js');
+        return [];
+    }
+    
     try {
-        const response = await fetch(`${API_BASE_URL}/suggestions?q=${encodeURIComponent(input)}`);
-        if (!response.ok) throw new Error("Erreur de l'API de suggestions (Node.js)");
-        return await response.json();
+        return await STATIONS_SERVICE.getSuggestions(input);
     } catch (error) {
-        console.error("Erreur lors de la récupération des suggestions :", error);
+        console.error('Erreur lors de la récupération des suggestions:', error);
         return [];
     }
 }
@@ -99,6 +101,17 @@ function showSuggestions(inputId, containerId) {
 
 // === INITIALISATION ===
 document.addEventListener("DOMContentLoaded", () => {
+    // Vérification que stations_service.js est chargé
+    if (typeof STATIONS_SERVICE === 'undefined') {
+        console.error('❌ ERREUR CRITIQUE: stations_service.js doit être chargé AVANT script.js');
+        console.error('📝 Ajoutez dans votre HTML:');
+        console.error('   <script src="stations_service.js"></script>');
+        console.error('   <script src="script.js"></script>');
+        return;
+    }
+
+    console.log('✅ Initialisation de l\'autocomplétion (mode client-side)');
+    
     // Initialisation pour la page index.html
     showSuggestions("departure-city", "departure-suggestions");
     showSuggestions("destination-city", "destination-suggestions");

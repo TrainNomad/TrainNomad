@@ -1,0 +1,605 @@
+/* ========================================== */
+/* CSS TABLET avec @media - TrainNomad */
+/* S'applique UNIQUEMENT sur tablette (769px - 1024px) */
+/* ========================================== */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* HEADER & NAVIGATION */
+    .header {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        position: relative;
+        top: 0;
+        left: 0;
+        background-color: transparent;
+        z-index: 10;
+    }
+
+    .header__nav {
+        width: 100%;
+        max-width: 1024px;
+        height: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        padding: 0 20px;
+        z-index: 10;
+    }
+
+    .nav__logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .nav__logo-title {
+        font-size: 20px;
+        color: rgb(var(--secondary-color));
+        padding: 20px;
+    }
+
+    .nav__right {
+        display: flex;
+        gap: 25px;
+        padding: 20px;
+    }
+
+    .nav__icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .nav__right-about_me {
+        font-size: 15px;
+        cursor: pointer;
+        color: rgb(var(--secondary-color));
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .right__link {
+        display: flex;
+        gap: 10px;
+    }
+
+    /* HERO SECTION */
+    .main__hero {
+        width: 100%;
+        position: relative;
+        background-color: transparent;
+        z-index: 1;
+        top: -70px;
+    }
+
+    .main__hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 350px;
+        background-color: rgba(78, 77, 77, 0.3);
+        z-index: 2;
+    }
+
+    .hero__background {
+        width: 100%;
+        height: 350px;
+        background-color: rgba(78, 77, 77, 0.5);
+    }
+
+    .hero__background-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero__sections {
+        position: absolute;
+        z-index: 10;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        text-align: center;
+        color: rgb(var(--secondary-color));
+        padding: 0 30px;
+    }
+
+    .hero__sections h3 {
+        font-size: 36px;
+        color: rgb(var(--secondary-color));
+        margin-bottom: 20px;
+    }
+
+    .hero__sections p {
+        font-size: 18px;
+        color: rgb(var(--secondary-color));
+    }
+
+    /* BARRE DE RECHERCHE - TABLET */
+    .search__main {
+        background-color: rgb(var(--secondary-color));
+        height: 50px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px 10px 0 0;
+        padding: 8px 16px;
+        max-width: 700px;
+        margin-top: -25px;
+        position: relative;
+        z-index: 20;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .search__inputs {
+        height: 100%;
+        display: flex;
+        flex-grow: 1;
+        gap: 5px;
+        position: relative;
+    }
+
+    .input-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        flex-grow: 1;
+    }
+
+    .search__inputs input {
+        height: 100%;
+        width: 100%;
+        padding: 0 10px;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        background-color: rgba(241, 242, 246, 1);
+        font-size: 14px;
+    }
+
+    .search__depart-input {
+        border-radius: 5px 0 0 5px;
+    }
+
+    .search__inputs input:focus {
+        outline: none;
+    }
+
+    .search__inputs input::placeholder {
+        color: black;
+    }
+
+    .search__bouton-container {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .search__bouton {
+        height: 100%;
+        padding: 0 15px;
+        background-color: rgb(236, 134, 66);
+        border: none;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 0 5px 5px 0;
+        white-space: nowrap;
+        margin-left: 5px;
+        font-size: 14px;
+    }
+
+    /* SUGGESTIONS */
+    .suggestions-container {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 0 0 5px 5px;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1000;
+        margin-top: 2px;
+    }
+
+    .suggestion-item {
+        padding: 10px 15px;
+        cursor: pointer;
+        border-bottom: 1px solid #eee;
+        font-size: 14px;
+        color: #333;
+        transition: background-color 0.2s ease;
+    }
+
+    .suggestion-item:hover {
+        background-color: #fce6e6;
+        color: #a00;
+    }
+
+    .suggestion-item:last-child {
+        border-bottom: none;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    .everywhere-option {
+        background-color: #f1f8e9 !important;
+        cursor: pointer;
+        padding: 10px 15px;
+    }
+
+    .everywhere-option:hover {
+        background-color: #c8e6c9 !important;
+    }
+
+    /* MAIN - DESTINATIONS */
+    .main {
+        width: 100%;
+        padding: 60px 0;
+    }
+
+    .destinations {
+        width: 100%;
+    }
+
+    .destinations__container {
+        max-width: 1024px;
+        margin: 0 auto;
+        padding: 0 30px;
+    }
+
+    .destinations__header {
+        text-align: left;
+        margin-bottom: 32px;
+    }
+
+    .destinations__title {
+        font-size: 28px;
+        font-weight: 600;
+        color: #222;
+        margin-bottom: 8px;
+    }
+
+    .destinations__subtitle {
+        font-size: 15px;
+        color: #717171;
+    }
+
+    .destinations__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+
+    .destination-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .destination-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .destination-card__image {
+        width: 100%;
+        height: 220px;
+        overflow: hidden;
+        background-color: #e0e0e0;
+    }
+
+    .destination-card__image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .destination-card:hover .destination-card__image img {
+        transform: scale(1.05);
+    }
+
+    .destination-card__content {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+        flex-grow: 1;
+    }
+
+    .destination-card__title {
+        font-size: 19px;
+        font-weight: 600;
+        color: #222;
+        line-height: 1.3;
+    }
+
+    .destination-card__tagline {
+        font-size: 15px;
+        color: rgb(236, 134, 66);
+        font-style: italic;
+        font-weight: 500;
+    }
+
+    .destination-card__highlights {
+        font-size: 13px;
+        color: #484848;
+        line-height: 1.5;
+    }
+
+    .destination-card__highlights strong {
+        color: #222;
+    }
+
+    .destination-card__trainnomad-tip {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        background-color: #f7f7f7;
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .destination-card__trainnomad-tip p {
+        font-size: 12px;
+        color: #484848;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    .destination-card__trainnomad-tip strong {
+        color: #222;
+    }
+
+    .destination-card__description {
+        font-size: 13px;
+        color: #717171;
+        line-height: 1.6;
+        margin-top: auto;
+    }
+
+    /* OUTILS PRATIQUES */
+    .tools {
+        width: 100%;
+        background-color: white;
+        padding: 60px 0;
+    }
+
+    .tools__container {
+        max-width: 1024px;
+        margin: 0 auto;
+        padding: 0 30px;
+    }
+
+    .tools__title {
+        font-size: 28px;
+        font-weight: 600;
+        color: #222;
+        margin-bottom: 40px;
+        text-align: left;
+        line-height: 1.3;
+    }
+
+    .tools__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: start;
+    }
+
+    .tools__cards {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+    }
+
+    .tool-card {
+        background: #f7f9fc;
+        border-radius: 12px;
+        padding: 22px;
+        display: flex;
+        gap: 18px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .tool-card:hover {
+        transform: translateX(4px);
+        box-shadow: 0 4px 12px rgba(0, 102, 255, 0.1);
+    }
+
+    .tool-card__icon {
+        flex-shrink: 0;
+    }
+
+    .tool-card__content {
+        flex-grow: 1;
+    }
+
+    .tool-card__title {
+        font-size: 17px;
+        font-weight: 600;
+        color: #222;
+        margin-bottom: 10px;
+    }
+
+    .tool-card__description {
+        font-size: 14px;
+        color: #717171;
+        line-height: 1.6;
+    }
+
+    .tools__visual {
+        background: white;
+        border-radius: 12px;
+        padding: 28px;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    .tools__visual-header {
+        margin-bottom: 28px;
+    }
+
+    .tools__visual-header h3 {
+        font-size: 19px;
+        font-weight: 600;
+        color: #222;
+        margin-bottom: 14px;
+        line-height: 1.3;
+    }
+
+    .tools__visual-header p {
+        font-size: 14px;
+        color: #717171;
+        line-height: 1.6;
+    }
+
+    .tools__visual-header strong {
+        color: #222;
+        font-weight: 600;
+    }
+
+    .calendar-preview {
+        background: #fafbfc;
+        border: 1px solid #e1e4e8;
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+    .calendar-preview__header {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        margin-bottom: 22px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid #e1e4e8;
+    }
+
+    .calendar-preview__icon svg {
+        display: block;
+        width: 28px;
+        height: 28px;
+    }
+
+    .calendar-preview__controls {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .control-bar {
+        height: 12px;
+        background: #c8d6e5;
+        border-radius: 6px;
+    }
+
+    .control-bar.short {
+        width: 60%;
+    }
+
+    .calendar-preview__grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 6px;
+    }
+
+    .calendar-cell {
+        aspect-ratio: 1;
+        background: white;
+        border: 1px solid #e1e4e8;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition: all 0.2s ease;
+    }
+
+    .calendar-cell.available {
+        background: #d4edda;
+        border-color: #28a745;
+    }
+
+    .calendar-cell.available .star {
+        color: #28a745;
+    }
+
+    .calendar-cell.unavailable {
+        background: #f8d7da;
+        border-color: #dc3545;
+    }
+
+    .calendar-cell.unavailable .cross {
+        color: #dc3545;
+        font-size: 22px;
+    }
+
+    .calendar-cell:hover {
+        transform: scale(1.05);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* FOOTER */
+    .footer {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        position: relative;
+        background-color: rgb(25, 96, 128);
+    }
+
+    .footer_nav {
+        width: 100%;
+        max-width: 1024px;
+        height: 140px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        padding: 0 30px;
+    }
+
+    .footer_left {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        font-size: 15px;
+        color: rgb(var(--secondary-color));
+        padding: 25px;
+    }
+
+    .footer_right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 20px;
+        color: rgb(var(--secondary-color));
+        padding: 25px;
+    }
+}

@@ -236,9 +236,9 @@ function buildDestinationCard(destination, trips, lat, lon, displayMode = 'stand
              data-lon="${lon}">
             
             <div class="result__card-header">
-                <div class="result__card-image-container">
+                <!-- <div class="result__card-image-container">
                     <img class="result__card-image" src="" alt="Image de ${destination}" loading="lazy">
-                </div>
+                </div> -->
                 
                 <div class="result__card-destination">
                     <span class="mr-2">→</span>

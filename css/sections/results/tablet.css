@@ -1,0 +1,480 @@
+/* ========================================== */
+/* CSS RESULTS TABLET avec @media */
+/* S'applique UNIQUEMENT sur tablette (769px - 1024px) */
+/* ========================================== */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* HEADER */
+    .header {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        position: relative;
+        top: 0;
+        left: 0;
+        background-color: rgb(var(--secondary-color));
+        z-index: 10;
+        box-shadow: 0 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .header__nav {
+        width: 100%;
+        max-width: 1024px;
+        height: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        /* padding: 0 20px; */
+        z-index: 10;
+    }
+
+    .nav__logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .nav__logo-title {
+        font-size: 20px;
+        color: rgb(var(--primary-color));
+        padding: 20px;
+    }
+
+    .nav__right {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .nav__right-about_me {
+        font-size: 15px;
+        cursor: pointer;
+        color: rgb(var(--primary-color));
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .right__link {
+        display: flex;
+        gap: 10px;
+    }
+
+    /* BARRE DE RECHERCHE */
+    .search__main {
+        background-color: rgb(var(--secondary-color));
+        height: 50px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px 10px 0 0;
+        padding: 8px 16px;
+        max-width: 900px;
+        width: calc(100% - 32px);
+        position: relative;
+        z-index: 20;
+    }
+
+    .search__inputs {
+        height: 100%;
+        display: flex;
+        flex-grow: 1;
+        gap: 5px;
+        position: relative;
+    }
+
+    .input-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        flex-grow: 1;
+    }
+
+    .search__inputs input {
+        height: 100%;
+        width: 100%;
+        padding: 0 10px;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        background-color: rgba(241, 242, 246, 1);
+        font-size: 14px;
+    }
+
+    .search__depart-input {
+        border-radius: 5px 0 0 5px;
+    }
+
+    .search__inputs input:focus {
+        outline: none;
+    }
+
+    .search__inputs input::placeholder {
+        color: black;
+    }
+
+    .search__bouton-container {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .search__bouton {
+        height: 100%;
+        padding: 0 15px;
+        background-color: rgb(236, 134, 66);
+        border: none;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 0 5px 5px 0;
+        white-space: nowrap;
+        margin-left: 5px;
+        font-size: 14px;
+    }
+
+    /* SUGGESTIONS */
+    .suggestions-container {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 0 0 5px 5px;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1000;
+        margin-top: 2px;
+    }
+
+    .suggestion-item {
+        padding: 10px 15px;
+        cursor: pointer;
+        border-bottom: 1px solid #eee;
+        font-size: 14px;
+        color: #333;
+        transition: background-color 0.2s ease;
+    }
+
+    .suggestion-item:hover {
+        background-color: #fce6e6;
+        color: #a00;
+    }
+
+    .suggestion-item:last-child {
+        border-bottom: none;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    .everywhere-option {
+        background-color: #f1f8e9 !important;
+        cursor: pointer;
+        padding: 10px 15px;
+    }
+
+    .everywhere-option:hover {
+        background-color: #c8e6c9 !important;
+    }
+
+    /* MAIN RESULTS */
+    body {
+        background-color: rgba(241, 242, 246, 1);
+        margin: 0;
+        padding: 0;
+    }
+
+    .results__main {
+        max-width: 1024px;
+        margin: 0 auto;
+        padding: 25px 20px;
+        display: flex;
+        gap: 25px;
+        min-height: calc(100vh - 70px - 140px - 50px);
+    }
+
+    /* LISTE DES RÉSULTATS */
+    .results__list-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .result__card-placeholder {
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        min-height: 110px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease-in-out;
+        cursor: pointer;
+    }
+
+    .result__card-placeholder:hover {
+        transform: translateX(3px) scale(1.013);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .result__card-header {
+        cursor: pointer;
+        display: flex;
+        width: 100%;
+        height: auto;
+        align-items: center;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .result__card-destination {
+        flex: 1;
+        justify-content: flex-start;
+        display: flex;
+        gap: 12px;
+        font-size: 17px;
+        padding: 6px;
+        align-items: center;
+    }
+
+    .result__card-image-container {
+        width: 70px;
+        height: 70px;
+        overflow: hidden;
+        border-radius: 4px;
+        margin-right: 12px;
+        flex-shrink: 0;
+        background-color: #f0f0f0;
+    }
+
+    .result__card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .result__car-hour {
+        display: grid;
+        gap: 7px;
+        margin-top: 7px;
+    }
+
+    .result__min-duration {
+        font-size: 14px;
+    }
+
+    .result__car-hour-buton {
+        border: 1px solid #e5e7eb;
+        background: #fff;
+        border-radius: 999px;
+        padding: 7px 11px;
+        margin: 4px;
+        font-weight: 600;
+        cursor: default;
+    }
+
+    .result__car-hour-buton p {
+        font-size: 14px;
+    }
+
+    .expand-arrow {
+        width: 19px;
+        height: 19px;
+        transition: transform 0.3s ease;
+        display: block;
+    }
+
+    .result__card-placeholder.expanded .expand-arrow {
+        transform: rotate(180deg);
+    }
+
+    .result__card-details {
+        padding: 0 10px 10px 10px;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+    }
+
+    .result__card-details.collapsed {
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .result__card-details.hidden {
+        display: none;
+    }
+
+    /* CARTE LEAFLET */
+    .results__map {
+        width: 45%;
+        height: 450px;
+        max-height: 450px;
+        position: sticky;
+        top: 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* FILTRES */
+    .filters-section {
+        max-width: 100%;
+        border-radius: 10px;
+    }
+
+    .filter-icon {
+        width: 15px;
+        height: 15px;
+    }
+
+    .filters-row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin: 0 auto;
+        max-width: 900px;
+        flex-wrap: wrap;
+    }
+
+    .filter-item {
+        position: relative;
+    }
+
+    .filter-button {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 9px 14px;
+        background: #f5f5f5;
+        border: 1px solid #e0e0e0;
+        border-radius: 50vh;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 500;
+        color: #333;
+        transition: all 0.2s ease;
+    }
+
+    .filter-button:hover {
+        background: #e8e8e8;
+        border-color: #d0d0d0;
+    }
+
+    .filter-button:active {
+        transform: scale(0.98);
+    }
+
+    .filter-label {
+        white-space: nowrap;
+        font-size: 13px;
+    }
+
+    .filter-chevron {
+        font-size: 10px;
+        transition: transform 0.2s ease;
+    }
+
+    .filter-button.active .filter-chevron {
+        transform: rotate(180deg);
+    }
+
+    .filter-dropdown {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        padding: 8px;
+        min-width: 140px;
+        z-index: 1000;
+    }
+
+    .filter-options {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .filter-option {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 9px 11px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+        user-select: none;
+    }
+
+    .filter-option:hover {
+        background: #f5f5f5;
+    }
+
+    .filter-option input[type="checkbox"] {
+        cursor: pointer;
+        width: 17px;
+        height: 17px;
+        accent-color: #2196F3;
+    }
+
+    .filter-option span {
+        font-size: 13px;
+        color: #333;
+        flex: 1;
+    }
+
+    .time-grid select {
+        font-size: 14px;
+    }
+
+    /* FOOTER */
+    .footer {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        position: relative;
+        background-color: rgb(25, 96, 128);
+    }
+
+    .footer_nav {
+        width: 100%;
+        max-width: 1024px;
+        height: 140px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        padding: 0 30px;
+    }
+
+    .footer_left {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        font-size: 15px;
+        color: rgb(var(--secondary-color));
+        padding: 25px;
+    }
+
+    .footer_right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 20px;
+        color: rgb(var(--secondary-color));
+        padding: 25px;
+    }
+}

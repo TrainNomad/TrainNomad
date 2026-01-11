@@ -1,0 +1,185 @@
+/* ========================================== */
+/* LARGE DESKTOP - PLUS DE 1450PX */
+/* ========================================== */
+@media (min-width: 1450px) {
+    /* HEADER */
+    .header__nav {
+        max-width: 1600px;
+        padding: 0 50px;
+        margin: 0 auto;
+    }
+
+    .nav__logo-title {
+        font-size: 28px;
+        padding: 35px;
+    }
+
+    .nav__right {
+        gap: 40px;
+        padding: 35px;
+    }
+
+    .nav__right-about_me {
+        font-size: 18px;
+    }
+
+    /* MAIN */
+    .main {
+        gap: 35px;
+    }
+
+    /* STORY SECTION */
+    .story-section {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+    }
+
+    .story-content {
+        padding: 70px 40px 70px 100px;
+        flex: 1;
+        max-width: 900px;
+    }
+
+    .story-content h1 {
+        padding-bottom: 12px;
+        font-size: 56px;
+    }
+
+    .story-content p {
+        padding-bottom: 22px;
+        font-size: 18px;
+        line-height: 1.7;
+    }
+
+    .subtitle {
+        padding-bottom: 35px;
+    }
+
+    .subtitle p {
+        font-size: 36px;
+    }
+
+    .Story-image {
+        padding: 30px 100px 30px 40px;
+    }
+
+    .Story-image img {
+        height: 420px;
+        width: auto;
+        border-radius: 18px;
+    }
+
+    /* QUOTE SECTION */
+    .Quote-Section {
+        gap: 25px;
+        padding: 60px 0;
+    }
+
+    .blockquote {
+        padding: 25px 200px;
+    }
+
+    .blockquote p {
+        font-size: 24px;
+        line-height: 1.7;
+    }
+
+    .quote-author p {
+        font-size: 18px;
+    }
+
+    /* MISSION SECTION */
+    .Mission-Section {
+        padding: 70px 100px 30px 100px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .Mission-Section p {
+        padding-bottom: 22px;
+        font-size: 18px;
+        line-height: 1.7;
+    }
+
+    /* VALUE SECTION */
+    .Value-Section {
+        display: flex;
+        flex-direction: row;
+        gap: 100px;
+        padding: 60px 100px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .Value-Item {
+        gap: 12px;
+    }
+
+    .Value-Item h3 {
+        font-size: 28px;
+        margin-bottom: 12px;
+    }
+
+    .Value-Item p {
+        font-size: 18px;
+        line-height: 1.7;
+    }
+
+    /* VISION SECTION */
+    .Vision-Section {
+        padding: 60px 100px 70px 100px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .Vision-Item p {
+        font-size: 18px;
+        line-height: 1.7;
+        padding-bottom: 50px;
+    }
+
+    .Destination-Grid {
+        display: flex;
+        justify-content: space-between;
+        gap: 25px;
+    }
+
+    .Destination-Card {
+        min-width: 180px;
+        max-width: 280px;
+        border-radius: 12px;
+    }
+
+    .Destination-Card img {
+        transition: transform 0.4s ease;
+    }
+
+    .Destination-Card:hover img {
+        transform: scale(1.05);
+    }
+
+    .Destination-Label {
+        padding: 25px 12px 12px;
+        font-size: 16px;
+    }
+
+    /* FOOTER */
+    .footer_nav {
+        max-width: 1600px;
+        height: 160px;
+        padding: 0 50px;
+        margin: 0 auto;
+    }
+
+    .footer_left {
+        font-size: 18px;
+        gap: 30px;
+        padding: 35px;
+    }
+
+    .footer_right {
+        font-size: 26px;
+        padding: 35px;
+    }
+}

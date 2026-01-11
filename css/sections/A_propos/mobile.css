@@ -1,0 +1,289 @@
+/* ========================================== */
+/* MOBILE - MAX 768PX */
+/* ========================================== */
+@media (max-width: 768px) {
+    /* HEADER */
+    .header {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        position: relative;
+        top: 0;
+        left: 0;
+        background-color: rgb(var(--secondary-color));
+        z-index: 10;
+        box-shadow: 0 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .header__nav {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10;
+        /* padding: 0 15px; */
+    }
+
+    .nav__logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav__logo-title {
+        font-size: 18px;
+        color: rgb(var(--primary-color));
+        padding: 10px;
+    }
+
+    .nav__right {
+        display: flex;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .nav__right-about_me {
+        font-size: 13px;
+        cursor: pointer;
+        color: rgb(var(--primary-color));
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .right__link {
+        display: flex;
+        gap: 8px;
+    }
+
+    /* MAIN CONTENT */
+    body {
+        background-color: rgba(241, 242, 246, 1);
+        margin: 0;
+        padding: 0;
+    }
+
+    .main {
+        width: 100%;
+        gap: 20px;
+    }
+
+    /* STORY SECTION */
+    .story-section {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 20px;
+        padding: 0;
+    }
+
+    .story-content {
+        padding: 20px 20px 30px 20px;
+    }
+
+    .story-content h1 {
+        padding-bottom: 8px;
+        font-family: var(--gfs-didot);
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .story-content p {
+        padding-bottom: 15px;
+        text-align: justify;
+        font-family: var(--baskervville);
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .subtitle {
+        padding-bottom: 20px;
+        text-align: center;
+    }
+
+    .subtitle p {
+        font-family: var(--gfs-didot);
+        font-size: 20px;
+    }
+
+    .Story-image {
+        padding: 20px;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+
+    .Story-image img {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+        border-radius: 12px;
+    }
+
+    /* QUOTE SECTION */
+    .Quote-Section {
+        gap: 15px;
+        padding: 30px 0;
+        background-color: rgba(25, 96, 128, 1);
+    }
+
+    .blockquote {
+        padding: 15px 20px;
+        gap: 8px;
+    }
+
+    .blockquote p {
+        font-family: var(--baskervville);
+        font-size: 16px;
+        font-style: italic;
+        color: rgb(var(--secondary-color));
+        text-align: center;
+        line-height: 1.6;
+    }
+
+    .quote-author {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        align-content: center;
+    }
+
+    .quote-author p {
+        font-family: var(--baskervville);
+        font-size: 14px;
+        color: rgb(var(--secondary-color));
+    }
+
+    /* MISSION SECTION */
+    .Mission-Section {
+        padding: 30px 20px 20px 20px;
+        gap: 15px;
+    }
+
+    .Mission-Section p {
+        padding-bottom: 15px;
+        font-family: var(--baskervville);
+        font-size: 14px;
+        text-align: justify;
+        line-height: 1.6;
+    }
+
+    /* VALUE SECTION */
+    .Value-Section {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 30px 20px;
+    }
+
+    .Value-Item {
+        gap: 8px;
+    }
+
+    .Value-Item h3 {
+        font-family: var(--gfs-didot);
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .Value-Item p {
+        font-family: var(--baskervville);
+        font-size: 14px;
+        text-align: justify;
+        line-height: 1.6;
+    }
+
+    /* VISION SECTION */
+    .Vision-Section {
+        padding: 30px 20px 40px 20px;
+    }
+
+    .Vision-Item p {
+        font-family: var(--baskervville);
+        font-size: 14px;
+        text-align: justify;
+        line-height: 1.6;
+        padding-bottom: 25px;
+    }
+
+    .Destination-Grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        width: 100%;
+    }
+
+    .Destination-Card {
+        position: relative;
+        border-radius: 8px;
+        min-width: auto;
+        max-width: 100%;
+        overflow: hidden;
+        aspect-ratio: 4/3;
+    }
+
+    .Destination-Card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .Destination-Label {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        color: white;
+        padding: 15px 8px 8px;
+        font-weight: 600;
+        text-align: center;
+        font-family: var(--baskervville);
+        font-size: 13px;
+    }
+
+    /* FOOTER */
+    .footer {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        position: relative;
+        background-color: rgb(25, 96, 128);
+    }
+
+    .footer_nav {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0;
+        gap: 20px;
+    }
+
+    .footer_left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        font-size: 14px;
+        color: rgb(var(--secondary-color));
+        padding: 15px 20px;
+        text-align: center;
+    }
+
+    .footer_right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 20px;
+        color: rgb(var(--secondary-color));
+        padding: 15px 20px;
+    }
+}

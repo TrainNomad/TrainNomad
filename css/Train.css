@@ -4,6 +4,9 @@
 @import url('sections/Train/header.css');
 @import url('sections/Train/main.css');
 @import url('sections/Train/footer.css');
+@import url('sections/Train/mobile.css');
+@import url('sections/Train/tablet.css');
+@import url('sections/Train/deskop_large.css');
 
 :root{
 

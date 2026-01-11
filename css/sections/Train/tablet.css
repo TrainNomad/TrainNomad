@@ -1,0 +1,123 @@
+/* ========================================== */
+/* TABLETTE - 769PX À 1024PX */
+/* ========================================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .header__nav {
+        max-width: 900px;
+        padding: 0 20px;
+    }
+
+    .nav__logo-title {
+        font-size: 20px;
+    }
+
+    .nav__right-about_me {
+        font-size: 15px;
+    }
+
+    .search__main {
+        max-width: 900px;
+        padding: 10px 20px;
+    }
+
+    .search__inputs {
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    .search__inputs input {
+        height: 48px;
+        font-size: 15px;
+    }
+
+    .search__bouton {
+        height: 48px;
+        font-size: 15px;
+        padding: 0 20px;
+    }
+
+    .results__main {
+        max-width: 900px;
+        padding: 20px;
+    }
+
+    .results__list-container {
+        max-width: 900px;
+        padding: 15px 0;
+    }
+
+    .train-trip-card {
+        padding: 14px 18px;
+    }
+
+    .train-trip-item {
+        display: grid;
+        grid-template-columns: 90px 1fr 110px 130px;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .train-company-logo {
+        height: 22px;
+    }
+
+    .train-time {
+        font-size: 19px;
+    }
+
+    .train-station {
+        font-size: 14px;
+    }
+
+    .section-header {
+        padding: 18px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .section-title {
+        font-size: 22px;
+    }
+
+    .week-calendar {
+        max-width: 900px;
+        gap: 10px;
+    }
+
+    .calendar-day {
+        min-width: 90px;
+        padding: 12px;
+    }
+
+    .filters-section {
+        max-width: 900px;
+        padding: 15px 20px;
+    }
+
+    .filters-row {
+        max-width: 900px;
+        gap: 12px;
+    }
+
+    .filter-item {
+        flex: 0 1 auto;
+        min-width: auto;
+    }
+
+    .filter-button {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    .footer_nav {
+        max-width: 900px;
+        flex-direction: row;
+        height: 120px;
+        padding: 0 20px;
+    }
+
+    .footer_left {
+        flex-direction: row;
+        text-align: left;
+    }
+}

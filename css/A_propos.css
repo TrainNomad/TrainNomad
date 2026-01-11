@@ -4,6 +4,9 @@
 @import url('sections/A_propos/header.css');
 @import url('sections/A_propos/main.css');
 @import url('sections/A_propos/footer.css');
+@import url('sections/A_propos/desktop_large.css');
+@import url('sections/A_propos/mobile.css');
+@import url('sections/A_propos/tablet.css');
 
 :root{
 

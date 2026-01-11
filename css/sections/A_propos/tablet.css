@@ -1,0 +1,158 @@
+/* ========================================== */
+/* TABLETTE - 769PX À 1024PX */
+/* ========================================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* HEADER */
+    .header__nav {
+        max-width: 900px;
+        padding: 0 30px;
+        margin: 0 auto;
+    }
+
+    .nav__logo-title {
+        font-size: 22px;
+        padding: 20px;
+    }
+
+    .nav__right {
+        gap: 25px;
+        padding: 20px;
+    }
+
+    .nav__right-about_me {
+        font-size: 16px;
+    }
+
+    /* MAIN */
+    .main {
+        gap: 25px;
+    }
+
+    /* STORY SECTION */
+    .story-section {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+        padding: 0;
+    }
+
+    .story-content {
+        padding: 40px 30px 40px 50px;
+        flex: 1;
+    }
+
+    .story-content h1 {
+        padding-bottom: 10px;
+        font-size: 38px;
+    }
+
+    .story-content p {
+        padding-bottom: 18px;
+        font-size: 15px;
+    }
+
+    .subtitle p {
+        font-size: 26px;
+    }
+
+    .Story-image {
+        padding: 30px 50px 30px 30px;
+        flex: 0 0 auto;
+    }
+
+    .Story-image img {
+        height: 320px;
+        width: auto;
+        border-radius: 14px;
+    }
+
+    /* QUOTE SECTION */
+    .Quote-Section {
+        padding: 40px 0;
+    }
+
+    .blockquote {
+        padding: 20px 80px;
+    }
+
+    .blockquote p {
+        font-size: 18px;
+    }
+
+    .quote-author p {
+        font-size: 15px;
+    }
+
+    /* MISSION SECTION */
+    .Mission-Section {
+        padding: 40px 50px 25px 50px;
+    }
+
+    .Mission-Section p {
+        padding-bottom: 18px;
+        font-size: 15px;
+    }
+
+    /* VALUE SECTION */
+    .Value-Section {
+        display: flex;
+        flex-direction: row;
+        gap: 50px;
+        padding: 40px 50px;
+    }
+
+    .Value-Item h3 {
+        font-size: 22px;
+    }
+
+    .Value-Item p {
+        font-size: 15px;
+    }
+
+    /* VISION SECTION */
+    .Vision-Section {
+        padding: 40px 50px;
+    }
+
+    .Vision-Item p {
+        font-size: 15px;
+        padding-bottom: 35px;
+    }
+
+    .Destination-Grid {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .Destination-Card {
+        min-width: 140px;
+        max-width: 200px;
+        border-radius: 10px;
+    }
+
+    .Destination-Label {
+        padding: 18px 10px 10px;
+        font-size: 14px;
+    }
+
+    /* FOOTER */
+    .footer_nav {
+        max-width: 900px;
+        flex-direction: row;
+        height: 120px;
+        padding: 0 30px;
+        margin: 0 auto;
+    }
+
+    .footer_left {
+        flex-direction: row;
+        text-align: left;
+        font-size: 15px;
+        gap: 20px;
+    }
+
+    .footer_right {
+        font-size: 22px;
+    }
+}

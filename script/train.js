@@ -93,9 +93,9 @@ function setupSearchListeners() {
 function getCompanyLogo(trip) {
     const entity = (trip.entity || '').toUpperCase();
     const axe = (trip.axe || '').toUpperCase();
-    if (entity.startsWith('OUIGO')) return 'assets/compagnie/ouigo.svg';
-    if (axe.startsWith('IC')) return 'assets/compagnie/intercite.png';
-    return 'assets/compagnie/inoui.svg';
+    if (entity.startsWith('OUIGO')) return 'assets/Compagnie/ouigo.svg';
+    if (axe.startsWith('IC')) return 'assets/Compagnie/intercite.png';
+    return 'assets/Compagnie/inoui.svg';
 }
 
 // ==================== CRÉATION DES CARTES ====================

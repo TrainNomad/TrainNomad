@@ -111,21 +111,21 @@ function setupToggleButton() {
     const isTransferMode = params.get('transfer') === 'true';
     
     // Créer le bouton de basculement s'il n'existe pas
-    let toggleBtn = document.getElementById('toggle-transfer-btn');
+    // let toggleBtn = document.getElementById('toggle-transfer-btn');
     
-    if (!toggleBtn) {
-        toggleBtn = document.createElement('button');
-        toggleBtn.id = 'toggle-transfer-btn';
-        toggleBtn.className = 'toggle-transfer-btn';
+    // if (!toggleBtn) {
+    //     toggleBtn = document.createElement('button');
+    //     toggleBtn.id = 'toggle-transfer-btn';
+    //     toggleBtn.className = 'toggle-transfer-btn';
         
-        const searchContainer = document.querySelector('.search__main');
-        if (searchContainer) {
-            const buttonContainer = document.createElement('div');
-            buttonContainer.className = 'search__toggle-container';
-            buttonContainer.appendChild(toggleBtn);
-            searchContainer.parentNode.insertBefore(buttonContainer, searchContainer.nextSibling);
-        }
-    }
+    //     const searchContainer = document.querySelector('.search__main');
+    //     if (searchContainer) {
+    //         const buttonContainer = document.createElement('div');
+    //         buttonContainer.className = 'search__toggle-container';
+    //         buttonContainer.appendChild(toggleBtn);
+    //         searchContainer.parentNode.insertBefore(buttonContainer, searchContainer.nextSibling);
+    //     }
+    // }
 }
 
 // === GESTION DES ÉVÉNEMENTS DU CHAMP DESTINATION ===

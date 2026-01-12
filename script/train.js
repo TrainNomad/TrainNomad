@@ -408,8 +408,8 @@ function setupLoadMoreButton() {
                     const loadPreviousHTML = `
                         <div class="load-more-container load-previous-container">
                             <button class="load-more-btn" id="load-previous-btn">
-                                Voir les ${previousVisible} trajets précédents
-                                <span class="load-more-count">(0/${allJourneysData.length})</span>
+                                Voir les trajets précédents
+                                
                             </button>
                         </div>
                     `;
@@ -628,6 +628,140 @@ function setupCardClickHandlers() {
             card.classList.add('expanded');
         }
     });
+}
+
+// ==================== OPTIMISATION DES TRAJETS ====================
+
+/**
+ * Optimise la liste des trajets en :
+ * 1. Regroupant par heure de départ
+ * 2. Ne gardant que le plus rapide pour chaque départ
+ * 3. Privilégiant les directs sur les correspondances à durée égale
+ */
+function optimizeJourneys(journeys) {
+    const journeysByDeparture = new Map();
+    
+    journeys.forEach(journey => {
+        const departureTime = journey.trips[0].heure_depart;
+        
+        if (!journeysByDeparture.has(departureTime)) {
+            // Premier trajet pour cette heure de départ
+            journeysByDeparture.set(departureTime, journey);
+        } else {
+            // Comparer avec le trajet existant
+            const existingJourney = journeysByDeparture.get(departureTime);
+            const shouldReplace = isBetterJourney(journey, existingJourney);
+            
+            if (shouldReplace) {
+                journeysByDeparture.set(departureTime, journey);
+            }
+        }
+    });
+    
+    // Convertir en array et trier par heure de départ
+    return Array.from(journeysByDeparture.values())
+        .sort((a, b) => a.trips[0].heure_depart.localeCompare(b.trips[0].heure_depart));
+}
+
+/**
+ * Détermine si un trajet est meilleur qu'un autre
+ * Priorité :
+ * 1. Trajet direct vs correspondance
+ * 2. Durée la plus courte
+ */
+function isBetterJourney(newJourney, existingJourney) {
+    const newIsDirect = newJourney.trips.length === 1;
+    const existingIsDirect = existingJourney.trips.length === 1;
+    
+    // Privilégier les directs
+    if (newIsDirect && !existingIsDirect) {
+        return true; // Le nouveau est direct, l'ancien non
+    }
+    if (!newIsDirect && existingIsDirect) {
+        return false; // L'ancien est direct, on le garde
+    }
+    
+    // Même type (direct/correspondance) : comparer la durée
+    return newJourney.duration < existingJourney.duration;
+}
+
+// ==================== MODIFICATION DE displaySchedules ====================
+
+async function displaySchedules() {
+    const container = document.getElementById('schedules-container');
+    if (!container) return;
+
+    const params = getUrlParams();
+    if (!params.departureId || !params.destinationId || !params.date) return;
+
+    container.innerHTML = `<div class="loading">🔍 Recherche des trajets (Direct + ${DISPLAY_CONFIG.MAX_TRANSFERS} corresp.)...</div>`;
+
+    try {
+        const results = await window.TGVMaxAPI.searchJourneys({
+            departureId: params.departureId,
+            destinationId: params.destinationId,
+            date: params.date
+        }, {
+            includeTransfers: true,
+            maxTransferLevels: DISPLAY_CONFIG.MAX_TRANSFERS
+        });
+
+        // Aplatir tous les trajets trouvés
+        let allJourneys = [];
+        results.destinationsMap.forEach(dest => {
+            if (dest.iata === params.destinationId || !params.destinationId) {
+                dest.trips.forEach(trip => {
+                    allJourneys.push({
+                        trips: trip.legs,
+                        duration: trip.duration,
+                        type: trip.type
+                    });
+                });
+            }
+        });
+
+        // 🎯 OPTIMISATION : ne garder qu'un trajet par heure de départ (le meilleur)
+        allJourneys = optimizeJourneys(allJourneys);
+        
+        console.log(`✅ Optimisation: ${allJourneys.length} trajets uniques affichés`);
+
+        // Tri par heure de départ (déjà fait dans optimizeJourneys, mais par sécurité)
+        allJourneys.sort((a, b) => a.trips[0].heure_depart.localeCompare(b.trips[0].heure_depart));
+        allJourneysData = allJourneys;
+
+        if (allJourneys.length === 0) {
+            container.innerHTML = `<div class="no-results">❌ Aucun trajet trouvé (même avec correspondances).</div>`;
+            return;
+        }
+
+        // RENDU INITIAL
+        const visibleJourneys = allJourneys.slice(0, DISPLAY_CONFIG.ITEMS_PER_PAGE);
+        const tripsHTML = visibleJourneys.map(j => createTripCard(j)).join('');
+        
+        let html = `
+            <div class="trips-list">
+                ${tripsHTML}
+            </div>
+        `;
+
+        if (allJourneys.length > DISPLAY_CONFIG.ITEMS_PER_PAGE) {
+            html += `
+                <div class="load-more-container">
+                    <button id="load-more-btn" class="load-more-btn">
+                        Voir les suivants 
+                    </button>
+                </div>`;
+        }
+
+        container.innerHTML = html;
+        
+        setupLoadMoreButton();
+        updateStationNames(); 
+
+    } catch (error) {
+        console.error(error);
+        container.innerHTML = `<div class="error">Erreur lors du chargement : ${error.message}</div>`;
+    }
 }
 
 // ==================== INITIALISATION ====================

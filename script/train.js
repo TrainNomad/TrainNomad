@@ -512,9 +512,9 @@ async function displaySchedules() {
         const tripsHTML = visibleJourneys.map(j => createTripCard(j)).join('');
         
         let html = `
-            <div class="results-header">
+            <!--<div class="results-header">
                 <h3>${allJourneys.length} trajets trouvés</h3>
-            </div>
+            </div>-->
             <div class="trips-list">
                 ${tripsHTML}
             </div>

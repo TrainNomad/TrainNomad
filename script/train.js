@@ -324,7 +324,7 @@ async function loadWeekCalendar() {
         `;
     }).join('');
 
-    // Récupération des compteurs pour chaque jour
+    // 🎯 Récupération des compteurs pour chaque jour AVEC OPTIMISATION
     const countPromises = days.map(async (date) => {
         const dateStr = formatDate(date);
         try {
@@ -341,14 +341,28 @@ async function loadWeekCalendar() {
             
             const results = await window.TGVMaxAPI.searchJourneys(searchParams, searchOptions);
             
-            // Compter tous les trajets (directs + correspondances)
-            let totalTrips = 0;
+            // 🎯 Aplatir tous les trajets dans le même format que displaySchedules
+            let allJourneys = [];
             results.destinationsMap.forEach(dest => {
-                totalTrips += dest.trips.length;
+                if (dest.iata === params.destinationId || !params.destinationId) {
+                    dest.trips.forEach(trip => {
+                        allJourneys.push({
+                            trips: trip.legs,
+                            duration: trip.duration,
+                            type: trip.type
+                        });
+                    });
+                }
             });
             
-            return { date: dateStr, count: totalTrips };
-        } catch {
+            // 🎯 APPLIQUER LA MÊME OPTIMISATION que displaySchedules
+            const optimizedJourneys = optimizeJourneys(allJourneys);
+            
+            console.log(`📅 ${dateStr}: ${allJourneys.length} → ${optimizedJourneys.length} trajets optimisés`);
+            
+            return { date: dateStr, count: optimizedJourneys.length };
+        } catch (error) {
+            console.warn(`⚠️ Erreur calendrier pour ${dateStr}:`, error);
             return { date: dateStr, count: 0 };
         }
     });
@@ -484,7 +498,7 @@ async function displaySchedules() {
             maxTransferLevels: DISPLAY_CONFIG.MAX_TRANSFERS
         });
 
-        // Aplatir tous les trajets trouvés pour la destination
+        // Aplatir tous les trajets trouvés
         let allJourneys = [];
         results.destinationsMap.forEach(dest => {
             if (dest.iata === params.destinationId || !params.destinationId) {
@@ -498,7 +512,12 @@ async function displaySchedules() {
             }
         });
 
-        // Tri par heure de départ
+        // 🎯 OPTIMISATION : ne garder qu'un trajet par heure de départ (le meilleur)
+        allJourneys = optimizeJourneys(allJourneys);
+        
+        console.log(`✅ Optimisation: ${allJourneys.length} trajets uniques affichés`);
+
+        // Tri par heure de départ (déjà fait dans optimizeJourneys, mais par sécurité)
         allJourneys.sort((a, b) => a.trips[0].heure_depart.localeCompare(b.trips[0].heure_depart));
         allJourneysData = allJourneys;
 
@@ -507,7 +526,7 @@ async function displaySchedules() {
             return;
         }
 
-        // RENDU INITIAL (Remplace renderInitialResults)
+        // RENDU INITIAL
         const visibleJourneys = allJourneys.slice(0, DISPLAY_CONFIG.ITEMS_PER_PAGE);
         const tripsHTML = visibleJourneys.map(j => createTripCard(j)).join('');
         
@@ -528,7 +547,6 @@ async function displaySchedules() {
 
         container.innerHTML = html;
         
-        // Réactiver les listeners et fonctions utilitaires
         setupLoadMoreButton();
         updateStationNames(); 
 

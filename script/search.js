@@ -6,11 +6,13 @@ const SEARCH_BUTTON_ID_HOME = "search-btn";
 const DEPARTURE_INPUT_ID_HOME = "departure-city";
 const DESTINATION_INPUT_ID_HOME = "destination-city";
 const DATE_INPUT_ID_HOME = "departure-date";
+const RETURN_DATE_INPUT_ID_HOME = "return-date";
 
 const SEARCH_BUTTON_ID_RESULTS = "results-search-btn";
 const DEPARTURE_INPUT_ID_RESULTS = "results-departure-city";
 const DESTINATION_INPUT_ID_RESULTS = "results-destination-city";
 const DATE_INPUT_ID_RESULTS = "results-departure-date";
+const RETURN_DATE_INPUT_ID_RESULTS = "results-return-date";
 
 const isResultsPage = document.getElementById(SEARCH_BUTTON_ID_RESULTS);
 
@@ -18,26 +20,14 @@ const SEARCH_BUTTON_ID = isResultsPage ? SEARCH_BUTTON_ID_RESULTS : SEARCH_BUTTO
 const DEPARTURE_INPUT_ID = isResultsPage ? DEPARTURE_INPUT_ID_RESULTS : DEPARTURE_INPUT_ID_HOME;
 const DESTINATION_INPUT_ID = isResultsPage ? DESTINATION_INPUT_ID_RESULTS : DESTINATION_INPUT_ID_HOME;
 const DATE_INPUT_ID = isResultsPage ? DATE_INPUT_ID_RESULTS : DATE_INPUT_ID_HOME;
-
-// === INITIALISATION DE L'OPTION "N'IMPORTE OÙ" ===
-function initializeAnywhereOption() {
-    // const destinationInput = document.getElementById(DESTINATION_INPUT_ID);
-    // if (!destinationInput) return;
-    
-    // // Définir "N'importe où" par défaut
-    // destinationInput.value = "N'importe où";
-    // destinationInput.dataset.id = "ANYWHERE";
-    // destinationInput.dataset.anywhere = "true";
-    
-    // // Mettre à jour le placeholder si nécessaire
-    // destinationInput.setAttribute('placeholder', "N'importe où");
-}
+const RETURN_DATE_INPUT_ID = isResultsPage ? RETURN_DATE_INPUT_ID_RESULTS : RETURN_DATE_INPUT_ID_HOME;
 
 // === FONCTION DE RECHERCHE ===
-function performSearch(includeTransfers = false) {
+async function performSearch(includeTransfers = false) {
     const departureInput = document.getElementById(DEPARTURE_INPUT_ID);
     const destinationInput = document.getElementById(DESTINATION_INPUT_ID);
     const dateInput = document.getElementById(DATE_INPUT_ID);
+    const returnDateInput = document.getElementById(RETURN_DATE_INPUT_ID);
     
     // Validation Départ
     if (!departureInput.value.trim() || !departureInput.dataset.id) {
@@ -51,9 +41,9 @@ function performSearch(includeTransfers = false) {
         return;
     }
 
-    // Validation Date
+    // Validation Date aller
     if (!dateInput.value) {
-        showAlert("Veuillez saisir une date.");
+        showAlert("Veuillez saisir une date de départ.");
         return;
     }
 
@@ -72,6 +62,26 @@ function performSearch(includeTransfers = false) {
         isAnywhere = true;
     }
 
+    // Récupération du type de trajet (aller simple ou aller-retour)
+    const tripType = window.getTripType ? window.getTripType() : 'roundtrip';
+    console.log('🎫 Type de trajet:', tripType);
+
+    // Validation date de retour pour aller-retour
+    let returnDateValue = null;
+    if (tripType === 'roundtrip') {
+        if (!returnDateInput || !returnDateInput.value) {
+            showAlert("Veuillez saisir une date de retour pour un trajet aller-retour.");
+            return;
+        }
+        returnDateValue = returnDateInput.value;
+        
+        // Vérifier que la date de retour est après la date d'aller
+        if (returnDateValue < dateValue) {
+            showAlert("La date de retour doit être postérieure ou égale à la date de départ.");
+            return;
+        }
+    }
+
     // Paramètres d'URL
     const params = new URLSearchParams({
         id: departureId,
@@ -81,16 +91,68 @@ function performSearch(includeTransfers = false) {
         lon: departureInput.dataset.lon || '',
         destination_id: destinationId,
         destination_name: destinationName,
-        transfer: includeTransfers ? 'true' : 'false'
+        transfer: includeTransfers ? 'true' : 'false',
+        trip_type: tripType
     });
+
+    // Ajouter la date de retour si aller-retour
+    if (tripType === 'roundtrip' && returnDateValue) {
+        params.append('return_date', returnDateValue);
+    }
 
     // Redirection selon le type de destination
     if (isAnywhere) {
         window.location.href = `results.html?${params.toString()}`;
     } else {
-        window.location.href = `train.html?departure_id=${departureId}&departure_name=${encodeURIComponent(departureName)}&destination_id=${destinationId}&destination_name=${encodeURIComponent(destinationName)}&date=${dateValue}`;
+        // Pour un trajet spécifique, on redirige vers train.html
+        let trainUrl = `train.html?departure_id=${departureId}&departure_name=${encodeURIComponent(departureName)}&destination_id=${destinationId}&destination_name=${encodeURIComponent(destinationName)}&date=${dateValue}&trip_type=${tripType}`;
+        
+        if (tripType === 'roundtrip' && returnDateValue) {
+            trainUrl += `&return_date=${returnDateValue}`;
+        }
+        
+        window.location.href = trainUrl;
     }
 }
+
+// === RECHERCHE DE TRAJET RETOUR ===
+/**
+ * Recherche un trajet retour (destination -> origine)
+ * @param {string} destinationId - Code IATA de la destination (devient l'origine du retour)
+ * @param {string} departureId - Code IATA du départ (devient la destination du retour)
+ * @param {string} returnDate - Date du retour
+ * @param {Object} options - Options de recherche
+ * @returns {Promise<Object>} Résultats de la recherche retour
+ */
+async function searchReturnJourney(destinationId, departureId, returnDate, options = {}) {
+    if (!window.TGVMaxAPI) {
+        console.error('❌ TGVMaxAPI non disponible');
+        return null;
+    }
+
+    console.log(`🔄 Recherche trajet retour: ${destinationId} -> ${departureId} le ${returnDate}`);
+
+    try {
+        const returnResults = await window.TGVMaxAPI.searchJourneysWithStations({
+            departureId: destinationId,  // La destination devient le départ
+            destinationId: departureId,  // Le départ devient la destination
+            date: returnDate
+        }, {
+            includeTransfers: options.includeTransfers || false,
+            maxTransferLevels: options.maxTransferLevels || 1
+        });
+
+        console.log('✅ Résultats trajet retour:', returnResults);
+        return returnResults;
+
+    } catch (error) {
+        console.error('❌ Erreur recherche trajet retour:', error);
+        return null;
+    }
+}
+
+// Exposition globale pour utilisation dans d'autres scripts
+window.searchReturnJourney = searchReturnJourney;
 
 // === BOUTON DE RECHERCHE ===
 function setupSearchButton() {
@@ -109,23 +171,6 @@ function setupToggleButton() {
     
     const params = new URLSearchParams(window.location.search);
     const isTransferMode = params.get('transfer') === 'true';
-    
-    // Créer le bouton de basculement s'il n'existe pas
-    // let toggleBtn = document.getElementById('toggle-transfer-btn');
-    
-    // if (!toggleBtn) {
-    //     toggleBtn = document.createElement('button');
-    //     toggleBtn.id = 'toggle-transfer-btn';
-    //     toggleBtn.className = 'toggle-transfer-btn';
-        
-    //     const searchContainer = document.querySelector('.search__main');
-    //     if (searchContainer) {
-    //         const buttonContainer = document.createElement('div');
-    //         buttonContainer.className = 'search__toggle-container';
-    //         buttonContainer.appendChild(toggleBtn);
-    //         searchContainer.parentNode.insertBefore(buttonContainer, searchContainer.nextSibling);
-    //     }
-    // }
 }
 
 // === GESTION DES ÉVÉNEMENTS DU CHAMP DESTINATION ===
@@ -139,21 +184,13 @@ function setupDestinationField() {
             destinationInput.dataset.anywhere = "false";
         }
     });
-    
-    // Si l'utilisateur efface tout, on remet "N'importe où"
-    // destinationInput.addEventListener('blur', () => {
-    //     if (destinationInput.value.trim() === "") {
-    //         destinationInput.value = "N'importe où";
-    //         destinationInput.dataset.id = "ANYWHERE";
-    //         destinationInput.dataset.anywhere = "true";
-    //     }
-    // });
 }
 
 // === INITIALISATION ===
 document.addEventListener("DOMContentLoaded", () => {
-    initializeAnywhereOption();
     setupSearchButton();
     setupToggleButton();
     setupDestinationField();
+    
+    console.log('✅ Search.js initialisé avec support aller-retour');
 });

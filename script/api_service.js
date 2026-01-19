@@ -411,6 +411,189 @@ async function searchJourneysWithStations(params, options = {}) {
     return results;
 }
 
+// ==================== RECHERCHE ALLER-RETOUR ====================
+
+/**
+ * Recherche intelligente d'aller-retours
+ * Effectue 2 recherches en parallèle et ne retourne que les destinations 
+ * où il existe AU MOINS un aller ET un retour
+ * 
+ * @param {Object} params - Paramètres de recherche
+ * @param {string} params.departureId - Code IATA départ
+ * @param {string} params.destinationId - Code IATA destination (ou null pour "n'importe où")
+ * @param {string} params.outboundDate - Date aller YYYY-MM-DD
+ * @param {string} params.returnDate - Date retour YYYY-MM-DD
+ * @param {Object} options - Options de recherche
+ * @param {number} options.minStayDuration - Durée minimale sur place en minutes (défaut: 60)
+ * @param {boolean} options.includeTransfers - Inclure les correspondances
+ * @param {number} options.maxTransferLevels - Nombre max de correspondances
+ * @returns {Promise<Object>} Résultats avec destinations valides (aller ET retour)
+ */
+async function searchRoundTrip(params, options = {}) {
+    const { departureId, destinationId, outboundDate, returnDate } = params;
+    const minStayDuration = options.minStayDuration || 60; // 1h par défaut
+    
+    console.log(`🔄 Recherche ALLER-RETOUR: ${departureId} ↔️ ${destinationId || 'Partout'}`);
+    console.log(`📅 Aller: ${outboundDate} | Retour: ${returnDate}`);
+
+    try {
+        // 1️⃣ RECHERCHE DE L'ALLER
+        console.log('➡️ Recherche des trajets aller...');
+        const outboundResults = await searchJourneys({
+            departureId: departureId,
+            destinationId: destinationId,
+            date: outboundDate
+        }, {
+            includeTransfers: options.includeTransfers || true,
+            maxTransferLevels: options.maxTransferLevels || 1
+        });
+
+        console.log(`✅ Aller: ${outboundResults.destinationsMap.size} destination(s) trouvée(s)`);
+
+        if (outboundResults.destinationsMap.size === 0) {
+            console.warn('⚠️ Aucun trajet aller trouvé');
+            return {
+                validDestinations: new Map(),
+                metadata: {
+                    outboundDate,
+                    returnDate,
+                    departureId,
+                    minStayDuration,
+                    totalOutboundDestinations: 0,
+                    totalReturnOrigins: 0
+                }
+            };
+        }
+
+        // 2️⃣ RECHERCHE DES RETOURS POUR CHAQUE DESTINATION
+        console.log('⬅️ Recherche des trajets retour depuis chaque destination...');
+        
+        const returnSearchPromises = [];
+        const destinationsList = Array.from(outboundResults.destinationsMap.keys());
+        
+        // Recherche en parallèle pour toutes les destinations
+        for (const destIata of destinationsList) {
+            returnSearchPromises.push(
+                searchJourneys({
+                    departureId: destIata,      // Depuis la destination
+                    destinationId: departureId, // Vers le point de départ
+                    date: returnDate
+                }, {
+                    includeTransfers: options.includeTransfers || true,
+                    maxTransferLevels: options.maxTransferLevels || 1
+                }).then(results => ({
+                    destIata,
+                    returnTrips: results.destinationsMap.get(departureId)?.trips || []
+                })).catch(err => {
+                    console.warn(`⚠️ Erreur retour depuis ${destIata}:`, err);
+                    return { destIata, returnTrips: [] };
+                })
+            );
+        }
+
+        const returnResults = await Promise.all(returnSearchPromises);
+        
+        console.log(`✅ Retours recherchés pour ${returnResults.length} destination(s)`);
+
+        // 3️⃣ CROISEMENT DES RÉSULTATS
+        const validDestinations = new Map();
+        let totalReturnOrigins = 0;
+
+        returnResults.forEach(({ destIata, returnTrips }) => {
+            const outboundDest = outboundResults.destinationsMap.get(destIata);
+            
+            if (returnTrips.length > 0) {
+                totalReturnOrigins++;
+                
+                // Vérifier la contrainte de durée minimale sur place
+                const validReturnTrips = returnTrips.filter(returnTrip => {
+                    // Trouver le dernier aller de la journée
+                    const lastOutbound = outboundDest.trips.reduce((latest, trip) => {
+                        return !latest || trip.arrival > latest.arrival ? trip : latest;
+                    }, null);
+
+                    if (!lastOutbound) return false;
+
+                    // Calculer le temps sur place
+                    const stayDuration = calculateMinutesDiff(
+                        lastOutbound.arrival,
+                        returnTrip.departure
+                    );
+
+                    return stayDuration >= minStayDuration;
+                });
+
+                if (validReturnTrips.length > 0) {
+                    validDestinations.set(destIata, {
+                        iata: destIata,
+                        name: outboundDest.name,
+                        latitude: outboundDest.latitude,
+                        longitude: outboundDest.longitude,
+                        outboundTrips: outboundDest.trips,
+                        returnTrips: validReturnTrips,
+                        outboundCount: outboundDest.trips.length,
+                        returnCount: validReturnTrips.length,
+                        totalCombinations: outboundDest.trips.length * validReturnTrips.length
+                    });
+                    
+                    console.log(`   ✓ ${outboundDest.name}: ${outboundDest.trips.length} aller(s) × ${validReturnTrips.length} retour(s) = ${outboundDest.trips.length * validReturnTrips.length} combinaisons`);
+                }
+            }
+        });
+
+        console.log(`🎯 RÉSULTAT: ${validDestinations.size} destination(s) avec aller ET retour valides`);
+
+        return {
+            validDestinations,
+            metadata: {
+                outboundDate,
+                returnDate,
+                departureId,
+                minStayDuration,
+                totalOutboundDestinations: outboundResults.destinationsMap.size,
+                totalReturnOrigins: totalReturnOrigins
+            }
+        };
+
+    } catch (error) {
+        console.error('❌ Erreur recherche aller-retour:', error);
+        throw error;
+    }
+}
+
+/**
+ * Version enrichie avec coordonnées GPS des gares
+ */
+async function searchRoundTripWithStations(params, options = {}) {
+    const results = await searchRoundTrip(params, options);
+
+    // Récupération des données de gares
+    const iataSet = new Set();
+    results.validDestinations.forEach((dest, iata) => {
+        iataSet.add(iata);
+    });
+
+    console.log(`📍 Récupération des coordonnées de ${iataSet.size} gare(s)...`);
+
+    const stationPromises = Array.from(iataSet).map(iata =>
+        fetchStationByIata(iata).then(data => ({ iata, data }))
+    );
+
+    const stationResults = await Promise.all(stationPromises);
+
+    // Enrichissement des destinations
+    stationResults.forEach(({ iata, data }) => {
+        if (data && results.validDestinations.has(iata)) {
+            const dest = results.validDestinations.get(iata);
+            dest.name = data.name || dest.name;
+            dest.latitude = data.latitude ? parseFloat(data.latitude) : null;
+            dest.longitude = data.longitude ? parseFloat(data.longitude) : null;
+        }
+    });
+
+    return results;
+}
+
 // ==================== EXPORTS ====================
 
 // Exposition globale pour compatibilité avec code existant
@@ -418,8 +601,10 @@ window.TGVMaxAPI = {
     // Fonctions principales
     searchJourneys,
     searchJourneysWithStations,
+    searchRoundTrip,                    
+    searchRoundTripWithStations,        
     
-    // Fonctions de bas niveau (pour compatibilité)
+    // Fonctions de bas niveau
     fetchAllTGVMaxRecords,
     fetchStationByIata,
     fetchWithCache,
@@ -434,9 +619,4 @@ window.TGVMaxAPI = {
     clearCache: () => apiCache.clear()
 };
 
-// Export pour modules ES6
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = window.TGVMaxAPI;
-}
-// window.TGVMaxAPI = { /* ... */ searchJourneys, searchJourneysWithStations /* ... */ };
-console.log('✅ TGVMaxAPI chargé et prêt');
+console.log('✅ TGVMaxAPI chargé et prêt (avec support aller-retour)');

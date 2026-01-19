@@ -470,9 +470,62 @@ function setupLoadPreviousButton() {
     
     loadPreviousBtn.addEventListener('click', function(e) {
         e.preventDefault();
+        e.stopPropagation(); // Empêcher la propagation
         
-        if (typeof window.showPreviousTimeSlot === 'function') {
-            window.showPreviousTimeSlot();
+        // Décrémenter la page
+        if (currentPage > 1) {
+            currentPage--;
+            window.currentPage = currentPage;
+            
+            // Recalculer les indices
+            const startIndex = (currentPage - 1) * DISPLAY_CONFIG.ITEMS_PER_PAGE;
+            const endIndex = startIndex + DISPLAY_CONFIG.ITEMS_PER_PAGE;
+            const previousJourneys = allJourneysData.slice(startIndex, endIndex);
+            
+            // Créer les nouvelles cartes
+            const newCardsHTML = previousJourneys.map(j => createTripCard(j)).join('');
+            
+            // Trouver le conteneur du bouton précédent
+            const loadPreviousContainer = document.querySelector('.load-previous-container');
+            
+            if (loadPreviousContainer) {
+                // Insérer les cartes après le bouton précédent
+                loadPreviousContainer.insertAdjacentHTML('afterend', newCardsHTML);
+                
+                // Si on est revenu à la page 1, supprimer le bouton précédent
+                if (currentPage === 1) {
+                    loadPreviousContainer.remove();
+                }
+                
+                // Mettre à jour le bouton suivant
+                const loadMoreContainer = document.querySelector('.load-more-container:not(.load-previous-container)');
+                const loadMoreBtn = document.getElementById('load-more-btn');
+                const remainingCount = allJourneysData.length - endIndex;
+                
+                if (loadMoreBtn && remainingCount > 0) {
+                    loadMoreBtn.innerHTML = `
+                        Voir les ${Math.min(DISPLAY_CONFIG.ITEMS_PER_PAGE, remainingCount)} trajets suivants
+                        <span class="load-more-count">(${endIndex}/${allJourneysData.length})</span>
+                    `;
+                }
+                
+                // Mettre à jour les noms de gares
+                updateStationNames();
+                
+                // Appliquer les filtres
+                if (typeof applyClientSideFilters === 'function') {
+                    setTimeout(() => applyClientSideFilters(), 50);
+                }
+                
+                // Scroll vers le premier trajet ajouté
+                setTimeout(() => {
+                    const cards = document.querySelectorAll('.train-trip-card');
+                    const firstNewCard = cards[startIndex];
+                    if (firstNewCard) {
+                        firstNewCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 100);
+            }
         }
     });
 }

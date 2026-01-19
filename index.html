@@ -6,6 +6,8 @@
     <title>TrainNomad</title>
     <link rel="icon" type="image/x-icon" href="assets/Icons_Logo/Train_Marker.svg">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/8e4de4bf0a.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
  crossorigin=""/>
@@ -37,30 +39,62 @@
             </div>
 
             <div class="search__main">
-                <div class="search__inputs">
-                    <!-- Wrapper pour Départ + suggestions -->
-                    <div class="input-wrapper">
-                        <input type="text" placeholder="Départ" class="search__depart-input" id="departure-city" autocomplete="off">
-                        <div id="departure-suggestions" class="suggestions-container hidden"></div>
+                <!-- <script src="script/trip-type.js"></script>
+                
+                <div class="search__main-top">
+            
+                    <div class="trip-type-dropdown">
+                        <button class="trip-type-button" id="tripTypeBtn">
+                            
+                                <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                            
+                            <span id="selectedTripType">Aller-retour</span>
+                            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="trip-type-menu hidden" id="tripTypeMenu">
+                        <div class="trip-type-option" data-value="roundtrip">
+                            <i class="fa-solid fa-arrow-right-arrow-left"></i> Aller-retour
+                        </div>
+                        <div class="trip-type-option" data-value="oneway">
+                            <i class="fa-solid fa-arrow-right"></i> Aller simple
+                        </div>
+                        </div>
                     </div>
-                    
-                    <!-- Wrapper pour Arrivée + suggestions -->
-                    <div class="input-wrapper">
-                        <input type="text" placeholder="Arrivée" class="search__arrive-input" id="destination-city" autocomplete="off">
-                        <div id="destination-suggestions" class="suggestions-container hidden"></div>
-                    </div>
-                    
-                    <div class="input-wrapper">
-                        <input type="date" class="search__date-input" id="departure-date"> 
-                    </div>
+                </div> -->
+                <div class="search__main-bottom">
+            <div class="search__inputs">
+                <!-- Wrapper pour Départ + suggestions -->
+                <div class="input-wrapper">
+                    <input type="text" placeholder="Départ" class="search__depart-input" id="departure-city" autocomplete="off">
+                    <div id="departure-suggestions" class="suggestions-container hidden"></div>
                 </div>
                 
-                <div class="search__bouton-container">
-                    <button type="submit" class="search__bouton" id="search-btn">
-                        RECHERCHER
-                    </button>
+                <!-- Wrapper pour Arrivée + suggestions -->
+                <!-- <div class="input-wrapper">
+                    <input type="text" placeholder="Arrivée" class="search__arrive-input" id="destination-city" autocomplete="off">
+                    <div id="destination-suggestions" class="suggestions-container hidden"></div>
+                </div> -->
+                
+                <!-- Wrapper pour Date de départ -->
+                <div class="input-wrapper">
+                    <input type="date" class="search__date-input" id="departure-date"> 
+                </div>
+
+                <!-- Wrapper pour Date de retour (masqué en aller simple) -->
+                <div class="input-wrapper" id="return-date-wrapper">
+                    <input type="date" class="search__date-input" id="return-date"> 
                 </div>
             </div>
+            
+            <div class="search__bouton-container">
+                <button type="submit" class="search__bouton" id="search-btn">
+                    RECHERCHER
+                </button>
+            </div>
+        </div>
+        </div>
         </div>
     </header>
 

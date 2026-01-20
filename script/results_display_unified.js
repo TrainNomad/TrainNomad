@@ -361,14 +361,18 @@ async function fetchAndDisplayResults() {
     const departureLon = params.get('lon');
     const destinationId = params.get('destination_id');
     const destinationName = params.get('destination_name');
+    const tripType = params.get('trip_type') || 'oneway'; 
+    const returnDateValue = params.get('return_date');
 
-    // Détection du mode de recherche
-    const mode = detectSearchMode(params);
-    
-    // Pré-remplir les inputs si présents
-    const departureInput = document.getElementById('results-departure-city');
-    const destinationInput = document.getElementById('results-destination-city');
-    const dateInput = document.getElementById('results-departure-date');
+    // 🔄 NOUVEAU : Détection du mode aller-retour
+    const isRoundTrip = tripType === 'roundtrip' && returnDateValue;
+
+    // Pré-remplir les inputs
+    const departureInput = document.getElementById('departure-city');
+    const destinationInput = document.getElementById('destination-city');
+    const dateInput = document.getElementById('departure-date');
+    const returnDateInput = document.getElementById('return-date');
+    const returnDateWrapper = document.getElementById('return-date-wrapper');
     
     if (departureInput) {
         departureInput.value = departureName || '';
@@ -376,6 +380,9 @@ async function fetchAndDisplayResults() {
         departureInput.dataset.lat = departureLat || '';
         departureInput.dataset.lon = departureLon || '';
     }
+
+    const mode = detectSearchMode(params);
+    
     if (destinationInput) {
         if (mode.isAnywhereMode) {
             destinationInput.value = "N'importe où";
@@ -386,9 +393,54 @@ async function fetchAndDisplayResults() {
             destinationInput.dataset.id = destinationId || '';
         }
     }
-    if (dateInput) dateInput.value = dateValue || '';
 
-    // Déterminer le niveau max de correspondances
+    if (dateInput) dateInput.value = dateValue || '';
+    if (returnDateInput && returnDateValue) {
+        returnDateInput.value = returnDateValue;
+    }
+
+    if (typeof handleTripTypeChange === 'function') {
+        handleTripTypeChange(tripType);
+    } else if (returnDateWrapper) {
+        if (tripType === 'roundtrip') {
+            returnDateWrapper.classList.remove('hidden');
+        } else {
+            returnDateWrapper.classList.add('hidden');
+        }
+    }
+
+    // 🔄 MODE ALLER-RETOUR : Attendre les données de roundtrip_handler.js
+    if (isRoundTrip) {
+        console.log('🔄 Mode aller-retour détecté - Attente des données...');
+        
+        cardsContainer.innerHTML = `
+            <div style="text-align: center; padding: 40px;">
+                <h3>🔄 Recherche d'aller-retours...</h3>
+                <p>Aller : ${dateValue}</p>
+                <p>Retour : ${returnDateValue}</p>
+                <div style="margin: 20px auto; width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+            </div>
+        `;
+
+        // Écouter l'événement de données prêtes
+        const handleRoundTripData = (event) => {
+            console.log('✅ Données aller-retour reçues:', event.detail);
+            displayRoundTripResults(event.detail.data, event.detail.params, cardsContainer);
+        };
+
+        // Si les données sont déjà disponibles
+        if (window.ROUNDTRIP_DATA) {
+            console.log('✅ Données aller-retour déjà disponibles');
+            displayRoundTripResults(window.ROUNDTRIP_DATA, window.ROUNDTRIP_PARAMS, cardsContainer);
+        } else {
+            // Sinon, attendre l'événement
+            window.addEventListener('roundtripDataReady', handleRoundTripData, { once: true });
+        }
+
+        return; // Ne pas continuer avec la recherche normale
+    }
+
+    // MODE NORMAL (aller simple) - Code existant inchangé
     let maxTransferLevels = 0;
     if (mode.isExplorerMode) {
         maxTransferLevels = window.getMaxTransfersFromStops(window.filterState.stops);
@@ -400,7 +452,6 @@ async function fetchAndDisplayResults() {
         console.log("🚄 Mode Direct uniquement");
     }
 
-    // Message de chargement
     const loadingMessage = mode.isAnywhereMode
         ? `Chargement de tous les TGVmax depuis <strong>${departureName}</strong> le <strong>${dateValue}</strong>...`
         : mode.isExplorerMode
@@ -418,7 +469,6 @@ async function fetchAndDisplayResults() {
     }
     
     try {
-        // Préparation des paramètres de recherche
         const searchParams = {
             departureId: departureId,
             destinationId: mode.isAnywhereMode ? null : destinationId,
@@ -433,7 +483,6 @@ async function fetchAndDisplayResults() {
         console.log('🔍 Recherche via TGVMaxAPI...', searchParams, searchOptions);
         const results = await window.TGVMaxAPI.searchJourneysWithStations(searchParams, searchOptions);
 
-        // Nettoyage du conteneur
         cardsContainer.innerHTML = "";
         
         if (results.destinationsMap.size === 0) {
@@ -443,11 +492,9 @@ async function fetchAndDisplayResults() {
         
         console.log(`✅ ${results.destinationsMap.size} destination(s) trouvée(s)`);
         
-        // Conversion et tri des destinations
         const destinationsArray = Array.from(results.destinationsMap.values())
             .sort((a, b) => a.name.localeCompare(b.name));
         
-        // Affichage des cartes
         destinationsArray.forEach(dest => {
             const cardHTML = buildDestinationCard(
                 dest.name,
@@ -459,10 +506,8 @@ async function fetchAndDisplayResults() {
             cardsContainer.innerHTML += cardHTML;
         });
         
-        // Configuration des listeners
         setupCardToggleListeners();
         
-        // Affichage de la carte
         const departureData = {
             name: departureName,
             lat: parseFloat(departureLat),
@@ -471,10 +516,8 @@ async function fetchAndDisplayResults() {
         
         addMarkers(departureData, destinationsArray);
 
-        // Chargement des images Wikipedia (si image_fetcher.js est chargé)
         await loadWikipediaImages(cardsContainer);
 
-        // Application des filtres côté client (si disponibles)
         if (typeof window.applyClientSideFilters === 'function') {
             setTimeout(() => {
                 window.applyClientSideFilters();
@@ -487,6 +530,149 @@ async function fetchAndDisplayResults() {
     }
 }
 
+// ==================== FONCTION PRINCIPALE A/R ====================
+// Affichage des résultats aller-retour
+function displayRoundTripResults(data, params, container) {
+    if (!data || data.error) {
+        container.innerHTML = `
+            <div style="text-align: center; padding: 40px; color: red;">
+                <h3>❌ Erreur</h3>
+                <p>${data?.error || 'Erreur inconnue'}</p>
+            </div>
+        `;
+        return;
+    }
+
+    if (data.metadata?.empty || data.destinationsMap.size === 0) {
+        container.innerHTML = `
+            <div style="text-align: center; padding: 40px;">
+                <h3>Aucun aller-retour trouvé</h3>
+                <p>Aucune destination avec un aller ET un retour valide</p>
+                <p>Dates : ${params.outboundDate} → ${params.returnDate}</p>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = '';
+
+    // Trier par durée minimale aller (comme les trajets simples)
+    const sortedDestinations = Array.from(data.destinationsMap.values())
+        .sort((a, b) => {
+            const minDurationA = Math.min(...a.trips.filter(t => t.direction === 'outbound').map(t => t.duration));
+            const minDurationB = Math.min(...b.trips.filter(t => t.direction === 'outbound').map(t => t.duration));
+            return minDurationA - minDurationB;
+        });
+
+    // Afficher chaque destination
+    sortedDestinations.forEach(dest => {
+        const cardHTML = buildRoundTripCard(dest, params);
+        container.innerHTML += cardHTML;
+    });
+
+    setupCardToggleListeners();
+
+    // Carte
+    if (typeof window.addMarkers === 'function') {
+        const departureData = {
+            name: params.departureName,
+            lat: parseFloat(params.latitude),
+            lon: parseFloat(params.longitude)
+        };
+        addMarkers(departureData, sortedDestinations);
+    }
+}
+
+// Construction de carte aller-retour
+function buildRoundTripCard(dest, params) {
+    const outboundTrips = dest.trips.filter(t => t.direction === 'outbound');
+    const returnTrips = dest.trips.filter(t => t.direction === 'return');
+
+    const minOutboundDuration = Math.min(...outboundTrips.map(t => t.duration));
+    const minOutboundFormatted = window.TGVMaxAPI.formatDuration(minOutboundDuration);
+
+    // On prépare l'affichage HTML pour l'aller (Top 3)
+    const outboundHTML = outboundTrips.slice(0, 3).map(trip => renderTripSmall(trip)).join('');
+    
+    // On prépare l'affichage HTML pour le retour (Top 3)
+    const returnHTML = returnTrips.slice(0, 3).map(trip => renderTripSmall(trip)).join('');
+
+    return `
+        <div class="result__card-placeholder" data-destination-name="${dest.name}">
+            <div class="result__card-header">
+                <div class="result__card-destination">
+                    <span class="mr-2"><i class="fa-solid fa-arrow-right-arrow-left"></i></span>
+                    <h4>${dest.name.toUpperCase()}</h4>
+                    <span class="result__min-duration">(${minOutboundFormatted})</span>
+                </div>
+                <div class="result__card-expand-info">
+                    <img src="assets/results/fleche_card.png" class="expand-arrow">
+                </div>
+            </div>
+            <div class="result__card-details collapsed">
+                <div style="padding: 10px;">
+                    <div style="font-weight: bold; margin-bottom: 5px; color: #2e7d32;">➡️ ALLER (${params.outboundDate})</div>
+                    <div class="result__car-hour">${outboundHTML}</div>
+                    
+                    <div style="font-weight: bold; margin-top: 15px; margin-bottom: 5px; color: #ef6c00;">⬅️ RETOUR (${params.returnDate})</div>
+                    <div class="result__car-hour">${returnHTML}</div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Fonction utilitaire pour éviter la répétition de code
+function renderTripSmall(trip) {
+    const isDirect = trip.type === 'direct';
+    const badgeClass = isDirect ? 'badge-direct' : 'badge-transfer';
+    const badgeText = isDirect ? 'DIRECT' : 'CORRESP.';
+    const transferInfo = !isDirect && trip.transferStation
+        ? `<div style="font-size:0.75rem;color:#666;margin-top:2px;">Via ${trip.transferStation}</div>`
+        : '';
+    
+    return `
+        <div class="result__car-hour-buton">
+            <p>${trip.departure}</p>
+            ${transferInfo}
+            <span class="${badgeClass}" style="position:absolute; top:4px; right:4px; font-size:0.65rem; padding:2px 6px; border-radius:8px; font-weight:bold;">
+                ${badgeText}
+            </span>
+        </div>
+    `;
+}
+
+// Construction d'une ligne de trajet (utilisée par aller-retour)
+// function buildTripRow(trip) {
+//     const isDirect = trip.type === 'direct';
+//     const badgeStyle = isDirect ? 'background:#e8f5e9;color:#2e7d32;' : 'background:#fff3e0;color:#ef6c00;';
+//     const badgeText = isDirect ? 'DIRECT' : `${trip.stops} CORRESP.`;
+    
+//     const transferInfo = !isDirect && trip.transferStation
+//         ? `<div style="font-size:0.75rem;color:#666;margin-top:2px;">Via ${trip.transferStation}</div>`
+//         : '';
+
+//     return `
+//         <div class="trip-row" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f2f2f2;">
+//             <div style="flex:1;">
+//                 <span style="font-weight:600;">${trip.departure} → ${trip.arrival}</span>
+//                 <span style="color:#888;margin-left:8px;">(${TGVMaxAPI.formatDuration(trip.duration)})</span>
+//                 ${transferInfo}
+//             </div>
+//             <span style="font-size:0.7rem;padding:2px 8px;border-radius:12px;${badgeStyle}font-weight:bold;white-space:nowrap;">
+//                 ${badgeText}
+//             </span>
+//         </div>
+//     `;
+// }
+
+// Formatage de date
+function formatDate(dateStr) {
+    if (!dateStr) return '';
+    const [year, month, day] = dateStr.split('-');
+    const date = new Date(year, month - 1, day);
+    return date.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
+}
 // ==================== EXPORT ET INITIALISATION ====================
 
 window.fetchAndDisplayResults = fetchAndDisplayResults;

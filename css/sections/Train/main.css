@@ -9,6 +9,7 @@
     padding-top: 28px;
     padding-bottom: 76px;
 }
+
 /* Carte individuelle par trajet */
 .train-trip-card {
     background: rgb(var(--secondary-color));
@@ -24,8 +25,12 @@
     box-shadow: 0 2px 8px rgba(var(--primary-color), 0.15);
 }
 
+.train-trip-card.expanded {
+    box-shadow: 0 6px 20px rgba(var(--primary-color), 0.2);
+}
+
 /* Item de trajet */
-.train-trip-item {
+.train-trip-item  {
     display: grid;
     grid-template-columns: 80px 1fr 100px 120px;
     align-items: center;
@@ -118,6 +123,23 @@
     white-space: nowrap;
 }
 
+.transfer-badge {
+    background: #f39c12; /* Orange */
+    color: white;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.transfer-info-text {
+    font-size: 0.8rem;
+    color: #666;
+    font-style: italic;
+    margin-top: 4px;
+}
+
 /* En-tête de section (titre principal) */
 .section-header {
     background: linear-gradient(135deg, rgb(var(--blue-color)) 0%, rgba(var(--blue-color), 0.8) 100%);
@@ -176,58 +198,7 @@
     100% { transform: rotate(360deg); }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .train-trip-item {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-    
-    .train-company-section {
-        flex-direction: row;
-        align-items: center;
-        gap: 8px;
-    }
-    
-    .section-header {
-        flex-direction: column;
-        gap: 8px;
-        text-align: center;
-    }
-}
-
-.transfer-badge {
-    background: #f39c12; /* Orange */
-    color: white;
-    text-transform: uppercase;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 500;
-}
-
-.transfer-info-text {
-    font-size: 0.8rem;
-    color: #666;
-    font-style: italic;
-    margin-top: 4px;
-}
-
 /* ========== STYLES POUR LES CARTES ÉTENDUES ========== */
-
-/* Animation et style pour les cartes étendues */
-.train-trip-card {
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.train-trip-card:hover {
-    box-shadow: 0 4px 12px rgba(var(--primary-color), 0.15);
-}
-
-.train-trip-card.expanded {
-    box-shadow: 0 6px 20px rgba(var(--primary-color), 0.2);
-}
 
 .trip-details {
     padding: 20px;
@@ -364,36 +335,6 @@
     font-family: var(--roboto);
 }
 
-/* Responsive pour les détails étendus */
-@media (max-width: 768px) {
-    .trip-details {
-        padding: 15px;
-    }
-    
-    .timeline-step {
-        gap: 10px;
-    }
-    
-    .timeline-icon {
-        width: 35px;
-        height: 35px;
-        font-size: 20px;
-    }
-    
-    .timeline-time {
-        font-size: 16px;
-    }
-    
-    .timeline-station {
-        font-size: 14px;
-    }
-    
-    .timeline-train-info {
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-}
-
 /* === CALENDRIER 7 JOURS === */
 .week-calendar {
     display: flex;
@@ -403,7 +344,6 @@
     margin-bottom: 20px;
     margin: 0 auto;
     max-width: 1024px;
-    /* justify-content: space-between; */
 }
 
 .calendar-day {
@@ -454,33 +394,66 @@
     border-top-color: white;
 }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
+/* ==================== CALENDRIER ALLER-RETOUR ==================== */
+
+/* Calendrier en mode aller-retour */
+.calendar-section {
+    margin-bottom: 1rem;
 }
 
-/* Style pour le badge de correspondance
-.transfer-badge {
-    background: #f39c12;
+.calendar-header {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 8px 8px 0 0;
     color: white;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-} */
+    font-family: var(--roboto);
+}
+
+.outbound-calendar .calendar-header {
+    background: #2c6e7f;
+}
+
+.return-calendar .calendar-header {
+    background: #c44a3a;
+}
+
+.calendar-days {
+    display: flex;
+    gap: 8px;
+    padding: 1rem;
+    background: white;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.calendar-days .calendar-day {
+    border: 2px solid transparent;
+}
+
+.outbound-calendar .calendar-day.selected {
+    background: #2c6e7f;
+    border-color: #2c6e7f;
+}
+
+.return-calendar .calendar-day.selected {
+    background: #c44a3a;
+    border-color: #c44a3a;
+}
 
 /* ========== SECTION FILTRES ========== */
-/* ========== SECTION FILTRES ========== */
 .filters-section {
-    /* background: white; */
     padding: 20px;
     margin: 20px auto;
     max-width: 1200px;
     border-radius: 12px;
-    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
 }
-.filter-icon{
+
+.filter-icon {
     width: 15px; 
     height: 15px;
 }
+
 .filters-row {
     display: flex;
     gap: 12px;
@@ -518,10 +491,6 @@
     transform: scale(0.98);
 }
 
-.filter-icon {
-    font-size: 18px;
-}
-
 .filter-label {
     white-space: nowrap;
 }
@@ -548,18 +517,6 @@
     padding: 8px;
     min-width: 140px;
     z-index: 1000;
-}
-
-/* Animation d'ouverture */
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .filter-dropdown:not(.hidden) {
@@ -601,39 +558,6 @@
     flex: 1;
 }
 
-/* ========== RESPONSIVE ========== */
-@media (max-width: 768px) {
-    .filters-section {
-        padding: 15px;
-        margin: 15px 10px;
-    }
-    
-    .filters-row {
-        gap: 8px;
-    }
-    
-    .filter-button {
-        padding: 8px 12px;
-        font-size: 13px;
-    }
-    
-    .filter-icon {
-        font-size: 16px;
-    }
-    
-    .filter-dropdown {
-        min-width: 200px;
-    }
-}
-
-@media (max-width: 480px) {
-    .filter-dropdown {
-        left: 0;
-        right: 0;
-        min-width: auto;
-    }
-}
-
 /* ========== COMPTEUR DE RÉSULTATS ========== */
 .results-counter {
     padding: 12px 16px;
@@ -649,64 +573,96 @@
     font-weight: 700;
 }
 
-/* ========== RESPONSIVE ========== */
-@media (max-width: 768px) {
-    .filters-section {
-        padding: 15px;
-        margin: 15px 10px;
-    }
-    
-    .filters-row {
-        gap: 8px;
-    }
-    
-    .filter-button {
-        padding: 8px 12px;
-        font-size: 13px;
-    }
-    
-    .filter-icon {
-        font-size: 16px;
-    }
-    
-    .filter-dropdown {
-        min-width: 180px;
-    }
-    
-    .filter-reset-btn,
-    .filter-apply-btn {
-        width: 100%;
-        justify-content: center;
-        margin-left: 0;
-        margin-top: 8px;
-    }
+/* ==================== CONTENEUR ALLER-RETOUR ==================== */
+
+.roundtrip-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 1024px;
+    /* margin: 0 auto;
+    padding: 2rem 1rem; */
 }
 
-@media (max-width: 480px) {
-    .filter-button {
-        flex: 1 1 calc(50% - 4px);
-        min-width: 0;
-    }
-    
-    .filter-label {
-        font-size: 12px;
-    }
-    
-    .filter-dropdown {
-        left: 0;
-        right: 0;
-        min-width: auto;
-    }
+/* ==================== SECTIONS ALLER / RETOUR ==================== */
+
+/* .trip-section {
+    background: rgb(var(--secondary-color));
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(var(--primary-color), 0.08);
 }
 
+.outbound-section {
+    border-top: 4px solid #2c6e7f;
+}
 
-/* Styles pour la pagination des trajets */
+.return-section {
+    border-top: 4px solid #c44a3a;
+} */
+
+/* ==================== EN-TÊTES DE SECTION ALLER-RETOUR ==================== */
+
+.trip-section .section-header {
+    background: transparent;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(var(--primary-color), 0.1);
+    box-shadow: none;
+}
+
+.trip-section .section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: rgb(var(--primary-color));
+}
+
+.outbound-section .section-title {
+    color: #2c6e7f;
+}
+
+.return-section .section-title {
+    color: #c44a3a;
+}
+
+.section-subtitle {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0.25rem 0;
+    color: rgba(var(--primary-color), 0.7);
+    font-family: var(--roboto);
+}
+
+.section-date {
+    font-size: 0.875rem;
+    color: rgba(var(--primary-color), 0.5);
+    margin: 0.25rem 0 0 0;
+    font-family: var(--roboto);
+}
+
+/* ==================== LISTE DES TRAJETS ==================== */
+
+.trips-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* ==================== PAGINATION ==================== */
 
 .load-more-container {
     display: flex;
     justify-content: center;
     padding: 2rem 0;
     margin-top: 1rem;
+}
+
+.load-previous-container {
+    padding: 0 0 2rem 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .load-more-btn {
@@ -723,6 +679,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    font-family: var(--roboto);
 }
 
 .load-more-btn:hover {
@@ -734,6 +691,26 @@
 .load-more-btn:active {
     transform: translateY(0);
     box-shadow: 0 2px 8px rgba(44, 95, 111, 0.2);
+}
+
+.load-previous-btn {
+    background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+    box-shadow: 0 4px 12px rgba(107, 114, 128, 0.2);
+}
+
+.load-previous-btn:hover {
+    background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+    box-shadow: 0 6px 16px rgba(107, 114, 128, 0.3);
+}
+
+.return-section .load-more-btn:not(.load-previous-btn) {
+    background: linear-gradient(135deg, #c44a3a 0%, #a83a2c 100%);
+    box-shadow: 0 4px 12px rgba(196, 74, 58, 0.2);
+}
+
+.return-section .load-more-btn:not(.load-previous-btn):hover {
+    background: linear-gradient(135deg, #a83a2c 0%, #8c2f23 100%);
+    box-shadow: 0 6px 16px rgba(196, 74, 58, 0.3);
 }
 
 .load-more-count {
@@ -758,8 +735,107 @@
     animation: fadeInUp 0.4s ease-out;
 }
 
-/* Responsive */
+.error {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: #c44a3a;
+    background: rgba(196, 74, 58, 0.1);
+    border-radius: 8px;
+    border: 2px solid rgba(196, 74, 58, 0.3);
+    font-family: var(--roboto);
+}
+
+.loading {
+    text-align: center;
+    padding: 3rem 1rem;
+    font-size: 1.1rem;
+    color: rgba(var(--primary-color), 0.7);
+    font-family: var(--roboto);
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 1024px) {
+    .roundtrip-container {
+        gap: 1.5rem;
+    }
+    
+    .trip-section .section-header {
+        text-align: center;
+    }
+    
+    .calendar-days {
+        flex-wrap: wrap;
+    }
+    
+    .calendar-day {
+        min-width: calc(14.28% - 0.5rem);
+    }
+}
+
 @media (max-width: 768px) {
+    .train-trip-item {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .train-company-section {
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+    
+    .trip-details {
+        padding: 15px;
+    }
+    
+    .timeline-step {
+        gap: 10px;
+    }
+    
+    .timeline-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+    }
+    
+    .timeline-time {
+        font-size: 16px;
+    }
+    
+    .timeline-station {
+        font-size: 14px;
+    }
+    
+    .timeline-train-info {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .filters-section {
+        padding: 15px;
+        margin: 15px 10px;
+    }
+    
+    .filters-row {
+        gap: 8px;
+    }
+    
+    .filter-button {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+    
+    .filter-dropdown {
+        min-width: 180px;
+    }
+    
     .load-more-btn {
         width: 100%;
         max-width: 320px;
@@ -770,5 +846,55 @@
     
     .load-more-container {
         padding: 1.5rem 1rem;
+    }
+    
+    .roundtrip-container {
+        padding: 1rem 0.5rem;
+    }
+    
+    .trip-section {
+        padding: 1rem;
+    }
+    
+    .trip-section .section-title {
+        font-size: 1.25rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .calendar-days {
+        gap: 0.25rem;
+        padding: 0.5rem;
+    }
+    
+    .calendar-day {
+        padding: 0.5rem 0.25rem;
+    }
+    
+    .day-name {
+        font-size: 0.75rem;
+    }
+    
+    .day-count {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-button {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 0;
+    }
+    
+    .filter-label {
+        font-size: 12px;
+    }
+    
+    .filter-dropdown {
+        left: 0;
+        right: 0;
+        min-width: auto;
     }
 }

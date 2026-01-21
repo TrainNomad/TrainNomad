@@ -116,7 +116,6 @@
         width: 100%;
         text-align: center;
         color: rgb(var(--secondary-color));
-        padding: 0 40px;
     }
 
     .hero__sections h3 {
@@ -134,18 +133,107 @@
     /* BARRE DE RECHERCHE - LARGE DESKTOP */
     .search__main {
         background-color: rgb(var(--secondary-color));
-        height: 60px;
         margin: 0 auto;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        border-radius: 12px 12px 0 0;
+        border-radius: 12px;
         padding: 10px 20px;
-        max-width: 900px;
-        margin-top: -35px;
+        max-width: 1200px;
+        margin-top: -40px;
         position: relative;
         z-index: 20;
         box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    /* Dropdown trip-type */
+    .search__main-top {
+        display: flex;
+        align-items: center;
+        padding: 8px 0 0 0;
+        width: 100%;
+    }
+
+    .trip-type-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .trip-type-button {
+        height: 32px;
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background-color: rgba(var(--secondary-color));
+        border: 1px solid rgb(var(--secondary-color));
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+
+    .trip-type-button:hover {
+        background-color: #ebebeb;
+    }
+
+    .arrow-icon {
+        flex-shrink: 0;
+    }
+
+    .dropdown-arrow {
+        flex-shrink: 0;
+        transition: transform 0.2s ease;
+        margin-left: 2px;
+    }
+
+    .trip-type-button.active .dropdown-arrow {
+        transform: rotate(180deg);
+    }
+
+    .trip-type-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white;
+        border-top: none;
+        border-radius: 0 0 6px 6px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        min-width: 160px;
+        z-index: 1000;
+        overflow: hidden;
+    }
+
+    .trip-type-option {
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: background-color 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .trip-type-option.selected {
+        background-color: #e8f4fd;
+        color: #0066FF;
+        font-weight: 500;
+    }
+
+    .option-icon {
+        flex-shrink: 0;
+    }
+
+    /* Inputs section */
+    .search__main-bottom {
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px 0;
+        width: 100%;
     }
 
     .search__inputs {
@@ -180,13 +268,17 @@
         border-radius: 6px 0 0 6px;
     }
 
+    .search__date-input {
+        cursor: pointer;
+    }
+
     .search__inputs input:focus {
         outline: none;
         box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2);
     }
 
     .search__inputs input::placeholder {
-        color: #555;
+        color: black;
     }
 
     .search__bouton-container {
@@ -212,6 +304,21 @@
 
     .search__bouton:hover {
         background-color: rgb(220, 120, 55);
+    }
+
+    /* Animation pour le calendrier retour */
+    #return-date-wrapper {
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+
+    #return-date-wrapper.hidden {
+        flex-grow: 0;
+        width: 0;
+        min-width: 0;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
     }
 
     /* SUGGESTIONS */

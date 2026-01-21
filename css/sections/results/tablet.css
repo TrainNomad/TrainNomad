@@ -4,7 +4,10 @@
 /* ========================================== */
 
 @media (min-width: 769px) and (max-width: 1024px) {
-    /* HEADER */
+    /* -------------------------------------- */
+    /* --- HEADER.CSS - Flux normal et Centrage --- */
+    /* -------------------------------------- */
+
     .header {
         width: 100%;
         display: flex;
@@ -27,7 +30,6 @@
         justify-content: space-between;
         align-items: center;
         margin: 0 auto;
-        /* padding: 0 20px; */
         z-index: 10;
     }
 
@@ -35,6 +37,10 @@
         display: flex;
         align-items: center;
         gap: 12px;
+    }
+
+    a {
+        text-decoration: none;
     }
 
     .nav__logo-title {
@@ -55,29 +61,116 @@
         color: rgb(var(--primary-color));
     }
 
-    a {
-        text-decoration: none;
-    }
-
     .right__link {
         display: flex;
         gap: 10px;
     }
 
-    /* BARRE DE RECHERCHE */
+    /* ------------------------------------ */
+    /* --- SEARCH.CSS - Barre de Recherche  --- */
+    /* ------------------------------------ */
+
     .search__main {
         background-color: rgb(var(--secondary-color));
-        height: 50px;
         margin: 0 auto;
+        border-radius: 10px 10px 0 0;
+        max-width: 900px;
+        position: relative;
+        z-index: 20;
+        width: calc(100% - 32px);
+    }
+
+    /* ------------------------------------ */
+    /* --- SEARCH__MAIN-TOP (Dropdown) --- */
+    /* ------------------------------------ */
+
+    .search__main-top {
+        display: flex;
+        align-items: center;
+        padding: 8px 16px 0 16px;
+    }
+
+    .trip-type-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .trip-type-button {
+        height: 30px;
+        padding: 0 9px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        background-color: rgba(var(--secondary-color));
+        border: 1px solid rgb(var(--secondary-color));
+        cursor: pointer;
+        font-size: 11px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+
+    .trip-type-button:hover {
+        background-color: #ebebeb;
+    }
+
+    .arrow-icon {
+        flex-shrink: 0;
+    }
+
+    .dropdown-arrow {
+        flex-shrink: 0;
+        transition: transform 0.2s ease;
+        margin-left: 2px;
+    }
+
+    .trip-type-button.active .dropdown-arrow {
+        transform: rotate(180deg);
+    }
+
+    .trip-type-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white;
+        border-top: none;
+        border-radius: 0 0 6px 6px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        min-width: 150px;
+        z-index: 1000;
+        overflow: hidden;
+    }
+
+    .trip-type-option {
+        padding: 8px 11px;
+        cursor: pointer;
+        font-size: 11px;
+        transition: background-color 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+    }
+
+    .trip-type-option.selected {
+        background-color: #e8f4fd;
+        color: #0066FF;
+        font-weight: 500;
+    }
+
+    .option-icon {
+        flex-shrink: 0;
+    }
+
+    /* ------------------------------------ */
+    /* --- SEARCH__MAIN-BOTTOM (Inputs) --- */
+    /* ------------------------------------ */
+
+    .search__main-bottom {
+        height: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: 10px 10px 0 0;
         padding: 8px 16px;
-        max-width: 900px;
-        width: calc(100% - 32px);
-        position: relative;
-        z-index: 20;
     }
 
     .search__inputs {
@@ -88,6 +181,7 @@
         position: relative;
     }
 
+    /* Wrapper pour chaque input + ses suggestions */
     .input-wrapper {
         position: relative;
         display: flex;
@@ -97,6 +191,7 @@
         flex-grow: 1;
     }
 
+    /* Style de base pour tous les inputs */
     .search__inputs input {
         height: 100%;
         width: 100%;
@@ -116,6 +211,7 @@
         outline: none;
     }
 
+    /* Styles pour les placeholders */
     .search__inputs input::placeholder {
         color: black;
     }
@@ -140,7 +236,11 @@
         font-size: 14px;
     }
 
-    /* SUGGESTIONS */
+    /* ================================================= */
+    /* --- SUGGESTIONS D'AUTOCOMPLÉTION --- */
+    /* ================================================= */
+
+    /* Conteneur global des suggestions */
     .suggestions-container {
         position: absolute;
         top: 100%;
@@ -156,6 +256,7 @@
         margin-top: 2px;
     }
 
+    /* Style de chaque élément de suggestion */
     .suggestion-item {
         padding: 10px 15px;
         cursor: pointer;
@@ -165,19 +266,23 @@
         transition: background-color 0.2s ease;
     }
 
+    /* Surlignage au survol */
     .suggestion-item:hover {
         background-color: #fce6e6;
         color: #a00;
     }
 
+    /* Supprime la bordure du dernier élément */
     .suggestion-item:last-child {
         border-bottom: none;
     }
 
+    /* Classe pour masquer le conteneur */
     .hidden {
         display: none !important;
     }
 
+    /* Style spécial pour l'option "N'importe où" */
     .everywhere-option {
         background-color: #f1f8e9 !important;
         cursor: pointer;
@@ -188,13 +293,18 @@
         background-color: #c8e6c9 !important;
     }
 
-    /* MAIN RESULTS */
+    /* -------------------------------------- */
+    /* --- RESULTS.CSS - Section Principale (Main) --- */
+    /* -------------------------------------- */
+
+    /* Style pour l'ensemble de la page (fond gris foncé) */
     body {
         background-color: rgba(241, 242, 246, 1);
         margin: 0;
         padding: 0;
     }
 
+    /* Conteneur principal qui structure la liste et la carte */
     .results__main {
         max-width: 1024px;
         margin: 0 auto;
@@ -204,7 +314,7 @@
         min-height: calc(100vh - 70px - 140px - 50px);
     }
 
-    /* LISTE DES RÉSULTATS */
+    /* Conteneur pour la liste des résultats (colonne gauche) */
     .results__list-container {
         flex: 1;
         display: flex;
@@ -212,6 +322,7 @@
         gap: 18px;
     }
 
+    /* Placeholders pour les cartes de résultats */
     .result__card-placeholder {
         display: flex;
         flex-direction: column;
@@ -221,21 +332,12 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         transition: transform 0.2s ease-in-out;
         cursor: pointer;
+        justify-content: center;
     }
 
     .result__card-placeholder:hover {
         transform: translateX(3px) scale(1.013);
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    }
-
-    .result__card-header {
-        cursor: pointer;
-        display: flex;
-        width: 100%;
-        height: auto;
-        align-items: center;
-        padding: 10px;
-        box-sizing: border-box;
     }
 
     .result__card-destination {
@@ -288,34 +390,7 @@
         font-size: 14px;
     }
 
-    .expand-arrow {
-        width: 19px;
-        height: 19px;
-        transition: transform 0.3s ease;
-        display: block;
-    }
-
-    .result__card-placeholder.expanded .expand-arrow {
-        transform: rotate(180deg);
-    }
-
-    .result__card-details {
-        padding: 0 10px 10px 10px;
-        overflow: hidden;
-        transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
-    }
-
-    .result__card-details.collapsed {
-        max-height: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-
-    .result__card-details.hidden {
-        display: none;
-    }
-
-    /* CARTE LEAFLET */
+    /* Conteneur pour la carte Leaflet (colonne droite) */
     .results__map {
         width: 45%;
         height: 450px;
@@ -326,7 +401,36 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    /* FILTRES */
+    .result__card-header {
+        cursor: pointer;
+        display: flex;
+        width: 100%;
+        height: auto;
+        vertical-align: middle;
+        align-items: center;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    /* Style de l'image de la flèche */
+    .expand-arrow {
+        width: 19px;
+        height: 19px;
+        transition: transform 0.3s ease;
+        display: block;
+    }
+
+    /* Fait pivoter la flèche vers le haut quand la carte est développée */
+    .result__card-placeholder.expanded .expand-arrow {
+        transform: rotate(180deg);
+    }
+
+    /* Cache le conteneur des horaires par défaut */
+    .result__card-details.hidden {
+        display: none;
+    }
+
+    /* ========== SECTION FILTRES ========== */
     .filters-section {
         max-width: 100%;
         border-radius: 10px;
@@ -346,6 +450,7 @@
         flex-wrap: wrap;
     }
 
+    /* ========== BOUTON DE FILTRE ========== */
     .filter-item {
         position: relative;
     }
@@ -374,6 +479,10 @@
         transform: scale(0.98);
     }
 
+    .filter-icon {
+        font-size: 17px;
+    }
+
     .filter-label {
         white-space: nowrap;
         font-size: 13px;
@@ -384,10 +493,12 @@
         transition: transform 0.2s ease;
     }
 
+    /* Rotation du chevron quand ouvert */
     .filter-button.active .filter-chevron {
         transform: rotate(180deg);
     }
 
+    /* ========== DROPDOWN ========== */
     .filter-dropdown {
         position: absolute;
         top: calc(100% + 8px);
@@ -401,12 +512,29 @@
         z-index: 1000;
     }
 
+    /* Animation d'ouverture */
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .filter-dropdown:not(.hidden) {
+        animation: slideDown 0.2s ease;
+    }
+
     .filter-options {
         display: flex;
         flex-direction: column;
         gap: 4px;
     }
 
+    /* ========== OPTIONS DE FILTRE ========== */
     .filter-option {
         display: flex;
         align-items: center;
@@ -435,11 +563,28 @@
         flex: 1;
     }
 
-    .time-grid select {
-        font-size: 14px;
+    /* -------------------------------------- */
+    /* --- Adaptation pour l'effet de Déploiement/Réduction --- */
+    /* -------------------------------------- */
+
+    /* Style du conteneur des détails (les horaires) */
+    .result__card-details {
+        padding: 0 10px 10px 10px;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
     }
 
-    /* FOOTER */
+    /* Masque le conteneur quand il est réduit (état initial par défaut) */
+    .result__card-details.collapsed {
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    /* -------------------------------------- */
+    /* --- FOOTER.CSS - Flux normal et Centrage --- */
+    /* -------------------------------------- */
+
     .footer {
         width: 100%;
         display: flex;
@@ -457,7 +602,6 @@
         justify-content: space-between;
         align-items: center;
         margin: 0 auto;
-        padding: 0 30px;
     }
 
     .footer_left {

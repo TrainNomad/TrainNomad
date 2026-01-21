@@ -4,7 +4,10 @@
 /* ========================================== */
 
 @media (min-width: 1450px) {
-    /* HEADER */
+    /* -------------------------------------- */
+    /* --- HEADER.CSS - Flux normal et Centrage --- */
+    /* -------------------------------------- */
+
     .header {
         width: 100%;
         display: flex;
@@ -36,6 +39,10 @@
         gap: 18px;
     }
 
+    a {
+        text-decoration: none;
+    }
+
     .nav__logo-title {
         font-size: 24px;
         color: rgb(var(--primary-color));
@@ -59,29 +66,116 @@
         opacity: 0.8;
     }
 
-    a {
-        text-decoration: none;
-    }
-
     .right__link {
         display: flex;
         gap: 12px;
     }
 
-    /* BARRE DE RECHERCHE */
+    /* ------------------------------------ */
+    /* --- SEARCH.CSS - Barre de Recherche  --- */
+    /* ------------------------------------ */
+
     .search__main {
         background-color: rgb(var(--secondary-color));
-        height: 60px;
         margin: 0 auto;
+        border-radius: 12px 12px 0 0;
+        max-width: 1300px;
+        position: relative;
+        z-index: 20;
+        width: calc(100% - 40px);
+    }
+
+    /* ------------------------------------ */
+    /* --- SEARCH__MAIN-TOP (Dropdown) --- */
+    /* ------------------------------------ */
+
+    .search__main-top {
+        display: flex;
+        align-items: center;
+        padding: 8px 20px 0 20px;
+    }
+
+    .trip-type-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .trip-type-button {
+        height: 34px;
+        padding: 0 12px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        background-color: rgba(var(--secondary-color));
+        border: 1px solid rgb(var(--secondary-color));
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+
+    .trip-type-button:hover {
+        background-color: #ebebeb;
+    }
+
+    .arrow-icon {
+        flex-shrink: 0;
+    }
+
+    .dropdown-arrow {
+        flex-shrink: 0;
+        transition: transform 0.2s ease;
+        margin-left: 2px;
+    }
+
+    .trip-type-button.active .dropdown-arrow {
+        transform: rotate(180deg);
+    }
+
+    .trip-type-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white;
+        border-top: none;
+        border-radius: 0 0 6px 6px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        min-width: 170px;
+        z-index: 1000;
+        overflow: hidden;
+    }
+
+    .trip-type-option {
+        padding: 10px 14px;
+        cursor: pointer;
+        font-size: 13px;
+        transition: background-color 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+    }
+
+    .trip-type-option.selected {
+        background-color: #e8f4fd;
+        color: #0066FF;
+        font-weight: 500;
+    }
+
+    .option-icon {
+        flex-shrink: 0;
+    }
+
+    /* ------------------------------------ */
+    /* --- SEARCH__MAIN-BOTTOM (Inputs) --- */
+    /* ------------------------------------ */
+
+    .search__main-bottom {
+        height: 60px;
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: 12px 12px 0 0;
         padding: 10px 20px;
-        max-width: 1300px;
-        width: calc(100% - 40px);
-        position: relative;
-        z-index: 20;
     }
 
     .search__inputs {
@@ -92,6 +186,7 @@
         position: relative;
     }
 
+    /* Wrapper pour chaque input + ses suggestions */
     .input-wrapper {
         position: relative;
         display: flex;
@@ -101,6 +196,7 @@
         flex-grow: 1;
     }
 
+    /* Style de base pour tous les inputs */
     .search__inputs input {
         height: 100%;
         width: 100%;
@@ -121,6 +217,7 @@
         box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2);
     }
 
+    /* Styles pour les placeholders */
     .search__inputs input::placeholder {
         color: #555;
     }
@@ -150,7 +247,11 @@
         background-color: rgb(220, 120, 55);
     }
 
-    /* SUGGESTIONS */
+    /* ================================================= */
+    /* --- SUGGESTIONS D'AUTOCOMPLÉTION --- */
+    /* ================================================= */
+
+    /* Conteneur global des suggestions */
     .suggestions-container {
         position: absolute;
         top: 100%;
@@ -166,6 +267,7 @@
         margin-top: 2px;
     }
 
+    /* Style de chaque élément de suggestion */
     .suggestion-item {
         padding: 12px 18px;
         cursor: pointer;
@@ -175,19 +277,23 @@
         transition: background-color 0.2s ease;
     }
 
+    /* Surlignage au survol */
     .suggestion-item:hover {
         background-color: #fce6e6;
         color: #a00;
     }
 
+    /* Supprime la bordure du dernier élément */
     .suggestion-item:last-child {
         border-bottom: none;
     }
 
+    /* Classe pour masquer le conteneur */
     .hidden {
         display: none !important;
     }
 
+    /* Style spécial pour l'option "N'importe où" */
     .everywhere-option {
         background-color: #f1f8e9 !important;
         cursor: pointer;
@@ -198,13 +304,18 @@
         background-color: #c8e6c9 !important;
     }
 
-    /* MAIN RESULTS */
+    /* -------------------------------------- */
+    /* --- RESULTS.CSS - Section Principale (Main) --- */
+    /* -------------------------------------- */
+
+    /* Style pour l'ensemble de la page (fond gris foncé) */
     body {
         background-color: rgba(241, 242, 246, 1);
         margin: 0;
         padding: 0;
     }
 
+    /* Conteneur principal qui structure la liste et la carte */
     .results__main {
         max-width: 1600px;
         margin: 0 auto;
@@ -214,7 +325,7 @@
         min-height: calc(100vh - 85px - 180px - 60px);
     }
 
-    /* LISTE DES RÉSULTATS */
+    /* Conteneur pour la liste des résultats (colonne gauche) */
     .results__list-container {
         flex: 1;
         display: flex;
@@ -222,6 +333,7 @@
         gap: 24px;
     }
 
+    /* Placeholders pour les cartes de résultats */
     .result__card-placeholder {
         display: flex;
         flex-direction: column;
@@ -231,21 +343,12 @@
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         transition: transform 0.2s ease-in-out, box-shadow 0.2s ease;
         cursor: pointer;
+        justify-content: center;
     }
 
     .result__card-placeholder:hover {
         transform: translateX(4px) scale(1.015);
         box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
-    }
-
-    .result__card-header {
-        cursor: pointer;
-        display: flex;
-        width: 100%;
-        height: auto;
-        align-items: center;
-        padding: 14px;
-        box-sizing: border-box;
     }
 
     .result__card-destination {
@@ -308,34 +411,7 @@
         font-size: 16px;
     }
 
-    .expand-arrow {
-        width: 22px;
-        height: 22px;
-        transition: transform 0.3s ease;
-        display: block;
-    }
-
-    .result__card-placeholder.expanded .expand-arrow {
-        transform: rotate(180deg);
-    }
-
-    .result__card-details {
-        padding: 0 14px 14px 14px;
-        overflow: hidden;
-        transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
-    }
-
-    .result__card-details.collapsed {
-        max-height: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-
-    .result__card-details.hidden {
-        display: none;
-    }
-
-    /* CARTE LEAFLET */
+    /* Conteneur pour la carte Leaflet (colonne droite) */
     .results__map {
         width: 55%;
         height: 600px;
@@ -346,7 +422,36 @@
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     }
 
-    /* FILTRES */
+    .result__card-header {
+        cursor: pointer;
+        display: flex;
+        width: 100%;
+        height: auto;
+        vertical-align: middle;
+        align-items: center;
+        padding: 14px;
+        box-sizing: border-box;
+    }
+
+    /* Style de l'image de la flèche */
+    .expand-arrow {
+        width: 22px;
+        height: 22px;
+        transition: transform 0.3s ease;
+        display: block;
+    }
+
+    /* Fait pivoter la flèche vers le haut quand la carte est développée */
+    .result__card-placeholder.expanded .expand-arrow {
+        transform: rotate(180deg);
+    }
+
+    /* Cache le conteneur des horaires par défaut */
+    .result__card-details.hidden {
+        display: none;
+    }
+
+    /* ========== SECTION FILTRES ========== */
     .filters-section {
         max-width: 1400px;
         border-radius: 14px;
@@ -365,6 +470,7 @@
         max-width: 1200px;
     }
 
+    /* ========== BOUTON DE FILTRE ========== */
     .filter-item {
         position: relative;
     }
@@ -394,6 +500,10 @@
         transform: scale(0.98);
     }
 
+    .filter-icon {
+        font-size: 19px;
+    }
+
     .filter-label {
         white-space: nowrap;
         font-size: 15px;
@@ -404,10 +514,12 @@
         transition: transform 0.2s ease;
     }
 
+    /* Rotation du chevron quand ouvert */
     .filter-button.active .filter-chevron {
         transform: rotate(180deg);
     }
 
+    /* ========== DROPDOWN ========== */
     .filter-dropdown {
         position: absolute;
         top: calc(100% + 10px);
@@ -421,6 +533,7 @@
         z-index: 1000;
     }
 
+    /* Animation d'ouverture */
     @keyframes slideDown {
         from {
             opacity: 0;
@@ -442,6 +555,7 @@
         gap: 6px;
     }
 
+    /* ========== OPTIONS DE FILTRE ========== */
     .filter-option {
         display: flex;
         align-items: center;
@@ -470,12 +584,28 @@
         flex: 1;
     }
 
-    .time-grid select {
-        font-size: 15px;
-        padding: 6px;
+    /* -------------------------------------- */
+    /* --- Adaptation pour l'effet de Déploiement/Réduction --- */
+    /* -------------------------------------- */
+
+    /* Style du conteneur des détails (les horaires) */
+    .result__card-details {
+        padding: 0 14px 14px 14px;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
     }
 
-    /* FOOTER */
+    /* Masque le conteneur quand il est réduit (état initial par défaut) */
+    .result__card-details.collapsed {
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    /* -------------------------------------- */
+    /* --- FOOTER.CSS - Flux normal et Centrage --- */
+    /* -------------------------------------- */
+
     .footer {
         width: 100%;
         display: flex;

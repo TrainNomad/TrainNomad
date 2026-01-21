@@ -611,10 +611,10 @@ function buildRoundTripCard(dest, params) {
             </div>
             <div class="result__card-details collapsed">
                 <div style="padding: 10px;">
-                    <div style="font-weight: bold; margin-bottom: 5px; color: #2e7d32;">➡️ ALLER (${params.outboundDate})</div>
+                    <div style="font-weight: bold; margin-bottom: 5px; color: #2e7d32;"><i class="fa-solid fa-arrow-right"></i> ALLER (${params.outboundDate})</div>
                     <div class="result__car-hour">${outboundHTML}</div>
                     
-                    <div style="font-weight: bold; margin-top: 15px; margin-bottom: 5px; color: #ef6c00;">⬅️ RETOUR (${params.returnDate})</div>
+                    <div style="font-weight: bold; margin-top: 15px; margin-bottom: 5px; color: #ef6c00;"><i class="fa-solid fa-arrow-left"></i> RETOUR (${params.returnDate})</div>
                     <div class="result__car-hour">${returnHTML}</div>
                 </div>
             </div>

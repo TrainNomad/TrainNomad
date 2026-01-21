@@ -4,7 +4,10 @@
 /* ========================================== */
 
 @media (max-width: 768px) {
-    /* HEADER */
+    /* -------------------------------------- */
+    /* --- HEADER.CSS - Flux normal et Centrage --- */
+    /* -------------------------------------- */
+
     .header {
         width: 100%;
         display: flex;
@@ -25,7 +28,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        /* padding: 0 10px; */
+        margin: 0 auto;
         z-index: 10;
     }
 
@@ -33,6 +36,10 @@
         display: flex;
         align-items: center;
         gap: 10px;
+    }
+
+    a {
+        text-decoration: none;
     }
 
     .nav__logo-title {
@@ -53,16 +60,15 @@
         color: rgb(var(--primary-color));
     }
 
-    a {
-        text-decoration: none;
-    }
-
     .right__link {
         display: flex;
         gap: 8px;
     }
 
-    /* BARRE DE RECHERCHE */
+    /* ------------------------------------ */
+    /* --- SEARCH.CSS - Barre de Recherche  --- */
+    /* ------------------------------------ */
+
     .search__main {
         background-color: rgb(var(--secondary-color));
         height: auto;
@@ -80,6 +86,103 @@
         gap: 8px;
     }
 
+    /* ------------------------------------ */
+    /* --- SEARCH__MAIN-TOP (Dropdown) --- */
+    /* ------------------------------------ */
+
+    .search__main-top {
+        display: flex;
+        align-items: center;
+        padding: 0;
+        width: 100%;
+    }
+
+    .trip-type-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .trip-type-button {
+        height: 28px;
+        padding: 0 8px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        background-color: rgba(var(--secondary-color));
+        border: 1px solid rgb(var(--secondary-color));
+        cursor: pointer;
+        font-size: 11px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+
+    .trip-type-button:hover {
+        background-color: #ebebeb;
+    }
+
+    .arrow-icon {
+        flex-shrink: 0;
+    }
+
+    .dropdown-arrow {
+        flex-shrink: 0;
+        transition: transform 0.2s ease;
+        margin-left: 2px;
+    }
+
+    .trip-type-button.active .dropdown-arrow {
+        transform: rotate(180deg);
+    }
+
+    .trip-type-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white;
+        border-top: none;
+        border-radius: 0 0 6px 6px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        min-width: 140px;
+        z-index: 1000;
+        overflow: hidden;
+    }
+
+    .trip-type-option {
+        padding: 8px 10px;
+        cursor: pointer;
+        font-size: 11px;
+        transition: background-color 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .trip-type-option.selected {
+        background-color: #e8f4fd;
+        color: #0066FF;
+        font-weight: 500;
+    }
+
+    .option-icon {
+        flex-shrink: 0;
+    }
+
+    /* ------------------------------------ */
+    /* --- SEARCH__MAIN-BOTTOM (Inputs) --- */
+    /* ------------------------------------ */
+
+    .search__main-bottom {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        width: 100%;
+        gap: 8px;
+    }
+
     .search__inputs {
         height: auto;
         display: flex;
@@ -89,43 +192,52 @@
         position: relative;
     }
 
+    /* Wrapper pour chaque input + ses suggestions */
     .input-wrapper {
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 100%;
         height: 44px;
+        flex-grow: 1;
     }
 
+    /* Style de base pour tous les inputs */
     .search__inputs input {
-        height: 44px;
+        height: 100%;
         width: 100%;
         padding: 0 10px;
+        justify-content: center;
+        align-items: center;
         border: none;
         background-color: rgba(241, 242, 246, 1);
         border-radius: 5px !important;
         font-size: 14px;
     }
 
+    .search__depart-input {
+        border-radius: 5px !important;
+    }
+
     .search__inputs input:focus {
         outline: none;
     }
 
+    /* Styles pour les placeholders */
     .search__inputs input::placeholder {
         color: black;
     }
 
     .search__bouton-container {
-        width: 100%;
         height: 44px;
+        width: 100%;
         display: flex;
         align-items: center;
     }
 
     .search__bouton {
+        height: 100%;
         width: 100%;
-        height: 44px;
         padding: 0 15px;
         background-color: rgb(236, 134, 66);
         border: none;
@@ -134,11 +246,15 @@
         cursor: pointer;
         border-radius: 5px !important;
         white-space: nowrap;
-        font-size: 14px;
         margin-left: 0;
+        font-size: 14px;
     }
 
-    /* SUGGESTIONS */
+    /* ================================================= */
+    /* --- SUGGESTIONS D'AUTOCOMPLÉTION --- */
+    /* ================================================= */
+
+    /* Conteneur global des suggestions */
     .suggestions-container {
         position: absolute;
         top: 100%;
@@ -154,6 +270,7 @@
         margin-top: 2px;
     }
 
+    /* Style de chaque élément de suggestion */
     .suggestion-item {
         padding: 12px;
         cursor: pointer;
@@ -163,19 +280,23 @@
         transition: background-color 0.2s ease;
     }
 
+    /* Surlignage au survol */
     .suggestion-item:hover {
         background-color: #fce6e6;
         color: #a00;
     }
 
+    /* Supprime la bordure du dernier élément */
     .suggestion-item:last-child {
         border-bottom: none;
     }
 
+    /* Classe pour masquer le conteneur */
     .hidden {
         display: none !important;
     }
 
+    /* Style spécial pour l'option "N'importe où" */
     .everywhere-option {
         background-color: #f1f8e9 !important;
         cursor: pointer;
@@ -186,13 +307,18 @@
         background-color: #c8e6c9 !important;
     }
 
-    /* MAIN RESULTS */
+    /* -------------------------------------- */
+    /* --- RESULTS.CSS - Section Principale (Main) --- */
+    /* -------------------------------------- */
+
+    /* Style pour l'ensemble de la page (fond gris foncé) */
     body {
         background-color: rgba(241, 242, 246, 1);
         margin: 0;
         padding: 0;
     }
 
+    /* Conteneur principal qui structure la liste et la carte */
     .results__main {
         max-width: 100%;
         margin: 0 auto;
@@ -203,7 +329,7 @@
         min-height: calc(100vh - 60px - 150px);
     }
 
-    /* LISTE DES RÉSULTATS */
+    /* Conteneur pour la liste des résultats (colonne gauche) */
     .results__list-container {
         flex: 1;
         display: flex;
@@ -212,6 +338,7 @@
         order: 2; /* Affiche la liste après la carte sur mobile */
     }
 
+    /* Placeholders pour les cartes de résultats */
     .result__card-placeholder {
         display: flex;
         flex-direction: column;
@@ -221,6 +348,7 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         transition: transform 0.2s ease-in-out;
         cursor: pointer;
+        justify-content: center;
     }
 
     .result__card-placeholder:active {
@@ -228,34 +356,22 @@
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     }
 
-    .result__card-header {
-        cursor: pointer;
-        display: flex;
-        width: 100%;
-        height: auto;
-        align-items: center;
-        padding: 12px;
-        box-sizing: border-box;
-    }
-
     .result__card-destination {
         flex: 1;
         justify-content: flex-start;
         display: flex;
-        /* flex-direction: column; */
         gap: 10px;
         font-size: 16px;
-        padding: 0;
-        /* align-items: flex-start; */
+        padding: 8px;
+        align-items: center;
     }
 
     .result__card-image-container {
-        width: 100%;
-        height: 150px;
+        width: 60px;
+        height: 60px;
         overflow: hidden;
-        border-radius: 8px 8px 0 0;
-        margin-right: 0;
-        margin-bottom: 10px;
+        border-radius: 4px;
+        margin-right: 10px;
         flex-shrink: 0;
         background-color: #f0f0f0;
     }
@@ -284,41 +400,13 @@
         margin: 3px;
         font-weight: 600;
         cursor: default;
-        font-size: 13px;
     }
 
     .result__car-hour-buton p {
         font-size: 13px;
     }
 
-    .expand-arrow {
-        width: 18px;
-        height: 18px;
-        transition: transform 0.3s ease;
-        display: block;
-    }
-
-    .result__card-placeholder.expanded .expand-arrow {
-        transform: rotate(180deg);
-    }
-
-    .result__card-details {
-        padding: 0 12px 12px 12px;
-        overflow: hidden;
-        transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
-    }
-
-    .result__card-details.collapsed {
-        max-height: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-
-    .result__card-details.hidden {
-        display: none;
-    }
-
-    /* CARTE LEAFLET - Cachée sur mobile ou réduite */
+    /* Conteneur pour la carte Leaflet (colonne droite) */
     .results__map {
         width: 100%;
         height: 250px;
@@ -331,7 +419,36 @@
         margin-bottom: 15px;
     }
 
-    /* FILTRES */
+    .result__card-header {
+        cursor: pointer;
+        display: flex;
+        width: 100%;
+        height: auto;
+        vertical-align: middle;
+        align-items: center;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    /* Style de l'image de la flèche */
+    .expand-arrow {
+        width: 18px;
+        height: 18px;
+        transition: transform 0.3s ease;
+        display: block;
+    }
+
+    /* Fait pivoter la flèche vers le haut quand la carte est développée */
+    .result__card-placeholder.expanded .expand-arrow {
+        transform: rotate(180deg);
+    }
+
+    /* Cache le conteneur des horaires par défaut */
+    .result__card-details.hidden {
+        display: none;
+    }
+
+    /* ========== SECTION FILTRES ========== */
     .filters-section {
         max-width: 100%;
         border-radius: 8px;
@@ -352,6 +469,7 @@
         max-width: 100%;
     }
 
+    /* ========== BOUTON DE FILTRE ========== */
     .filter-item {
         position: relative;
         flex: 1 1 calc(50% - 4px); /* 2 filtres par ligne */
@@ -384,6 +502,10 @@
         transform: scale(0.98);
     }
 
+    .filter-icon {
+        font-size: 16px;
+    }
+
     .filter-label {
         white-space: nowrap;
         font-size: 12px;
@@ -394,10 +516,12 @@
         transition: transform 0.2s ease;
     }
 
+    /* Rotation du chevron quand ouvert */
     .filter-button.active .filter-chevron {
         transform: rotate(180deg);
     }
 
+    /* ========== DROPDOWN ========== */
     .filter-dropdown {
         position: absolute;
         top: calc(100% + 6px);
@@ -412,12 +536,29 @@
         z-index: 1000;
     }
 
+    /* Animation d'ouverture */
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .filter-dropdown:not(.hidden) {
+        animation: slideDown 0.2s ease;
+    }
+
     .filter-options {
         display: flex;
         flex-direction: column;
         gap: 4px;
     }
 
+    /* ========== OPTIONS DE FILTRE ========== */
     .filter-option {
         display: flex;
         align-items: center;
@@ -446,12 +587,28 @@
         flex: 1;
     }
 
-    .time-grid select {
-        font-size: 13px;
-        padding: 4px;
+    /* -------------------------------------- */
+    /* --- Adaptation pour l'effet de Déploiement/Réduction --- */
+    /* -------------------------------------- */
+
+    /* Style du conteneur des détails (les horaires) */
+    .result__card-details {
+        padding: 0 10px 10px 10px;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
     }
 
-    /* FOOTER */
+    /* Masque le conteneur quand il est réduit (état initial par défaut) */
+    .result__card-details.collapsed {
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    /* -------------------------------------- */
+    /* --- FOOTER.CSS - Flux normal et Centrage --- */
+    /* -------------------------------------- */
+
     .footer {
         width: 100%;
         display: flex;
@@ -468,6 +625,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        margin: 0 auto;
         padding: 20px 0;
         gap: 20px;
     }

@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('global.css');
+
+@import url('sections/mention legal/header.css');
+@import url('sections/mention legal/main.css');
+@import url('sections/mention legal/footer.css');
+@import url('sections/mention legal/mobile.css');
+@import url('sections/mention legal/desktop_large.css'); 
+@import url('sections/mention legal/tablet.css'); 
+
+/* :root {
+            --primary-color: 25, 96, 128;
+            --secondary-color: 255, 255, 255;
+            --accent-color: 236, 134, 66;
+            --text-color: 34, 34, 34;
+            --light-bg: 250, 250, 250;
+            --body-font-size: 14px;
+            --subheadline-font-size: 18px;
+        } */
+
+
+:root{
+
+    --roboto: "Roboto", sans-serif; 
+
+    /* --primary-color : 0,0,0;
+    --secondary-color: 255,255,255;
+
+    --orange-color: 236, 134,66;
+    --blue-color: 25,96,128;
+    --grey-color: 217,217,217;
+
+    --headline-font-size :42px;
+    --headline-font-weight: 700;
+
+    --subheadline-font-size: 22px;
+    --subheadline-font-weight: 400;
+
+    --body-font-size: 18px; */
+
+
+    --primary-color: 25, 96, 128;
+    --secondary-color: 255, 255, 255;
+    --accent-color: 236, 134, 66;
+    --text-color: 34, 34, 34;
+            --light-bg: 250, 250, 250;
+            --body-font-size: 14px;
+            --subheadline-font-size: 18px;
+}

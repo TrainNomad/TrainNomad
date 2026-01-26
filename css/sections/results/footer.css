@@ -33,6 +33,11 @@
     color: rgb(var(--secondary-color));
     padding: 30px;
 }
+.footer_left p{
+    font-size:var(--body-font-size);
+    color: rgb(var(--secondary-color));
+    
+}
 
 .footer_right{
     display: flex;

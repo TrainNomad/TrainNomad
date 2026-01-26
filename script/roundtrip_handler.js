@@ -1,5 +1,5 @@
-// roundtrip_handler.js - Prépare les données aller-retour pour results_display_unified.js
-// Utilise searchJourneysWithStations() dans les deux sens avec optimisation
+// roundtrip_handler.js - VERSION OPTIMISÉE avec calculs parallèles
+// Prépare les données aller-retour pour results_display_unified.js
 
 (function() {
     'use strict';
@@ -10,7 +10,7 @@
         return;
     }
 
-    console.log('🔄 Chargement du gestionnaire aller-retour...');
+    console.log('🔄 Chargement du gestionnaire aller-retour optimisé...');
 
     /**
      * Détecte si on est en mode aller-retour depuis l'URL
@@ -26,7 +26,6 @@
     function getRoundTripParams() {
         const params = new URLSearchParams(window.location.search);
         
-        // Déterminer si on doit inclure les correspondances
         const isAnywhereMode = params.get('destination_id') === 'ANYWHERE';
         const transferParam = params.get('transfer') === 'true';
         
@@ -37,7 +36,6 @@
             destinationName: params.get('destination_name') ? decodeURIComponent(params.get('destination_name')) : null,
             outboundDate: params.get('date'),
             returnDate: params.get('return_date'),
-            // IMPORTANT : En mode "N'importe où", forcer les correspondances
             includeTransfers: isAnywhereMode ? true : transferParam,
             latitude: params.get('lat'),
             longitude: params.get('lon')
@@ -46,7 +44,6 @@
 
     /**
      * Optimise les trajets : ne garde qu'un trajet par heure de départ (le plus rapide)
-     * Même logique que dans results_display_unified.js
      */
     function optimizeTrips(trips) {
         const tripsByDeparture = new Map();
@@ -57,7 +54,6 @@
             if (!tripsByDeparture.has(departureTime)) {
                 tripsByDeparture.set(departureTime, trip);
             } else {
-                // Garder le trajet le plus rapide
                 const existingTrip = tripsByDeparture.get(departureTime);
                 if (trip.duration < existingTrip.duration) {
                     tripsByDeparture.set(departureTime, trip);
@@ -65,57 +61,46 @@
             }
         });
         
-        // Convertir en array et trier par heure de départ
         return Array.from(tripsByDeparture.values())
             .sort((a, b) => a.departure.localeCompare(b.departure));
     }
 
     /**
-     * Recherche aller-retour en utilisant searchJourneysWithStations() deux fois
-     * 1. Départ → Destinations (aller)
-     * 2. Destinations → Départ (retour)
-     * Croise les résultats pour ne garder que les destinations avec aller ET retour
+     * 🚀 RECHERCHE ALLER-RETOUR OPTIMISÉE
+     * Parallélisation maximale des requêtes
      */
     async function performRoundTripSearch() {
         const params = getRoundTripParams();
         
-        console.log('🔄 RECHERCHE ALLER-RETOUR avec searchJourneysWithStations()');
+        console.log('🔄 RECHERCHE ALLER-RETOUR OPTIMISÉE (calculs parallèles)');
         console.log(`   Départ: ${params.departureName} (${params.departureId})`);
         console.log(`   Destination: ${params.destinationName || "N'importe où"} (${params.destinationId || 'ANYWHERE'})`);
         console.log(`   Aller: ${params.outboundDate}`);
         console.log(`   Retour: ${params.returnDate}`);
         console.log(`   Correspondances: ${params.includeTransfers ? 'OUI' : 'NON'}`);
 
+        const startTime = performance.now();
+
         try {
-            // Déterminer le niveau max de correspondances
             const maxTransferLevels = params.includeTransfers ? 1 : 0;
 
-            console.log(`📊 Configuration: maxTransferLevels=${maxTransferLevels}, includeTransfers=${params.includeTransfers}`);
+            console.log(`📊 Configuration: maxTransferLevels=${maxTransferLevels}`);
 
             // ================== 1️⃣ RECHERCHE ALLER ==================
             console.log('➡️ Recherche des trajets ALLER...');
+            const searchStartTime = performance.now();
             
             const outboundResults = await TGVMaxAPI.searchJourneysWithStations({
                 departureId: params.departureId,
-                destinationId: params.destinationId, // null si "N'importe où"
+                destinationId: params.destinationId,
                 date: params.outboundDate
             }, {
                 includeTransfers: params.includeTransfers,
                 maxTransferLevels: maxTransferLevels
             });
 
-            console.log(`✅ Aller: ${outboundResults.destinationsMap.size} destination(s) trouvée(s)`);
-            
-            // Debug : compter les trajets directs vs avec correspondances
-            let directCount = 0;
-            let transferCount = 0;
-            outboundResults.destinationsMap.forEach(dest => {
-                dest.trips.forEach(trip => {
-                    if (trip.type === 'direct') directCount++;
-                    else transferCount++;
-                });
-            });
-            console.log(`   📊 Aller: ${directCount} directs, ${transferCount} avec correspondances`);
+            const searchDuration = (performance.now() - searchStartTime) / 1000;
+            console.log(`✅ Aller: ${outboundResults.destinationsMap.size} destination(s) en ${searchDuration.toFixed(2)}s`);
 
             if (outboundResults.destinationsMap.size === 0) {
                 console.warn('⚠️ Aucun trajet aller trouvé');
@@ -134,136 +119,136 @@
                 return;
             }
 
-            // ================== 2️⃣ RECHERCHE RETOURS ==================
-            console.log('⬅️ Recherche des trajets RETOUR depuis chaque destination...');
+            // ================== 2️⃣ RECHERCHE RETOURS EN PARALLÈLE ==================
+            console.log('⬅️ Recherche des trajets RETOUR (parallélisation maximale)...');
+            const returnStartTime = performance.now();
 
-            const returnSearchPromises = [];
             const destinationsList = Array.from(outboundResults.destinationsMap.keys());
+            
+            // 🚀 OPTIMISATION : Toutes les recherches retour en PARALLÈLE
+            const returnSearchPromises = destinationsList.map(destIata => 
+                TGVMaxAPI.searchJourneysWithStations({
+                    departureId: destIata,
+                    destinationId: params.departureId,
+                    date: params.returnDate
+                }, {
+                    includeTransfers: params.includeTransfers,
+                    maxTransferLevels: maxTransferLevels
+                })
+                .then(results => {
+                    const returnData = results.destinationsMap.get(params.departureId);
+                    const returnTrips = returnData ? returnData.trips : [];
+                    
+                    return {
+                        destIata: destIata,
+                        returnTrips: returnTrips,
+                        outboundDest: outboundResults.destinationsMap.get(destIata)
+                    };
+                })
+                .catch(err => {
+                    console.warn(`⚠️ Erreur retour depuis ${destIata}:`, err);
+                    return { 
+                        destIata: destIata, 
+                        returnTrips: [],
+                        outboundDest: outboundResults.destinationsMap.get(destIata)
+                    };
+                })
+            );
 
-            // Pour chaque destination accessible à l'aller, chercher le retour
-            for (const destIata of destinationsList) {
-                returnSearchPromises.push(
-                    TGVMaxAPI.searchJourneysWithStations({
-                        departureId: destIata,           // Depuis la destination
-                        destinationId: params.departureId, // Vers le point de départ
-                        date: params.returnDate
-                    }, {
-                        // IMPORTANT : Passer les MÊMES options que pour l'aller
-                        includeTransfers: params.includeTransfers,
-                        maxTransferLevels: maxTransferLevels
-                    }).then(results => {
-                        // Extraire les trajets retour vers le point de départ
-                        const returnData = results.destinationsMap.get(params.departureId);
-                        const returnTrips = returnData ? returnData.trips : [];
-                        
-                        // Debug
-                        if (returnTrips.length > 0) {
-                            const directRet = returnTrips.filter(t => t.type === 'direct').length;
-                            const transferRet = returnTrips.filter(t => t.type === 'transfer').length;
-                            console.log(`   🔍 ${destIata}: ${returnTrips.length} retours (${directRet} directs, ${transferRet} corresp.)`);
-                        }
-                        
-                        return {
-                            destIata: destIata,
-                            returnTrips: returnTrips
-                        };
-                    }).catch(err => {
-                        console.warn(`⚠️ Erreur retour depuis ${destIata}:`, err);
-                        return { destIata: destIata, returnTrips: [] };
-                    })
-                );
-            }
-
+            // Attendre TOUTES les recherches retour
             const returnResults = await Promise.all(returnSearchPromises);
             
-            console.log(`✅ Retours recherchés pour ${returnResults.length} destination(s)`);
+            const returnDuration = (performance.now() - returnStartTime) / 1000;
+            console.log(`✅ ${returnResults.length} recherches retour en ${returnDuration.toFixed(2)}s (parallèles)`);
 
-            // ================== 3️⃣ CROISEMENT DES RÉSULTATS ==================
-            console.log('🔄 Croisement des résultats (aller ∩ retour)...');
+            // ================== 3️⃣ TRAITEMENT PARALLÈLE DES RÉSULTATS ==================
+            console.log('🔄 Traitement des résultats...');
+            const processingStartTime = performance.now();
 
             const validDestinations = new Map();
             let totalReturnOrigins = 0;
             let totalDirectReturns = 0;
             let totalTransferReturns = 0;
 
-            returnResults.forEach(({ destIata, returnTrips }) => {
-                const outboundDest = outboundResults.destinationsMap.get(destIata);
-                
-                if (!outboundDest) {
-                    console.warn(`⚠️ Destination ${destIata} non trouvée dans les allers`);
-                    return;
-                }
+            // 🚀 OPTIMISATION : Traitement en parallèle avec Promise.all
+            const processedResults = await Promise.all(
+                returnResults.map(async ({ destIata, returnTrips, outboundDest }) => {
+                    if (!outboundDest) {
+                        console.warn(`⚠️ Destination ${destIata} non trouvée dans les allers`);
+                        return null;
+                    }
 
-                if (returnTrips.length > 0) {
+                    if (returnTrips.length === 0) {
+                        return null;
+                    }
+
                     totalReturnOrigins++;
 
-                    // Compter les types de trajets retour
+                    // Compter les types de trajets
                     const directRet = returnTrips.filter(t => t.type === 'direct').length;
                     const transferRet = returnTrips.filter(t => t.type === 'transfer').length;
-                    totalDirectReturns += directRet;
-                    totalTransferReturns += transferRet;
 
-                    // Optimiser les trajets aller (pas de doublons d'horaires)
-                    const optimizedOutbound = optimizeTrips(outboundDest.trips);
-                    
-                    // Optimiser les trajets retour (pas de doublons d'horaires)
-                    const optimizedReturn = optimizeTrips(returnTrips);
+                    // 🚀 OPTIMISATION : Optimisations en parallèle
+                    const [optimizedOutbound, optimizedReturn] = await Promise.all([
+                        Promise.resolve(optimizeTrips(outboundDest.trips)),
+                        Promise.resolve(optimizeTrips(returnTrips))
+                    ]);
 
-                    console.log(`   ✓ ${outboundDest.name}: ${outboundDest.trips.length}→${optimizedOutbound.length} allers, ${returnTrips.length}→${optimizedReturn.length} retours`);
+                    // Ajouter les métadonnées
+                    const outboundWithMeta = optimizedOutbound.map(trip => ({
+                        ...trip,
+                        direction: 'outbound',
+                        directionLabel: '➡️ ALLER',
+                        date: params.outboundDate,
+                        transferStation: trip.type === 'transfer' && trip.legs?.length >= 2 
+                            ? trip.legs[0].destination 
+                            : null
+                    }));
 
-                    // Ajouter les métadonnées de direction et transferStation
-                    const outboundWithMeta = optimizedOutbound.map(trip => {
-                        // Extraire la gare de correspondance si c'est un trajet avec correspondance
-                        let transferStation = null;
-                        if (trip.type === 'transfer' && trip.legs && trip.legs.length >= 2) {
-                            transferStation = trip.legs[0].destination;
-                        }
-                        
-                        return {
-                            ...trip,
-                            direction: 'outbound',
-                            directionLabel: '➡️ ALLER',
-                            date: params.outboundDate,
-                            transferStation: transferStation
-                        };
-                    });
+                    const returnWithMeta = optimizedReturn.map(trip => ({
+                        ...trip,
+                        direction: 'return',
+                        directionLabel: '⬅️ RETOUR',
+                        date: params.returnDate,
+                        transferStation: trip.type === 'transfer' && trip.legs?.length >= 2 
+                            ? trip.legs[0].destination 
+                            : null
+                    }));
 
-                    const returnWithMeta = optimizedReturn.map(trip => {
-                        // Extraire la gare de correspondance si c'est un trajet avec correspondance
-                        let transferStation = null;
-                        if (trip.type === 'transfer' && trip.legs && trip.legs.length >= 2) {
-                            transferStation = trip.legs[0].destination;
-                        }
-                        
-                        return {
-                            ...trip,
-                            direction: 'return',
-                            directionLabel: '⬅️ RETOUR',
-                            date: params.returnDate,
-                            transferStation: transferStation
-                        };
-                    });
-
-                    // Combiner et trier (allers d'abord, puis retours)
                     const allTrips = [...outboundWithMeta, ...returnWithMeta];
 
-                    validDestinations.set(destIata, {
-                        iata: destIata,
-                        name: outboundDest.name,
-                        latitude: outboundDest.latitude,
-                        longitude: outboundDest.longitude,
-                        trips: allTrips,
-                        tripCount: allTrips.length,
-                        outboundCount: optimizedOutbound.length,
-                        returnCount: optimizedReturn.length,
-                        totalCombinations: optimizedOutbound.length * optimizedReturn.length
-                    });
-                } else {
-                    console.log(`   ✗ ${outboundDest.name}: Aucun retour disponible`);
+                    return {
+                        destIata,
+                        data: {
+                            iata: destIata,
+                            name: outboundDest.name,
+                            latitude: outboundDest.latitude,
+                            longitude: outboundDest.longitude,
+                            trips: allTrips,
+                            tripCount: allTrips.length,
+                            outboundCount: optimizedOutbound.length,
+                            returnCount: optimizedReturn.length,
+                            totalCombinations: optimizedOutbound.length * optimizedReturn.length
+                        },
+                        stats: { directRet, transferRet }
+                    };
+                })
+            );
+
+            // Filtrer les résultats valides et construire la Map
+            processedResults.forEach(result => {
+                if (result) {
+                    validDestinations.set(result.destIata, result.data);
+                    totalDirectReturns += result.stats.directRet;
+                    totalTransferReturns += result.stats.transferRet;
                 }
             });
 
-            console.log(`🎯 RÉSULTAT FINAL: ${validDestinations.size} destination(s) avec aller ET retour`);
+            const processingDuration = (performance.now() - processingStartTime) / 1000;
+            console.log(`✅ Traitement en ${processingDuration.toFixed(2)}s`);
+
+            const totalDuration = (performance.now() - startTime) / 1000;
+            console.log(`🎯 RÉSULTAT FINAL: ${validDestinations.size} destination(s) en ${totalDuration.toFixed(2)}s TOTAL`);
             console.log(`📊 Retours: ${totalDirectReturns} directs, ${totalTransferReturns} avec correspondances`);
 
             if (validDestinations.size === 0) {
@@ -295,6 +280,12 @@
                     returnDate: params.returnDate,
                     departureId: params.departureId,
                     mode: 'roundtrip',
+                    performanceMetrics: {
+                        totalDuration: totalDuration.toFixed(2),
+                        searchDuration: searchDuration.toFixed(2),
+                        returnDuration: returnDuration.toFixed(2),
+                        processingDuration: processingDuration.toFixed(2)
+                    },
                     stats: {
                         totalDestinations: validDestinations.size,
                         outboundDestinations: outboundResults.destinationsMap.size,
@@ -308,13 +299,10 @@
             };
 
             console.log('✅ Données transformées:', transformedResults);
-            console.log(`📊 Stats: ${transformedResults.metadata.stats.totalCombinations} combinaisons au total`);
 
-            // Injecter dans window
             window.ROUNDTRIP_DATA = transformedResults;
             window.ROUNDTRIP_PARAMS = params;
 
-            // Déclencher l'événement
             triggerDataReadyEvent();
 
         } catch (error) {
@@ -347,13 +335,11 @@
      * Point d'entrée principal
      */
     function init() {
-        console.log('🔄 Initialisation du gestionnaire aller-retour...');
+        console.log('🔄 Initialisation du gestionnaire aller-retour optimisé...');
 
-        // Vérifier si on est en mode aller-retour
         if (isRoundTripMode()) {
             console.log('✅ Mode aller-retour détecté');
             
-            // Lancer la recherche
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', performRoundTripSearch);
             } else {
@@ -364,7 +350,6 @@
         }
     }
 
-    // Lancer l'initialisation
     init();
 
     // Export global pour debug
@@ -375,6 +360,6 @@
         optimizeTrips
     };
 
-    console.log('✅ Gestionnaire aller-retour chargé (utilise searchJourneysWithStations)');
+    console.log('✅ Gestionnaire aller-retour optimisé chargé (calculs parallèles)');
 
 })();

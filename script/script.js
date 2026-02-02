@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showSuggestions("departure-city", "departure-suggestions");
     showSuggestions("destination-city", "destination-suggestions");
     
-    // Initialisation pour la page results.html
+    // Initialisation pour la page explorer.html
     showSuggestions("results-departure-city", "results-departure-suggestions");
     showSuggestions("results-destination-city", "results-destination-suggestions");
 });

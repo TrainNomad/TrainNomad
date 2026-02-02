@@ -102,7 +102,7 @@ async function performSearch(includeTransfers = false) {
 
     // Redirection selon le type de destination
     if (isAnywhere) {
-        window.location.href = `results.html?${params.toString()}`;
+        window.location.href = `explorer.html?${params.toString()}`;
     } else {
         // Pour un trajet spécifique, on redirige vers train.html
         let trainUrl = `train.html?departure_id=${departureId}&departure_name=${encodeURIComponent(departureName)}&destination_id=${destinationId}&destination_name=${encodeURIComponent(destinationName)}&date=${dateValue}&trip_type=${tripType}`;

@@ -430,7 +430,7 @@ function filterTrainCard(card) {
     return visible;
 }
 
-// ✅ Filtrage pour les cartes de results.html
+// ✅ Filtrage pour les cartes de explorer.html
 function filterResultCard(card) {
     let visible = true;
     
@@ -594,7 +594,7 @@ function reloadDataWithNewConfig() {
 
 // ✅ Application des filtres côté client (CORRIGÉ)
 function applyClientSideFilters() {
-    // Détecter le type de cartes (Train.html vs results.html)
+    // Détecter le type de cartes (Train.html vs explorer.html)
     const trainCards = document.querySelectorAll('.train-trip-card');
     const resultCards = document.querySelectorAll('.result__card-placeholder');
     
@@ -636,7 +636,7 @@ function applyClientSideFilters() {
         if (isVisible) visibleCount++;
     });
     
-    // Pour results.html - filtrer les trajets DANS les cartes (pas les cartes elles-mêmes)
+    // Pour explorer.html - filtrer les trajets DANS les cartes (pas les cartes elles-mêmes)
     resultCards.forEach(card => {
         const tripButtons = card.querySelectorAll('.result__car-hour-buton');
         const tripRows = card.querySelectorAll('.trip-row');

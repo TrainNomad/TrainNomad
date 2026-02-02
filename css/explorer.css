@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('global.css');
 
-@import url('sections/results/header.css');
-@import url('sections/results/main.css');
-@import url('sections/results/footer.css');
-@import url('sections/results/mobile.css'); 
-@import url('sections/results/desktop_large.css');
-@import url('sections/results/tablet.css'); 
+@import url('sections/explorer/header.css');
+@import url('sections/explorer/main.css');
+@import url('sections/explorer/footer.css');
+@import url('sections/explorer/mobile.css'); 
+@import url('sections/explorer/desktop_large.css');
+@import url('sections/explorer/tablet.css'); 
 
 :root{
 

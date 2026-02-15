@@ -1,59 +1,63 @@
 // stations_service.js
-// Service côté CLIENT pour charger et rechercher les gares depuis le fichier local
-// Source : ../Data/stations_tgvmax.json (gares TGVmax / MAX Jeune / MAX Senior)
+// Service côté CLIENT pour charger et rechercher les gares DIRECTEMENT depuis GitHub
+// REMPLACE complètement server.js - Aucun serveur Node.js nécessaire !
 
 const STATIONS_SERVICE = {
-    JSON_URL: '../Data/stations_tgvmax.json',
-
+    CSV_URL: 'https://raw.githubusercontent.com/trainline-eu/stations/master/stations.csv',
+    
     // Cache en mémoire
     cache: {
-        data: [],       // tableau de stations (format JSON : {iata, tvs, uic, name, latitude, longitude, ...})
-        map: new Map(), // Map iata → station pour recherche O(1)
+        data: [],
+        map: new Map(),
         lastUpdate: null,
         isLoading: false
     },
-
+    
     CACHE_DURATION: 30 * 60 * 1000, // 30 minutes
 
-    // === CHARGEMENT DU JSON LOCAL ===
+    // === CHARGEMENT DU CSV DEPUIS GITHUB ===
     async loadStations() {
         if (this.cache.isLoading) {
             console.log('⏳ Chargement déjà en cours...');
+            // Attendre que le chargement se termine
             while (this.cache.isLoading) {
                 await new Promise(resolve => setTimeout(resolve, 100));
             }
             return this.cache.data;
         }
 
-        console.log('📥 Chargement des gares TGVmax depuis ../Data/stations_tgvmax.json...');
+        console.log('📥 Téléchargement des stations depuis GitHub...');
         this.cache.isLoading = true;
 
         try {
-            const response = await fetch(this.JSON_URL);
-
+            const response = await fetch(this.CSV_URL);
+            
             if (!response.ok) {
-                throw new Error(`Erreur HTTP: ${response.status} — fichier introuvable : ${this.JSON_URL}`);
+                throw new Error(`Erreur HTTP: ${response.status}`);
             }
-
-            const json = await response.json();
-
-            // Le JSON a la structure : { meta: {...}, stations: [...] }
-            // Chaque station : { iata, tvs, uic, name, latitude, longitude, is_main_station }
-            const stationsData = json.stations ?? json; // compatibilité si tableau direct
-
-            if (!Array.isArray(stationsData) || stationsData.length === 0) {
-                throw new Error('Le fichier JSON ne contient aucune station valide');
+            
+            const csvText = await response.text();
+            const lines = csvText.split("\n").filter(line => line.trim().length > 0);
+            
+            if (lines.length === 0) {
+                throw new Error("Le fichier CSV est vide");
             }
+            
+            const headers = lines[0].split(";").map(h => h.trim());
 
-            // Construire la Map iata → station pour getStationByIata()
+            // Parser les données
+            const stationsData = lines.slice(1).map(line => {
+                const values = line.split(";");
+                const obj = {};
+                headers.forEach((h, i) => obj[h] = values[i]?.trim());
+                return obj;
+            }).filter(obj => Object.keys(obj).length === headers.length);
+            
+            // Créer la Map pour recherche rapide
             const stationsMap = new Map();
             stationsData.forEach(station => {
-                if (station.iata) {
-                    stationsMap.set(station.iata.toUpperCase(), station);
-                }
-                // Index secondaire par code TVS (ex: "LYD", "MSC"...)
-                if (station.tvs) {
-                    stationsMap.set(station.tvs.toUpperCase(), station);
+                if (station.sncf_id) {
+                    stationsMap.set(station.sncf_id.toUpperCase(), station);
                 }
             });
 
@@ -63,9 +67,9 @@ const STATIONS_SERVICE = {
             this.cache.lastUpdate = Date.now();
             this.cache.isLoading = false;
 
-            console.log(`✅ ${stationsData.length} gares TGVmax chargées`);
+            console.log(`✅ ${stationsData.length} stations chargées`);
             return stationsData;
-
+            
         } catch (error) {
             console.error('❌ Erreur chargement stations:', error);
             this.cache.isLoading = false;
@@ -76,47 +80,42 @@ const STATIONS_SERVICE = {
     // === VÉRIFICATION DU CACHE ===
     async ensureCacheValid() {
         const now = Date.now();
-
+        
+        // Si pas de cache ou cache expiré
         if (!this.cache.lastUpdate || (now - this.cache.lastUpdate) > this.CACHE_DURATION) {
             await this.loadStations();
         }
-
+        
         return this.cache.data.length > 0;
     },
 
     // === RECHERCHE DE SUGGESTIONS ===
-    // Toutes les stations du JSON sont déjà filtrées TGVmax — pas besoin de re-filtrer sncf_is_enabled
     async getSuggestions(query) {
         if (!query || query.length < 2) return [];
-
+        
         await this.ensureCacheValid();
-
-        const normalize = str =>
-            str.toLowerCase()
-               .normalize('NFD')
-               .replace(/[\u0300-\u036f]/g, '') // supprime les accents
-               .replace(/[-–]/g, ' ');
-
-        const search = normalize(query);
-
-        const suggestions = this.cache.data
-            .filter(station => {
-                const name = normalize(station.name ?? '');
-                return name.includes(search);
-            })
-            .slice(0, 15);
+        
+        const search = query.toLowerCase();
+        
+        const suggestions = this.cache.data.filter(station => {
+            const name = station.name ? station.name.toLowerCase() : '';
+            const slug = station.slug ? station.slug.toLowerCase() : '';
+            const isSncfEnabled = station.sncf_is_enabled === 't';
+            
+            return isSncfEnabled && (name.includes(search) || slug.includes(search));
+        }).slice(0, 15);
 
         return suggestions;
     },
 
-    // === RÉCUPÉRATION PAR CODE IATA (ou TVS) ===
-    // Accepte les deux formats : "FRPLY" (iata) ou "PLY" (tvs)
+    // === RÉCUPÉRATION PAR CODE IATA ===
     async getStationByIata(iataCode) {
         if (!iataCode) return null;
-
+        
         await this.ensureCacheValid();
-
-        return this.cache.map.get(iataCode.toUpperCase()) ?? null;
+        
+        const station = this.cache.map.get(iataCode.toUpperCase());
+        return station || null;
     },
 
     // === FORCER LE RECHARGEMENT ===
@@ -128,10 +127,10 @@ const STATIONS_SERVICE = {
 
     // === STATUT DU CACHE ===
     getCacheStatus() {
-        const cacheAge = this.cache.lastUpdate
+        const cacheAge = this.cache.lastUpdate 
             ? Math.floor((Date.now() - this.cache.lastUpdate) / 1000)
             : null;
-
+        
         return {
             isValid: cacheAge !== null && cacheAge < (this.CACHE_DURATION / 1000),
             stationCount: this.cache.data.length,
@@ -149,13 +148,13 @@ window.STATIONS_SERVICE = STATIONS_SERVICE;
 // Pré-charger au démarrage de la page
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-        console.log('🚀 Initialisation du service de gares TGVmax...');
+        console.log('🚀 Initialisation du service de gares...');
         STATIONS_SERVICE.loadStations().catch(err => {
             console.warn('⚠️ Erreur lors du pré-chargement:', err);
         });
     });
 } else {
-    console.log('🚀 Initialisation du service de gares TGVmax...');
+    console.log('🚀 Initialisation du service de gares...');
     STATIONS_SERVICE.loadStations().catch(err => {
         console.warn('⚠️ Erreur lors du pré-chargement:', err);
     });

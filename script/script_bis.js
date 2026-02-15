@@ -1,45 +1,23 @@
 // script.js
 // Gère l'autocomplétion des gares - VERSION SANS SERVEUR
-// Utilise directement STATIONS_SERVICE + stations_tgvmax.json
+// Utilise directement STATIONS_SERVICE pour accéder aux données
 
 // === UTILS ===
 function showAlert(message) {
     console.error("ALERTE :", message);
-    alert(message);
-}
-
-// === ATTENDRE QUE LE SERVICE SOIT PRÊT ===
-// Résout la race condition : script.js peut s'initialiser AVANT que
-// le JSON soit chargé. On attend que STATIONS_SERVICE.cache.data soit rempli.
-async function waitForService(timeoutMs = 5000) {
-    if (typeof STATIONS_SERVICE === 'undefined') {
-        console.error('❌ STATIONS_SERVICE non disponible. Assurez-vous que stations_service.js est chargé AVANT script.js');
-        return false;
-    }
-
-    const start = Date.now();
-
-    // Si déjà chargé, on retourne immédiatement
-    if (STATIONS_SERVICE.cache.data.length > 0) return true;
-
-    // Sinon, on attend (le pré-chargement est déjà en cours dans stations_service.js)
-    console.log('⏳ Attente du chargement des gares...');
-    while (Date.now() - start < timeoutMs) {
-        if (STATIONS_SERVICE.cache.data.length > 0) {
-            console.log(`✅ Service prêt — ${STATIONS_SERVICE.cache.data.length} gares disponibles`);
-            return true;
-        }
-        await new Promise(resolve => setTimeout(resolve, 50));
-    }
-
-    console.error('❌ Timeout : le service de gares n\'a pas répondu dans les délais');
-    return false;
+    alert(message); 
 }
 
 // === API SUGGESTIONS (CLIENT-SIDE) ===
 async function getSuggestions(input) {
     if (!input || input.length < 2) return [];
-
+    
+    // Vérifier que stations_service.js est chargé
+    if (typeof STATIONS_SERVICE === 'undefined') {
+        console.error('❌ STATIONS_SERVICE non disponible. Assurez-vous que stations_service.js est chargé AVANT script.js');
+        return [];
+    }
+    
     try {
         return await STATIONS_SERVICE.getSuggestions(input);
     } catch (error) {
@@ -52,16 +30,16 @@ async function getSuggestions(input) {
 function showSuggestions(inputId, containerId) {
     const inputElement = document.getElementById(inputId);
     const container = document.getElementById(containerId);
-
-    if (!inputElement || !container) return;
+    
+    if (!inputElement || !container) return; 
 
     async function updateSuggestions() {
         const value = inputElement.value.trim();
-        const suggestions = await getSuggestions(value);
+        let suggestions = await getSuggestions(value);
 
         container.innerHTML = "";
-
-        // Option "N'importe où" pour les champs Arrivée uniquement
+        
+        // AJOUT : Suggestion "N'importe où" pour le champ Arrivée uniquement
         if (inputId === "destination-city" || inputId === "results-destination-city") {
             const anywhereDiv = document.createElement('div');
             anywhereDiv.className = "suggestion-item everywhere-option";
@@ -76,24 +54,23 @@ function showSuggestions(inputId, containerId) {
             container.classList.add("hidden");
             return;
         }
-
-        // Ajout des suggestions — champs adaptés au format JSON (iata, latitude, longitude)
+        
+        // Ajout des suggestions classiques
         suggestions.forEach(station => {
-            // Le JSON utilise "iata" comme identifiant (ex: "FRPLY")
-            // L'ancien CSV utilisait "sncf_id" — on unifie ici
-            const stationId = (station.iata ?? station.sncf_id ?? '').toUpperCase();
-
+            const stationId = station.sncf_id ? station.sncf_id.toUpperCase() : '';
             const item = document.createElement('div');
             item.className = "suggestion-item";
             item.setAttribute('data-name', station.name);
             item.setAttribute('data-id', stationId);
-            item.setAttribute('data-lat', station.latitude  ?? '');
-            item.setAttribute('data-lon', station.longitude ?? '');
-
-            // Le JSON n'a pas is_city ni sncf_is_enabled (filtre déjà appliqué)
-            // On affiche juste "Gare TGVmax" comme suffixe
-            // Gare TGVmax
-            item.innerHTML = `<strong>${station.name}</strong> <span class="station-type"></span>`; 
+            item.setAttribute('data-lat', station.latitude || '');
+            item.setAttribute('data-lon', station.longitude || '');
+            
+            let typeLabels = [];
+            if (station.is_city === 't') typeLabels.push('Ville');
+            if (station.sncf_is_enabled === 't') typeLabels.push('Gare');
+            let suffix = typeLabels.length > 0 ? ` (${typeLabels.join(' / ')})` : '';
+            
+            item.innerHTML = `<strong>${station.name}${suffix}</strong>`;
             container.appendChild(item);
         });
 
@@ -102,19 +79,19 @@ function showSuggestions(inputId, containerId) {
         // Gestion du clic sur une suggestion
         container.querySelectorAll(".suggestion-item").forEach(div => {
             div.addEventListener("click", () => {
-                inputElement.value          = div.dataset.name;
-                inputElement.dataset.id     = div.dataset.id;
-                inputElement.dataset.lat    = div.dataset.lat    || '';
-                inputElement.dataset.lon    = div.dataset.lon    || '';
+                inputElement.value = div.dataset.name;
+                inputElement.dataset.id = div.dataset.id;
+                inputElement.dataset.lat = div.dataset.lat || '';
+                inputElement.dataset.lon = div.dataset.lon || '';
                 inputElement.dataset.anywhere = (div.dataset.anywhere === "true") ? "true" : "false";
                 container.classList.add("hidden");
             });
         });
     }
-
+    
     inputElement.addEventListener("input", updateSuggestions);
-
-    // Fermeture au clic extérieur
+    
+    // Fermeture du conteneur au clic extérieur
     document.addEventListener("click", (e) => {
         if (!container.contains(e.target) && e.target !== inputElement) {
             container.classList.add("hidden");
@@ -123,29 +100,23 @@ function showSuggestions(inputId, containerId) {
 }
 
 // === INITIALISATION ===
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
+    // Vérification que stations_service.js est chargé
     if (typeof STATIONS_SERVICE === 'undefined') {
         console.error('❌ ERREUR CRITIQUE: stations_service.js doit être chargé AVANT script.js');
-        console.error('📝 Ajoutez dans votre HTML :');
+        console.error('📝 Ajoutez dans votre HTML:');
         console.error('   <script src="stations_service.js"></script>');
         console.error('   <script src="script.js"></script>');
         return;
     }
 
-    // Attendre que le JSON soit chargé avant de brancher l'autocomplétion
-    const ready = await waitForService(5000);
-    if (!ready) {
-        console.error('❌ Impossible d\'initialiser l\'autocomplétion : service indisponible');
-        return;
-    }
-
     console.log('✅ Initialisation de l\'autocomplétion (mode client-side)');
-
-    // Page index.html
-    showSuggestions("departure-city",  "departure-suggestions");
+    
+    // Initialisation pour la page index.html
+    showSuggestions("departure-city", "departure-suggestions");
     showSuggestions("destination-city", "destination-suggestions");
-
-    // Page explorer.html
-    showSuggestions("results-departure-city",  "results-departure-suggestions");
+    
+    // Initialisation pour la page explorer.html
+    showSuggestions("results-departure-city", "results-departure-suggestions");
     showSuggestions("results-destination-city", "results-destination-suggestions");
 });

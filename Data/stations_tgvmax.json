@@ -1,0 +1,2414 @@
+{
+  "meta": {
+    "source": "Trainline Open Stations Database — filtré TGVmax",
+    "filtre": "country=FR + sncf_self_service_machine=t + sncf_is_enabled=t + sncf_tvs_id≠∅ + GPS",
+    "generated": "2026-02-15",
+    "total": 267,
+    "description": "Gares desservies par TGV INOUI et Intercités à réservation (TGVmax / MAX Jeune / MAX Senior)"
+  },
+  "stations": [
+    {
+      "iata": "FRXAB",
+      "tvs": "ABB",
+      "uic": "8731736",
+      "name": "Abbeville",
+      "latitude": 50.10221,
+      "longitude": 1.82449,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXAG",
+      "tvs": "AGD",
+      "uic": "8778127",
+      "name": "Agde",
+      "latitude": 43.31728,
+      "longitude": 3.466203,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRAGF",
+      "tvs": "AGN",
+      "uic": "8758600",
+      "name": "Agen",
+      "latitude": 44.208311,
+      "longitude": 0.620932,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRQXB",
+      "tvs": "AXP",
+      "uic": "8775140",
+      "name": "Aix-en-Provence Centre",
+      "latitude": 43.522912,
+      "longitude": 5.445345,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRAIE",
+      "tvs": "AXV",
+      "uic": "8731901",
+      "name": "Aix-en-Provence TGV",
+      "latitude": 43.455237,
+      "longitude": 5.317534,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXAI",
+      "tvs": "AIX",
+      "uic": "8774113",
+      "name": "Aix-les-Bains – Le Revard",
+      "latitude": 45.688161,
+      "longitude": 5.909371,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXAV",
+      "tvs": "ALV",
+      "uic": "8774164",
+      "name": "Albertville",
+      "latitude": 45.672977,
+      "longitude": 6.383167,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRAFJ",
+      "tvs": "ALB",
+      "uic": "8761500",
+      "name": "Albi Ville",
+      "latitude": 43.92238,
+      "longitude": 2.137958,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRXAN",
+      "tvs": "ALN",
+      "uic": "8744471",
+      "name": "Alençon",
+      "latitude": 48.433884,
+      "longitude": 0.098531,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXAS",
+      "tvs": "ALS",
+      "uic": "8777528",
+      "name": "Alès",
+      "latitude": 44.127825,
+      "longitude": 4.084948,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRQAM",
+      "tvs": "AMS",
+      "uic": "8731387",
+      "name": "Amiens",
+      "latitude": 49.890746,
+      "longitude": 2.312592,
+      "is_main_station": false
+    },
+    {
+      "iata": "FREFN",
+      "tvs": "ANC",
+      "uic": "8748119",
+      "name": "Ancenis",
+      "latitude": 47.369334,
+      "longitude": -1.177763,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRACL",
+      "tvs": "ASL",
+      "uic": "8748400",
+      "name": "Angers St-Laud",
+      "latitude": 47.464647,
+      "longitude": -0.55682,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRANG",
+      "tvs": "ANG",
+      "uic": "8758300",
+      "name": "Angoulême",
+      "latitude": 45.653572,
+      "longitude": 0.164608,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRNCY",
+      "tvs": "ANY",
+      "uic": "8774600",
+      "name": "Annecy",
+      "latitude": 45.901965,
+      "longitude": 6.121835,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRQNJ",
+      "tvs": "ANE",
+      "uic": "8774549",
+      "name": "Annemasse",
+      "latitude": 46.199222,
+      "longitude": 6.23652,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXAT",
+      "tvs": "ATB",
+      "uic": "8775767",
+      "name": "Antibes",
+      "latitude": 43.585784,
+      "longitude": 7.119498,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRHZA",
+      "tvs": "ARS",
+      "uic": "8775365",
+      "name": "Arles",
+      "latitude": 43.684853,
+      "longitude": 4.63203,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXRM",
+      "tvs": "ARM",
+      "uic": "8728614",
+      "name": "Armentières",
+      "latitude": 50.68084,
+      "longitude": 2.87763,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRQRV",
+      "tvs": "ARR",
+      "uic": "8734201",
+      "name": "Arras",
+      "latitude": 50.286673,
+      "longitude": 2.781942,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXUY",
+      "tvs": "ARY",
+      "uic": "8747620",
+      "name": "Auray",
+      "latitude": 47.68022,
+      "longitude": -2.999995,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRGRD",
+      "tvs": "AUP",
+      "uic": "8769457",
+      "name": "Autun",
+      "latitude": 46.954875,
+      "longitude": 4.292908,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRAES",
+      "tvs": "AVI",
+      "uic": "8776500",
+      "name": "Avignon Centre",
+      "latitude": 43.9419,
+      "longitude": 4.805281,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRAVG",
+      "tvs": "AVV",
+      "uic": "8731896",
+      "name": "Avignon TGV",
+      "latitude": 43.921586,
+      "longitude": 4.786079,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRMLW",
+      "tvs": "RYT",
+      "uic": "8727149",
+      "name": "Aéroport Paris Roissy Charles de Gaulle CDG T2",
+      "latitude": 49.003652,
+      "longitude": 2.570892,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRXBD",
+      "tvs": "BLD",
+      "uic": "8717504",
+      "name": "Bar-le-Duc",
+      "latitude": 48.773308,
+      "longitude": 5.166822,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRBYX",
+      "tvs": "BAY",
+      "uic": "8744406",
+      "name": "Bayeux",
+      "latitude": 49.269836,
+      "longitude": -0.698056,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXBY",
+      "tvs": "BYE",
+      "uic": "8767300",
+      "name": "Bayonne",
+      "latitude": 43.496801,
+      "longitude": -1.470306,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXBV",
+      "tvs": "BEA",
+      "uic": "8771354",
+      "name": "Beaune",
+      "latitude": 47.023053,
+      "longitude": 4.848379,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRBVA",
+      "tvs": "BVS",
+      "uic": "8731351",
+      "name": "Beauvais",
+      "latitude": 49.42648,
+      "longitude": 2.08869,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRTJA",
+      "tvs": "BFB",
+      "uic": "8730082",
+      "name": "Belfort – Montbéliard TGV",
+      "latitude": 47.585937,
+      "longitude": 6.897687,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRBOR",
+      "tvs": "BFT",
+      "uic": "8718400",
+      "name": "Belfort-Ville",
+      "latitude": 47.633284,
+      "longitude": 6.853956,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXBF",
+      "tvs": "BGD",
+      "uic": "8774500",
+      "name": "Bellegarde-sur-Valserine",
+      "latitude": 46.109425,
+      "longitude": 5.823483,
+      "is_main_station": true
+    },
+    {
+      "iata": "FREGC",
+      "tvs": "BGC",
+      "uic": "8758426",
+      "name": "Bergerac",
+      "latitude": 44.857061,
+      "longitude": 0.489174,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXBX",
+      "tvs": "BEY",
+      "uic": "8744429",
+      "name": "Bernay",
+      "latitude": 49.087102,
+      "longitude": 0.595634,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRABG",
+      "tvs": "BNV",
+      "uic": "8771800",
+      "name": "Besançon Viotte",
+      "latitude": 47.247019,
+      "longitude": 6.022003,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRTJB",
+      "tvs": "BFC",
+      "uic": "8730086",
+      "name": "Besançon-Franche-Comté TGV",
+      "latitude": 47.307361,
+      "longitude": 5.953195,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRBIQ",
+      "tvs": "BIZ",
+      "uic": "8767340",
+      "name": "Biarritz",
+      "latitude": 43.459397,
+      "longitude": -1.545915,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXBQ",
+      "tvs": "BLO",
+      "uic": "8757400",
+      "name": "Blois – Chambord",
+      "latitude": 47.585445,
+      "longitude": 1.323823,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRBOJ",
+      "tvs": "BXJ",
+      "uic": "8758100",
+      "name": "Bordeaux St-Jean",
+      "latitude": 44.825873,
+      "longitude": -0.556697,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRAEB",
+      "tvs": "BEM",
+      "uic": "8731758",
+      "name": "Boulogne-sur-Mer Ville",
+      "latitude": 50.7157,
+      "longitude": 1.60964,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRQBM",
+      "tvs": "BSM",
+      "uic": "8774179",
+      "name": "Bourg-St-Maurice",
+      "latitude": 45.619036,
+      "longitude": 6.771273,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXBK",
+      "tvs": "BGB",
+      "uic": "8774300",
+      "name": "Bourg-en-Bresse",
+      "latitude": 46.200351,
+      "longitude": 5.215063,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRBOU",
+      "tvs": "BGS",
+      "uic": "8757620",
+      "name": "Bourges",
+      "latitude": 47.094145,
+      "longitude": 2.394255,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRHEY",
+      "tvs": "BRG",
+      "uic": "8772342",
+      "name": "Bourgoin-Jallieu",
+      "latitude": 45.583954,
+      "longitude": 5.273401,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRBES",
+      "tvs": "BRT",
+      "uic": "8747400",
+      "name": "Brest",
+      "latitude": 48.38811,
+      "longitude": -4.478903,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRBVE",
+      "tvs": "BLG",
+      "uic": "8759400",
+      "name": "Brive-la-Gaillarde",
+      "latitude": 45.152618,
+      "longitude": 1.528655,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXBH",
+      "tvs": "BET",
+      "uic": "8734200",
+      "name": "Béthune",
+      "latitude": 50.52144,
+      "longitude": 2.64055,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRBZR",
+      "tvs": "BZS",
+      "uic": "8778100",
+      "name": "Béziers",
+      "latitude": 43.33633,
+      "longitude": 3.218873,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRCFR",
+      "tvs": "CAE",
+      "uic": "8744400",
+      "name": "Caen",
+      "latitude": 49.176354,
+      "longitude": -0.347613,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRZAO",
+      "tvs": "CAH",
+      "uic": "8761300",
+      "name": "Cahors",
+      "latitude": 44.449275,
+      "longitude": 1.433325,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRSTH",
+      "tvs": "FHS",
+      "uic": "8728107",
+      "name": "Calais Fréthun",
+      "latitude": 50.902585,
+      "longitude": 1.811286,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRAEA",
+      "tvs": "CSV",
+      "uic": "8731726",
+      "name": "Calais Ville",
+      "latitude": 50.952613,
+      "longitude": 1.848185,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRAFX",
+      "tvs": "CAM",
+      "uic": "8734552",
+      "name": "Cambrai",
+      "latitude": 50.17662,
+      "longitude": 3.24118,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRJCA",
+      "tvs": "CAN",
+      "uic": "8775762",
+      "name": "Cannes",
+      "latitude": 43.553839,
+      "longitude": 7.019682,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRCCF",
+      "tvs": "CNE",
+      "uic": "8761528",
+      "name": "Carcassonne",
+      "latitude": 43.218029,
+      "longitude": 2.351824,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRFAM",
+      "tvs": "CUD",
+      "uic": "8758153",
+      "name": "Caudéran – Mérignac",
+      "latitude": 44.84288,
+      "longitude": -0.627434,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXCE",
+      "tvs": "CER",
+      "uic": "8778500",
+      "name": "Cerbère",
+      "latitude": 42.441773,
+      "longitude": 3.163403,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRCLS",
+      "tvs": "CLS",
+      "uic": "8748139",
+      "name": "Challans",
+      "latitude": 46.843962,
+      "longitude": -1.871879,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXCD",
+      "tvs": "CSS",
+      "uic": "8772500",
+      "name": "Chalon-sur-Saône",
+      "latitude": 46.781612,
+      "longitude": 4.843454,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRCMF",
+      "tvs": "CRL",
+      "uic": "8774100",
+      "name": "Chambéry Challes-les-Eaux",
+      "latitude": 45.571302,
+      "longitude": 5.919547,
+      "is_main_station": false
+    },
+    {
+      "iata": "FREAH",
+      "tvs": "CGV",
+      "uic": "8717192",
+      "name": "Champagne-Ardenne TGV",
+      "latitude": 49.214806,
+      "longitude": 3.994632,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXCV",
+      "tvs": "CLY",
+      "uic": "8727611",
+      "name": "Chantilly – Gouvieux",
+      "latitude": 49.18724,
+      "longitude": 2.45979,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXCZ",
+      "tvs": "CMZ",
+      "uic": "8717200",
+      "name": "Charleville-Mézières",
+      "latitude": 49.767915,
+      "longitude": 4.724952,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRQTJ",
+      "tvs": "CHH",
+      "uic": "8739400",
+      "name": "Chartres",
+      "latitude": 48.448202,
+      "longitude": 1.481313,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRXCW",
+      "tvs": "CHM",
+      "uic": "8714200",
+      "name": "Chaumont",
+      "latitude": 48.10976,
+      "longitude": 5.1346,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRACK",
+      "tvs": "CBU",
+      "uic": "8744487",
+      "name": "Cherbourg",
+      "latitude": 49.633505,
+      "longitude": -1.621515,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRCET",
+      "tvs": "CHT",
+      "uic": "8748430",
+      "name": "Cholet",
+      "latitude": 47.065698,
+      "longitude": -0.869583,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXCR",
+      "tvs": "CMP",
+      "uic": "8717400",
+      "name": "Châlons-en-Champagne",
+      "latitude": 48.955252,
+      "longitude": 4.348656,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRCHR",
+      "tvs": "CTX",
+      "uic": "8759700",
+      "name": "Châteauroux",
+      "latitude": 46.809737,
+      "longitude": 1.699536,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXCX",
+      "tvs": "CRT",
+      "uic": "8757514",
+      "name": "Châtellerault",
+      "latitude": 46.818594,
+      "longitude": 0.549279,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRCFE",
+      "tvs": "CLF",
+      "uic": "8773400",
+      "name": "Clermont-Ferrand",
+      "latitude": 45.778945,
+      "longitude": 3.100543,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRHTZ",
+      "tvs": "CLU",
+      "uic": "8774637",
+      "name": "Cluses",
+      "latitude": 46.061447,
+      "longitude": 6.582663,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRCNG",
+      "tvs": "COG",
+      "uic": "8749144",
+      "name": "Cognac",
+      "latitude": 45.684682,
+      "longitude": -0.326112,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRAEJ",
+      "tvs": "CMR",
+      "uic": "8718201",
+      "name": "Colmar",
+      "latitude": 48.073201,
+      "longitude": 7.346967,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRXCP",
+      "tvs": "CPE",
+      "uic": "8727669",
+      "name": "Compiègne",
+      "latitude": 49.422005,
+      "longitude": 2.823679,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRCSF",
+      "tvs": "CLH",
+      "uic": "8727600",
+      "name": "Creil",
+      "latitude": 49.263757,
+      "longitude": 2.469244,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRCKH",
+      "tvs": "CRW",
+      "uic": "8728671",
+      "name": "Croix – Wasquehal",
+      "latitude": 50.678557,
+      "longitude": 3.138032,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRACG",
+      "tvs": "DAX",
+      "uic": "8767320",
+      "name": "Dax",
+      "latitude": 43.720472,
+      "longitude": -1.050301,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRABA",
+      "tvs": "DJV",
+      "uic": "8771304",
+      "name": "Dijon Ville",
+      "latitude": 47.32337,
+      "longitude": 5.027208,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRDIN",
+      "tvs": "DIN",
+      "uic": "8747816",
+      "name": "Dinan",
+      "latitude": 48.456764,
+      "longitude": -2.053542,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRDOL",
+      "tvs": "DOL",
+      "uic": "8747807",
+      "name": "Dol-de-Bretagne",
+      "latitude": 48.54425,
+      "longitude": -1.750536,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRACE",
+      "tvs": "DLE",
+      "uic": "8771341",
+      "name": "Dole Ville",
+      "latitude": 47.096084,
+      "longitude": 5.488105,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRXDN",
+      "tvs": "DOI",
+      "uic": "8734500",
+      "name": "Douai",
+      "latitude": 50.371677,
+      "longitude": 3.089986,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXDR",
+      "tvs": "DRX",
+      "uic": "8739348",
+      "name": "Dreux",
+      "latitude": 48.731456,
+      "longitude": 1.37016,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRADI",
+      "tvs": "DKQ",
+      "uic": "8728100",
+      "name": "Dunkerque",
+      "latitude": 51.03047,
+      "longitude": 2.368961,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRETA",
+      "tvs": "ETA",
+      "uic": "8731706",
+      "name": "Etaples – Le Touquet",
+      "latitude": 50.51686,
+      "longitude": 1.64231,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRFAC",
+      "tvs": "FAT",
+      "uic": "8758247",
+      "name": "Facture – Biganos",
+      "latitude": 44.637384,
+      "longitude": -0.96621,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRAFE",
+      "tvs": "FON",
+      "uic": "8768221",
+      "name": "Fontainebleau – Avon",
+      "latitude": 48.416371,
+      "longitude": 2.72634,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRBQT",
+      "tvs": "FOB",
+      "uic": "8719300",
+      "name": "Forbach",
+      "latitude": 49.189228,
+      "longitude": 6.901318,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRFRA",
+      "tvs": "FRA",
+      "uic": "8771513",
+      "name": "Frasne",
+      "latitude": 46.857596,
+      "longitude": 6.157767,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRTGO",
+      "tvs": "FTU",
+      "uic": "8732409",
+      "name": "Futuroscope",
+      "latitude": 46.669918,
+      "longitude": 0.377209,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRGAT",
+      "tvs": "GAP",
+      "uic": "8776300",
+      "name": "Gap",
+      "latitude": 44.563693,
+      "longitude": 6.085638,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRGFR",
+      "tvs": "GRV",
+      "uic": "8744768",
+      "name": "Granville",
+      "latitude": 48.838456,
+      "longitude": -1.587757,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRGNB",
+      "tvs": "GRE",
+      "uic": "8774700",
+      "name": "Grenoble",
+      "latitude": 45.191493,
+      "longitude": 5.714584,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRGGP",
+      "tvs": "GGP",
+      "uic": "8747320",
+      "name": "Guingamp",
+      "latitude": 48.555659,
+      "longitude": -3.143343,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXGT",
+      "tvs": "GTJ",
+      "uic": "8759760",
+      "name": "Guéret",
+      "latitude": 46.174186,
+      "longitude": 1.879386,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRHGD",
+      "tvs": "HGD",
+      "uic": "8719111",
+      "name": "Hagondange",
+      "latitude": 49.25356,
+      "longitude": 6.16448,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRHAG",
+      "tvs": "HAG",
+      "uic": "8721305",
+      "name": "Haguenau",
+      "latitude": 48.81345,
+      "longitude": 7.782726,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRTHP",
+      "tvs": "HPI",
+      "uic": "8731388",
+      "name": "Haute-Picardie TGV",
+      "latitude": 49.861154,
+      "longitude": 2.83233,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRHZK",
+      "tvs": "HZK",
+      "uic": "8728630",
+      "name": "Hazebrouck",
+      "latitude": 50.72501,
+      "longitude": 2.54129,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRAEF",
+      "tvs": "HED",
+      "uic": "8767700",
+      "name": "Hendaye",
+      "latitude": 43.353132,
+      "longitude": -1.781724,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXHE",
+      "tvs": "HYE",
+      "uic": "8775562",
+      "name": "Hyères",
+      "latitude": 43.108867,
+      "longitude": 6.124223,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRJLT",
+      "tvs": "JLT",
+      "uic": "8757188",
+      "name": "Joué-lès-Tours",
+      "latitude": 47.354174,
+      "longitude": 0.667559,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRJEE",
+      "tvs": "LBE",
+      "uic": "8748175",
+      "name": "La Baule-Escoublac",
+      "latitude": 47.28869,
+      "longitude": -2.389102,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRXCT",
+      "tvs": "LTV",
+      "uic": "8775178",
+      "name": "La Ciotat",
+      "latitude": 43.199593,
+      "longitude": 5.632647,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXRO",
+      "tvs": "LRY",
+      "uic": "8748601",
+      "name": "La Roche-sur-Yon",
+      "latitude": 46.67212,
+      "longitude": -1.435621,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRLRH",
+      "tvs": "LRE",
+      "uic": "8748500",
+      "name": "La Rochelle Ville",
+      "latitude": 46.15269,
+      "longitude": -1.145305,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRHFB",
+      "tvs": "LTP",
+      "uic": "8772347",
+      "name": "La Tour-du-Pin",
+      "latitude": 45.560277,
+      "longitude": 5.450092,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRLAM",
+      "tvs": "LAM",
+      "uic": "8747310",
+      "name": "Lamballe",
+      "latitude": 48.46606,
+      "longitude": -2.511546,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRLAI",
+      "tvs": "LNI",
+      "uic": "8747322",
+      "name": "Lannion",
+      "latitude": 48.727638,
+      "longitude": -3.460353,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRISI",
+      "tvs": "LAR",
+      "uic": "8768326",
+      "name": "Laroche-Migennes",
+      "latitude": 47.960998,
+      "longitude": 3.513191,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRACR",
+      "tvs": "LAL",
+      "uic": "8747840",
+      "name": "Laval",
+      "latitude": 48.076206,
+      "longitude": -0.760907,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXCC",
+      "tvs": "LCM",
+      "uic": "8769410",
+      "name": "Le Creusot TGV",
+      "latitude": 46.765343,
+      "longitude": 4.499513,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRAEZ",
+      "tvs": "LHA",
+      "uic": "8741301",
+      "name": "Le Havre",
+      "latitude": 49.492996,
+      "longitude": 0.125677,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRAET",
+      "tvs": "LEN",
+      "uic": "8739600",
+      "name": "Le Mans",
+      "latitude": 47.995034,
+      "longitude": 0.19014,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRLPY",
+      "tvs": "LPU",
+      "uic": "8773469",
+      "name": "Le Puy-en-Velay",
+      "latitude": 45.042866,
+      "longitude": 3.892421,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRXLE",
+      "tvs": "LNS",
+      "uic": "8734502",
+      "name": "Lens",
+      "latitude": 50.426818,
+      "longitude": 2.828254,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXRS",
+      "tvs": "LAC",
+      "uic": "8775544",
+      "name": "Les Arcs – Draguignan",
+      "latitude": 43.455524,
+      "longitude": 6.482498,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRLAB",
+      "tvs": "LAB",
+      "uic": "8754301",
+      "name": "Les Aubrais",
+      "latitude": 47.926801,
+      "longitude": 1.906629,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRLSO",
+      "tvs": "LSO",
+      "uic": "8748644",
+      "name": "Les Sables-d’Olonne",
+      "latitude": 46.499917,
+      "longitude": -1.78105,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXLR",
+      "tvs": "LIB",
+      "uic": "8758405",
+      "name": "Libourne",
+      "latitude": 44.915888,
+      "longitude": -0.236344,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRLLE",
+      "tvs": "LEW",
+      "uic": "8722326",
+      "name": "Lille-Europe",
+      "latitude": 50.639224,
+      "longitude": 3.075796,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRADJ",
+      "tvs": "LLF",
+      "uic": "8728600",
+      "name": "Lille-Flandres",
+      "latitude": 50.636577,
+      "longitude": 3.06987,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRAGQ",
+      "tvs": "LIM",
+      "uic": "8759200",
+      "name": "Limoges Bénédictins",
+      "latitude": 45.836089,
+      "longitude": 1.267356,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRXLX",
+      "tvs": "LIS",
+      "uic": "8744426",
+      "name": "Lisieux",
+      "latitude": 49.138299,
+      "longitude": 0.231143,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRCQL",
+      "tvs": "LUA",
+      "uic": "8731304",
+      "name": "Longueau",
+      "latitude": 49.86344,
+      "longitude": 2.35215,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXLL",
+      "tvs": "LLS",
+      "uic": "8771823",
+      "name": "Lons-le-Saunier",
+      "latitude": 46.66858,
+      "longitude": 5.551108,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRLRT",
+      "tvs": "LRT",
+      "uic": "8747600",
+      "name": "Lorient",
+      "latitude": 47.755597,
+      "longitude": -3.366221,
+      "is_main_station": false
+    },
+    {
+      "iata": "FREAM",
+      "tvs": "TGL",
+      "uic": "8714210",
+      "name": "Lorraine TGV",
+      "latitude": 48.947773,
+      "longitude": 6.169838,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRLDE",
+      "tvs": "LDS",
+      "uic": "8767133",
+      "name": "Lourdes",
+      "latitude": 43.10037,
+      "longitude": -0.042174,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRIJB",
+      "tvs": "LUN",
+      "uic": "8777340",
+      "name": "Lunel",
+      "latitude": 43.679392,
+      "longitude": 4.131086,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRLNE",
+      "tvs": "LNE",
+      "uic": "8714115",
+      "name": "Lunéville",
+      "latitude": 48.588233,
+      "longitude": 6.49727,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRHTF",
+      "tvs": "LJC",
+      "uic": "8728262",
+      "name": "Lyon Jean Macé",
+      "latitude": 45.74495,
+      "longitude": 4.84139,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRLPD",
+      "tvs": "LYD",
+      "uic": "8772319",
+      "name": "Lyon Part-Dieu",
+      "latitude": 45.760559,
+      "longitude": 4.859355,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRLPE",
+      "tvs": "LPR",
+      "uic": "8772202",
+      "name": "Lyon Perrache",
+      "latitude": 45.748476,
+      "longitude": 4.825733,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRJDQ",
+      "tvs": "SXA",
+      "uic": "8776290",
+      "name": "Lyon St-Exupéry TGV",
+      "latitude": 45.721109,
+      "longitude": 5.074969,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRHXM",
+      "tvs": "MNQ",
+      "uic": "8775132",
+      "name": "Manosque – Gréoux-les-Bains",
+      "latitude": 43.823195,
+      "longitude": 5.793324,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXMR",
+      "tvs": "MMD",
+      "uic": "8758654",
+      "name": "Marmande",
+      "latitude": 44.503019,
+      "longitude": 0.168044,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRMLV",
+      "tvs": "MLV",
+      "uic": "8711184",
+      "name": "Marne-la-Vallée – Chessy",
+      "latitude": 48.869856,
+      "longitude": 2.78272,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRMSC",
+      "tvs": "MSC",
+      "uic": "8775100",
+      "name": "Marseille St-Charles",
+      "latitude": 43.302666,
+      "longitude": 5.380407,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRDJU",
+      "tvs": "MPW",
+      "uic": "8739370",
+      "name": "Massy TGV",
+      "latitude": 48.725758,
+      "longitude": 2.261254,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRXME",
+      "tvs": "MBG",
+      "uic": "8729500",
+      "name": "Maubeuge",
+      "latitude": 50.27298,
+      "longitude": 3.96677,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRMEL",
+      "tvs": "MEL",
+      "uic": "8768200",
+      "name": "Melun",
+      "latitude": 48.527662,
+      "longitude": 2.655404,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXMT",
+      "tvs": "MEN",
+      "uic": "8775648",
+      "name": "Menton",
+      "latitude": 43.774444,
+      "longitude": 7.4933,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRADE",
+      "tvs": "MZE",
+      "uic": "8719203",
+      "name": "Metz",
+      "latitude": 49.109545,
+      "longitude": 6.176593,
+      "is_main_station": true
+    },
+    {
+      "iata": "FREAJ",
+      "tvs": "TGM",
+      "uic": "8714732",
+      "name": "Meuse TGV",
+      "latitude": 48.978549,
+      "longitude": 5.270954,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRMAZ",
+      "tvs": "MAS",
+      "uic": "8775300",
+      "name": "Miramas",
+      "latitude": 43.580704,
+      "longitude": 5.000264,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRMOL",
+      "tvs": "MOL",
+      "uic": "8721457",
+      "name": "Molsheim",
+      "latitude": 48.53705,
+      "longitude": 7.50044,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXMM",
+      "tvs": "MNA",
+      "uic": "8775640",
+      "name": "Monaco – Monte-Carlo",
+      "latitude": 43.738211,
+      "longitude": 7.419606,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXMJ",
+      "tvs": "MMR",
+      "uic": "8767101",
+      "name": "Mont-de-Marsan",
+      "latitude": 43.884898,
+      "longitude": -0.50466,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRGNX",
+      "tvs": "MSR",
+      "uic": "8768400",
+      "name": "Montargis",
+      "latitude": 48.006862,
+      "longitude": 2.742783,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXMW",
+      "tvs": "MBN",
+      "uic": "8761124",
+      "name": "Montauban Ville Bourbon",
+      "latitude": 44.014387,
+      "longitude": 1.341496,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRGWE",
+      "tvs": "MBA",
+      "uic": "8771313",
+      "name": "Montbard",
+      "latitude": 47.618747,
+      "longitude": 4.33616,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXMF",
+      "tvs": "MBD",
+      "uic": "8718452",
+      "name": "Montbéliard",
+      "latitude": 47.510509,
+      "longitude": 6.801376,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRMCU",
+      "tvs": "MLN",
+      "uic": "8764100",
+      "name": "Montluçon",
+      "latitude": 46.338101,
+      "longitude": 2.596159,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRMPL",
+      "tvs": "MPL",
+      "uic": "8777300",
+      "name": "Montpellier St-Roch",
+      "latitude": 43.604738,
+      "longitude": 3.880674,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRSUF",
+      "tvs": "MSF",
+      "uic": "8768888",
+      "name": "Montpellier Sud de France",
+      "latitude": 43.59508,
+      "longitude": 3.92403,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXMK",
+      "tvs": "MTR",
+      "uic": "8776400",
+      "name": "Montélimar",
+      "latitude": 44.559079,
+      "longitude": 4.744792,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRMXN",
+      "tvs": "MXR",
+      "uic": "8747433",
+      "name": "Morlaix",
+      "latitude": 48.57797,
+      "longitude": -3.832514,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRMCD",
+      "tvs": "MCD",
+      "uic": "8771883",
+      "name": "Mouchard",
+      "latitude": 46.976911,
+      "longitude": 5.799644,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXMU",
+      "tvs": "MSA",
+      "uic": "8769632",
+      "name": "Moulins-sur-Allier",
+      "latitude": 46.561346,
+      "longitude": 3.338842,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRQMU",
+      "tvs": "MOS",
+      "uic": "8774172",
+      "name": "Moûtiers – Salins",
+      "latitude": 45.486344,
+      "longitude": 6.531425,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRAEK",
+      "tvs": "MSE",
+      "uic": "8718206",
+      "name": "Mulhouse",
+      "latitude": 47.742224,
+      "longitude": 7.342396,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRHGU",
+      "tvs": "MAC",
+      "uic": "8772568",
+      "name": "Mâcon Ville",
+      "latitude": 46.302572,
+      "longitude": 4.824887,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRMLT",
+      "tvs": "MLH",
+      "uic": "8772570",
+      "name": "Mâcon – Loché TGV",
+      "latitude": 46.282884,
+      "longitude": 4.778876,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRENC",
+      "tvs": "NCY",
+      "uic": "8714100",
+      "name": "Nancy",
+      "latitude": 48.689861,
+      "longitude": 6.174583,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRNTE",
+      "tvs": "NTS",
+      "uic": "8748100",
+      "name": "Nantes",
+      "latitude": 47.216148,
+      "longitude": -1.542356,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRXNA",
+      "tvs": "NBN",
+      "uic": "8778110",
+      "name": "Narbonne",
+      "latitude": 43.190387,
+      "longitude": 3.00591,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRNVS",
+      "tvs": "NVS",
+      "uic": "8769600",
+      "name": "Nevers",
+      "latitude": 46.987282,
+      "longitude": 3.150743,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRNIC",
+      "tvs": "NIC",
+      "uic": "8775605",
+      "name": "Nice Ville",
+      "latitude": 43.704556,
+      "longitude": 7.261904,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRNIT",
+      "tvs": "NRT",
+      "uic": "8748530",
+      "name": "Niort",
+      "latitude": 46.319491,
+      "longitude": -0.454639,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRFNI",
+      "tvs": "NMS",
+      "uic": "8777500",
+      "name": "Nîmes Centre",
+      "latitude": 43.832291,
+      "longitude": 4.365845,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRXZP",
+      "tvs": "NIM",
+      "uic": "8770397",
+      "name": "Nîmes Pont du Gard",
+      "latitude": 43.816944,
+      "longitude": 4.507778,
+      "is_main_station": false
+    },
+    {
+      "iata": "FROIL",
+      "tvs": "OSL",
+      "uic": "8741120",
+      "name": "Oissel",
+      "latitude": 49.34306,
+      "longitude": 1.101799,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXOG",
+      "tvs": "OGE",
+      "uic": "8776510",
+      "name": "Orange",
+      "latitude": 44.137304,
+      "longitude": 4.819594,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRAFK",
+      "tvs": "ORL",
+      "uic": "8754300",
+      "name": "Orléans Centre",
+      "latitude": 47.90796,
+      "longitude": 1.904666,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRGFI",
+      "tvs": "ORT",
+      "uic": "8767225",
+      "name": "Orthez",
+      "latitude": 43.484242,
+      "longitude": -0.76776,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRHDV",
+      "tvs": "OUL",
+      "uic": "8772220",
+      "name": "Oullins",
+      "latitude": 45.716626,
+      "longitude": 4.813579,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRPAZ",
+      "tvs": "PAZ",
+      "uic": "8754700",
+      "name": "Paris Austerlitz",
+      "latitude": 48.842285,
+      "longitude": 2.364891,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRPBE",
+      "tvs": "PBY",
+      "uic": "8768666",
+      "name": "Paris Bercy Bourgogne-Pays d’Auvergne",
+      "latitude": 48.83917,
+      "longitude": 2.38278,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRPLY",
+      "tvs": "PLY",
+      "uic": "8768600",
+      "name": "Paris Gare de Lyon",
+      "latitude": 48.844888,
+      "longitude": 2.37352,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRPST",
+      "tvs": "PES",
+      "uic": "8711300",
+      "name": "Paris Gare de l’Est",
+      "latitude": 48.876742,
+      "longitude": 2.358424,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRPNO",
+      "tvs": "PNO",
+      "uic": "8727100",
+      "name": "Paris Gare du Nord",
+      "latitude": 48.880185,
+      "longitude": 2.355151,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRPMO",
+      "tvs": "PMP",
+      "uic": "8739100",
+      "name": "Paris Montparnasse",
+      "latitude": 48.841172,
+      "longitude": 2.320514,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRPSL",
+      "tvs": "PSL",
+      "uic": "8738400",
+      "name": "Paris St-Lazare",
+      "latitude": 48.876242,
+      "longitude": 2.325331,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRAEE",
+      "tvs": "PAU",
+      "uic": "8767200",
+      "name": "Pau",
+      "latitude": 43.291762,
+      "longitude": -0.369626,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRPGF",
+      "tvs": "PPN",
+      "uic": "8778400",
+      "name": "Perpignan",
+      "latitude": 42.696292,
+      "longitude": 2.879779,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRFAR",
+      "tvs": "PSC",
+      "uic": "8758175",
+      "name": "Pessac",
+      "latitude": 44.80461,
+      "longitude": -0.63185,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRPIS",
+      "tvs": "PST",
+      "uic": "8757500",
+      "name": "Poitiers",
+      "latitude": 46.582275,
+      "longitude": 0.333241,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRPTL",
+      "tvs": "PTL",
+      "uic": "8771500",
+      "name": "Pontarlier",
+      "latitude": 46.900944,
+      "longitude": 6.353524,
+      "is_main_station": false
+    },
+    {
+      "iata": "FREGR",
+      "tvs": "PNI",
+      "uic": "8748174",
+      "name": "Pornichet",
+      "latitude": 47.270535,
+      "longitude": -2.344577,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRABF",
+      "tvs": "PXR",
+      "uic": "8759500",
+      "name": "Périgueux",
+      "latitude": 45.187408,
+      "longitude": 0.707879,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRUIP",
+      "tvs": "QPR",
+      "uic": "8747409",
+      "name": "Quimper",
+      "latitude": 47.994455,
+      "longitude": -4.092103,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRECO",
+      "tvs": "QPL",
+      "uic": "8747631",
+      "name": "Quimperlé",
+      "latitude": 47.869375,
+      "longitude": -3.552693,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXRT",
+      "tvs": "RBT",
+      "uic": "8739331",
+      "name": "Rambouillet",
+      "latitude": 48.64377,
+      "longitude": 1.83154,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXRN",
+      "tvs": "RDN",
+      "uic": "8747130",
+      "name": "Redon",
+      "latitude": 47.652004,
+      "longitude": -2.08777,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRRHE",
+      "tvs": "RMS",
+      "uic": "8717100",
+      "name": "Reims Ville",
+      "latitude": 49.258978,
+      "longitude": 4.024435,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRRNT",
+      "tvs": "RMT",
+      "uic": "8714445",
+      "name": "Remiremont",
+      "latitude": 48.016363,
+      "longitude": 6.598855,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRRNS",
+      "tvs": "RES",
+      "uic": "8747100",
+      "name": "Rennes",
+      "latitude": 48.103517,
+      "longitude": -1.672744,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRBDT",
+      "tvs": "RTL",
+      "uic": "8717227",
+      "name": "Rethel",
+      "latitude": 49.504393,
+      "longitude": 4.369566,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRRIO",
+      "tvs": "RIO",
+      "uic": "8773405",
+      "name": "Riom – Châtel-Guyon",
+      "latitude": 45.889965,
+      "longitude": 3.120498,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRRNE",
+      "tvs": "ROA",
+      "uic": "8772680",
+      "name": "Roanne",
+      "latitude": 46.039383,
+      "longitude": 4.063207,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRRCO",
+      "tvs": "RCT",
+      "uic": "8748514",
+      "name": "Rochefort",
+      "latitude": 45.947189,
+      "longitude": -0.963556,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRRDZ",
+      "tvs": "RDZ",
+      "uic": "8761342",
+      "name": "Rodez",
+      "latitude": 44.362633,
+      "longitude": 2.58056,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRIFE",
+      "tvs": "ROM",
+      "uic": "8776165",
+      "name": "Romans – Bourg-de-Péage",
+      "latitude": 45.048857,
+      "longitude": 5.0498,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRAPI",
+      "tvs": "RMY",
+      "uic": "8711815",
+      "name": "Romilly-sur-Seine",
+      "latitude": 48.514433,
+      "longitude": 3.728887,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRADP",
+      "tvs": "RXB",
+      "uic": "8728673",
+      "name": "Roubaix",
+      "latitude": 50.69561,
+      "longitude": 3.16348,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRURD",
+      "tvs": "RRD",
+      "uic": "8741101",
+      "name": "Rouen Rive Droite",
+      "latitude": 49.448764,
+      "longitude": 1.094087,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRRYN",
+      "tvs": "ROY",
+      "uic": "8749180",
+      "name": "Royan",
+      "latitude": 45.625886,
+      "longitude": -1.016703,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRFDS",
+      "tvs": "RUG",
+      "uic": "8758384",
+      "name": "Ruffec (Charente)",
+      "latitude": 46.030519,
+      "longitude": 0.190206,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRSAB",
+      "tvs": "SAB",
+      "uic": "8739640",
+      "name": "Sablé-sur-Sarthe",
+      "latitude": 47.841593,
+      "longitude": -0.341936,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXTD",
+      "tvs": "STD",
+      "uic": "8714401",
+      "name": "Saint-Dié-des-Vosges",
+      "latitude": 48.282225,
+      "longitude": 6.948656,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXST",
+      "tvs": "SKW",
+      "uic": "8749100",
+      "name": "Saintes",
+      "latitude": 45.74874,
+      "longitude": -0.6179,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRHZF",
+      "tvs": "SON",
+      "uic": "8775376",
+      "name": "Salon",
+      "latitude": 43.639061,
+      "longitude": 5.088569,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRSBG",
+      "tvs": "SBG",
+      "uic": "8721501",
+      "name": "Sarrebourg",
+      "latitude": 48.73808,
+      "longitude": 7.05285,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRACN",
+      "tvs": "SUD",
+      "uic": "8748760",
+      "name": "Saumur",
+      "latitude": 47.269,
+      "longitude": -0.07136,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRSNE",
+      "tvs": "SNE",
+      "uic": "8721222",
+      "name": "Saverne",
+      "latitude": 48.744461,
+      "longitude": 7.36208,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXSW",
+      "tvs": "SED",
+      "uic": "8717225",
+      "name": "Sedan",
+      "latitude": 49.695024,
+      "longitude": 4.930373,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXSF",
+      "tvs": "SES",
+      "uic": "8768300",
+      "name": "Sens",
+      "latitude": 48.197856,
+      "longitude": 3.267833,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXSS",
+      "tvs": "SOI",
+      "uic": "8727181",
+      "name": "Soissons",
+      "latitude": 49.369198,
+      "longitude": 3.338126,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRSBK",
+      "tvs": "SBC",
+      "uic": "8747300",
+      "name": "St-Brieuc",
+      "latitude": 48.50758,
+      "longitude": -2.765,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRHHO",
+      "tvs": "SCM",
+      "uic": "8772630",
+      "name": "St-Chamond",
+      "latitude": 45.47257,
+      "longitude": 4.51695,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXJZ",
+      "tvs": "SJZ",
+      "uic": "8767712",
+      "name": "St-Jean-de-Luz – Ciboure",
+      "latitude": 43.385838,
+      "longitude": -1.66122,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXLI",
+      "tvs": "STL",
+      "uic": "8718213",
+      "name": "St-Louis",
+      "latitude": 47.590609,
+      "longitude": 7.555988,
+      "is_main_station": true
+    },
+    {
+      "iata": "FREJC",
+      "tvs": "SMX",
+      "uic": "8748549",
+      "name": "St-Maixent",
+      "latitude": 46.406607,
+      "longitude": -0.201073,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXSB",
+      "tvs": "SMP",
+      "uic": "8747810",
+      "name": "St-Malo",
+      "latitude": 48.646859,
+      "longitude": -2.004158,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRSNR",
+      "tvs": "SNA",
+      "uic": "8748170",
+      "name": "St-Nazaire",
+      "latitude": 47.286412,
+      "longitude": -2.211096,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXSG",
+      "tvs": "STO",
+      "uic": "8728144",
+      "name": "St-Omer",
+      "latitude": 50.75362,
+      "longitude": 2.266762,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXSH",
+      "tvs": "SPC",
+      "uic": "8757124",
+      "name": "St-Pierre-des-Corps",
+      "latitude": 47.386099,
+      "longitude": 0.72355,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXSJ",
+      "tvs": "SQT",
+      "uic": "8729600",
+      "name": "St-Quentin",
+      "latitude": 49.840048,
+      "longitude": 3.297009,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXSK",
+      "tvs": "SRV",
+      "uic": "8775752",
+      "name": "St-Raphaël – Valescure",
+      "latitude": 43.42356,
+      "longitude": 6.769083,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRHHD",
+      "tvs": "SEN",
+      "uic": "8772600",
+      "name": "St-Étienne Châteaucreux",
+      "latitude": 45.443366,
+      "longitude": 4.399722,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRAEG",
+      "tvs": "STG",
+      "uic": "8721202",
+      "name": "Strasbourg",
+      "latitude": 48.584967,
+      "longitude": 7.734584,
+      "is_main_station": true
+    },
+    {
+      "iata": "FREIP",
+      "tvs": "SGE",
+      "uic": "8748522",
+      "name": "Surgères",
+      "latitude": 46.113238,
+      "longitude": -0.762284,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXSY",
+      "tvs": "STE",
+      "uic": "8777320",
+      "name": "Sète",
+      "latitude": 43.412485,
+      "longitude": 3.69656,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXSQ",
+      "tvs": "STT",
+      "uic": "8721405",
+      "name": "Sélestat",
+      "latitude": 48.260117,
+      "longitude": 7.443278,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXTB",
+      "tvs": "TBS",
+      "uic": "8767100",
+      "name": "Tarbes",
+      "latitude": 43.239955,
+      "longitude": 0.069415,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXTH",
+      "tvs": "THL",
+      "uic": "8719100",
+      "name": "Thionville",
+      "latitude": 49.353931,
+      "longitude": 6.169543,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXTS",
+      "tvs": "THO",
+      "uic": "8774564",
+      "name": "Thonon-les-Bains",
+      "latitude": 46.369004,
+      "longitude": 6.481669,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRTOL",
+      "tvs": "TOL",
+      "uic": "8714104",
+      "name": "Toul",
+      "latitude": 48.679018,
+      "longitude": 5.880615,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRTLN",
+      "tvs": "TLN",
+      "uic": "8775500",
+      "name": "Toulon",
+      "latitude": 43.12837,
+      "longitude": 5.929293,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXYT",
+      "tvs": "TSE",
+      "uic": "8761100",
+      "name": "Toulouse Matabiau",
+      "latitude": 43.611206,
+      "longitude": 1.453616,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRADM",
+      "tvs": "TRG",
+      "uic": "8728654",
+      "name": "Tourcoing",
+      "latitude": 50.71683,
+      "longitude": 3.16804,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRAFW",
+      "tvs": "TRS",
+      "uic": "8757100",
+      "name": "Tours",
+      "latitude": 47.389781,
+      "longitude": 0.693703,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRTRD",
+      "tvs": "TDE",
+      "uic": "8744437",
+      "name": "Trouville – Deauville",
+      "latitude": 49.360005,
+      "longitude": 0.084167,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRQYR",
+      "tvs": "TOY",
+      "uic": "8711800",
+      "name": "Troyes",
+      "latitude": 48.296069,
+      "longitude": 4.065281,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRVDR",
+      "tvs": "VDR",
+      "uic": "8741587",
+      "name": "Val-de-Reuil",
+      "latitude": 49.275437,
+      "longitude": 1.224147,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRVLA",
+      "tvs": "VAL",
+      "uic": "8776302",
+      "name": "Valence TGV",
+      "latitude": 44.991545,
+      "longitude": 4.978703,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRVAF",
+      "tvs": "VCE",
+      "uic": "8776100",
+      "name": "Valence Ville",
+      "latitude": 44.928049,
+      "longitude": 4.893273,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRXVS",
+      "tvs": "VSN",
+      "uic": "8734300",
+      "name": "Valenciennes",
+      "latitude": 50.363259,
+      "longitude": 3.517115,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRVNE",
+      "tvs": "VAN",
+      "uic": "8747660",
+      "name": "Vannes",
+      "latitude": 47.665169,
+      "longitude": -2.75245,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRESL",
+      "tvs": "VDT",
+      "uic": "8757121",
+      "name": "Vendôme – Villiers-sur-Loir",
+      "latitude": 47.821937,
+      "longitude": 1.021143,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXVN",
+      "tvs": "VDN",
+      "uic": "8717577",
+      "name": "Verdun",
+      "latitude": 49.165406,
+      "longitude": 5.379701,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRDQC",
+      "tvs": "VNO",
+      "uic": "8741560",
+      "name": "Vernon – Giverny",
+      "latitude": 49.091336,
+      "longitude": 1.47857,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRDHT",
+      "tvs": "VCR",
+      "uic": "8739300",
+      "name": "Versailles-Chantiers",
+      "latitude": 48.795826,
+      "longitude": 2.135883,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRXVO",
+      "tvs": "VES",
+      "uic": "8718500",
+      "name": "Vesoul",
+      "latitude": 47.617773,
+      "longitude": 6.151926,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRVHY",
+      "tvs": "VHY",
+      "uic": "8773200",
+      "name": "Vichy",
+      "latitude": 46.126979,
+      "longitude": 3.430448,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXVI",
+      "tvs": "VIE",
+      "uic": "8772258",
+      "name": "Vienne",
+      "latitude": 45.521207,
+      "longitude": 4.874211,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXVZ",
+      "tvs": "VER",
+      "uic": "8757600",
+      "name": "Vierzon",
+      "latitude": 47.226497,
+      "longitude": 2.059822,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRXVF",
+      "tvs": "VIS",
+      "uic": "8772133",
+      "name": "Villefranche-sur-Saône",
+      "latitude": 45.9845,
+      "longitude": 4.72077,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRBFO",
+      "tvs": "VYF",
+      "uic": "8717427",
+      "name": "Vitry-le-François",
+      "latitude": 48.718142,
+      "longitude": 4.587581,
+      "is_main_station": true
+    },
+    {
+      "iata": "FRXVT",
+      "tvs": "VTE",
+      "uic": "8747150",
+      "name": "Vitré",
+      "latitude": 48.122671,
+      "longitude": -1.211754,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRHVO",
+      "tvs": "VOR",
+      "uic": "8774728",
+      "name": "Voiron",
+      "latitude": 45.364037,
+      "longitude": 5.595054,
+      "is_main_station": false
+    },
+    {
+      "iata": "FRXEP",
+      "tvs": "EPR",
+      "uic": "8717155",
+      "name": "Épernay",
+      "latitude": 49.046289,
+      "longitude": 3.959798,
+      "is_main_station": false
+    },
+    {
+      "iata": "FREPL",
+      "tvs": "ELP",
+      "uic": "8714400",
+      "name": "Épinal",
+      "latitude": 48.178005,
+      "longitude": 6.441787,
+      "is_main_station": false
+    },
+    {
+      "iata": "FREVX",
+      "tvs": "EVX",
+      "uic": "8738700",
+      "name": "Évreux",
+      "latitude": 49.018748,
+      "longitude": 1.149629,
+      "is_main_station": false
+    }
+  ]
+}

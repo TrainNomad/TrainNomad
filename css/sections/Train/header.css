@@ -281,20 +281,25 @@ a {
 /* --- SUGGESTIONS D'AUTOCOMPLÉTION --- */
 /* ================================================= */
 
-/* Conteneur global des suggestions (sa position est gérée par JavaScript) */
-.suggestions-container {
-    /* Styles esthétiques */
+/* Conteneur global des suggestions */
+.suggestions-container{
+    position: absolute;
+    top: 100%; /* Positionné juste en dessous de l'input */
+    left: 0;
+    right: 0;
+    
     background-color: white;
     border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre portée douce */
-    border-radius: 0 0 5px 5px; /* Coins arrondis seulement en bas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 5px 5px;
     
-    /* Défilement */
-    max-height: 170px; /* Limite la hauteur pour éviter d'envahir l'écran */
+    max-height: 200px;
     overflow-y: auto;
     
-    /* Assure que le conteneur est au-dessus de tout le reste */
-    z-index: 1000; 
+    z-index: 1000;
+    
+    /* Légère marge pour séparer de l'input */
+    margin-top: 2px;
 }
 
 /* Style de chaque élément de suggestion */
@@ -304,20 +309,32 @@ a {
     border-bottom: 1px solid #eee;
     font-size: 14px;
     color: #333;
+    transition: background-color 0.2s ease;
 }
 
-/* Surlignage au survol (couleur vive pour attirer l'attention) */
+/* Surlignage au survol */
 .suggestion-item:hover {
-    background-color: #fce6e6; /* Un rouge très clair ou une couleur d'accent */
-    color: #a00; /* Texte rouge foncé au survol */
+    background-color: #fce6e6;
+    color: #a00;
 }
 
-/* Supprime la bordure du dernier élément pour un rendu plus net */
+/* Supprime la bordure du dernier élément */
 .suggestion-item:last-child {
     border-bottom: none;
 }
 
-/* Classe pour masquer le conteneur (utilisée par JavaScript) */
+/* Classe pour masquer le conteneur */
 .hidden {
     display: none !important;
+}
+
+/* Style spécial pour l'option "N'importe où" */
+.everywhere-option {
+    background-color: #f1f8e9 !important;
+    cursor: pointer;
+    padding: 10px 15px;
+}
+
+.everywhere-option:hover {
+    background-color: #c8e6c9 !important;
 }
